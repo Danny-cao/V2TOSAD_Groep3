@@ -30,6 +30,11 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
     }
 
     @Override
+    public BusinessRule executeQuery(String query) {
+        return null;
+    }
+
+    @Override
     public BusinessRule findByID(int id) {
         return null;
     }
