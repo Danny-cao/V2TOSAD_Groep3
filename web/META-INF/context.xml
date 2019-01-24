@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <Resource name="jdbc/Oracle"
+              url="jdbc:oracle:thin:@//ondora04.hu.nl:8521/EDUC21"
+              driverClassName="oracle.jdbc.driver.OracleDriver" auth="Container"
+              type="javax.sql.DataSource"
+              username="cursist"
+              password="cursist4491" />
+</Context>
