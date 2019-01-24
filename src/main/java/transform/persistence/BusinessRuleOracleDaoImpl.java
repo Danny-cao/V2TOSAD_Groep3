@@ -42,8 +42,8 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
     @Override
     public boolean save(BusinessRule businessRule) {
         try {
-            String query = "INSERT INTO BUSINESSRULE (id, naam, businessruletypeid, constraintid)" +
-                    "VALUES (?, ?, ?, ?);";
+            String query =  "INSERT INTO BUSINESSRULE (id, naam, businessruletypeid, constraintid)" +
+                            "VALUES (?, ?, ?, ?);";
 
             PreparedStatement stmt = conn.prepareStatement(query);
 
