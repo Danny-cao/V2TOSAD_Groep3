@@ -1,5 +1,8 @@
 package transform.model;
 
+import transform.persistence.BusinessRuleDao;
+import transform.persistence.BusinessRuleOracleDaoImpl;
+
 public class BusinessRule {
 
     private int id;
@@ -12,6 +15,11 @@ public class BusinessRule {
         this.naam = naam;
         this.type = type;
         this.constraint = constraint;
+    }
+
+    public BusinessRule(int id, String naam){
+        this.id = id;
+        this.naam = naam;
     }
 
     public int getId() {
@@ -29,4 +37,4 @@ public class BusinessRule {
     public Constraint getConstraint() {
         return constraint;
     }
-}
+    }

@@ -3,9 +3,8 @@ package transform.persistence;
 import persistence.OracleBaseDao;
 import transform.model.BusinessRule;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements BusinessRuleDao {
@@ -25,7 +24,7 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
     }
 
     @Override
-    public List<BusinessRule> findAll() {
+    public ArrayList<BusinessRule> findAll() {
 
         return null;
     }
@@ -60,11 +59,10 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
         try {
             String query = "UPDATE BUSINESSRULE " +
                     "set naam = ? " +
-                    "where ID = ?;";
+                    "values  (?);";
 
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, businessRule.getNaam());
-            stmt.setInt(2, businessRule.getId());
 
             return stmt.execute();
         } catch (SQLException e) {
@@ -88,4 +86,26 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
         }
     }
 
+    @Override
+    public ArrayList<BusinessRule> selectBusinessRules(String query) {
+        ArrayList<BusinessRule> resultaten = new ArrayList<BusinessRule>();
+        try (Connection c = super.getConnection()) {
+            Statement pstmt = c.createStatement();
+            ResultSet dbResultSet = pstmt.executeQuery(query);
+
+            while (dbResultSet.next()) {
+                int id = dbResultSet.getInt("id");
+                String naam = dbResultSet.getString("naam");
+
+                BusinessRule businessrule = new BusinessRule(id, naam);
+
+                resultaten.add(businessrule);
+            }
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+
+        }
+        return resultaten;
+    }
 }
+

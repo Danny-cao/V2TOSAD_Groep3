@@ -1,14 +1,51 @@
 package transform.persistence;
 
-import transform.model.Attribute_Compare;
-import transform.model.Attribute_List;
-import transform.model.Attribute_Other;
-import transform.model.Attribute_Range;
-import transform.model.BusinessRule;
+import persistence.OracleBaseDao;
+import transform.model.*;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
-public class TransformBusinessRule implements TransformBusinessRuleDao {
+public class TransformBusinessRule extends OracleBaseDao implements TransformBusinessRuleDao {
+
+    private Connection conn;
+
+    public TransformBusinessRule() {
+        try {
+            conn = super.getConnection();
+        } catch (SQLException e) {
+            System.out.println("Error: could not connect to database.");
+            e.printStackTrace();
+        }
+    }
+
+    public boolean transformDatabase(String query){
+
+        try {
+
+            PreparedStatement stmt = conn.prepareStatement(query);
+            int result = stmt.executeUpdate();
+
+            if (result > 0) {
+
+                return true;
+
+            } else {
+
+                return false;
+
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+            return false;
+
+        }
+
+    }
 
     public boolean transform(BusinessRule rule) {
 
@@ -23,8 +60,7 @@ public class TransformBusinessRule implements TransformBusinessRuleDao {
             String value = constraint.getValue();
 
             String query = "ALTER TABLE " + table + " ADD CONSTRAINT " + name + " CHECK (" + attribute + " " + operator + " " + value + ")";
-
-            return true;
+            return transformDatabase(query);
 
         } else if (rule.getType().equals("Attribute_List")) {
 
@@ -51,12 +87,12 @@ public class TransformBusinessRule implements TransformBusinessRuleDao {
             if (constraint.getInList().equals("yes")) {
 
                 String query = "ALTER TABLE " + table + " ADD CONSTRAINT " + name + " CHECK (" + value + " IN " + values + ")";
-                return true;
+                return transformDatabase(query);
 
             } else {
 
                 String query = "ALTER TABLE " + table + " ADD CONSTRAINT " + name + " CHECK (" + value + " NOT IN " + values + ")";
-                return true;
+                return transformDatabase(query);
 
             }
 
@@ -66,7 +102,7 @@ public class TransformBusinessRule implements TransformBusinessRuleDao {
 
             String query = "";
 
-            return true;
+            return transformDatabase(query);
 
         } else if (rule.getType().equals("Attribute_Range")) {
 
@@ -81,12 +117,12 @@ public class TransformBusinessRule implements TransformBusinessRuleDao {
             if (constraint.getBetween().equals("yes")) {
 
                 String query = "ALTER TABLE " + table + " ADD CONSTRAINT " + name + " CHECK (" + attribute + " > " + value1 + " AND " + attribute + " < " + value2 + ")";
-                return true;
+                return transformDatabase(query);
 
             } else {
 
                 String query = "ALTER TABLE " + table + " ADD CONSTRAINT " + name + " CHECK (" + attribute + " < " + value1 + " AND " + attribute + " > " + value2 + ")";
-                return true;
+                return transformDatabase(query);
 
             }
 
