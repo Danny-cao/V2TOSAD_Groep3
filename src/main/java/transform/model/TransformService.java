@@ -19,6 +19,11 @@ public class TransformService {
     public ArrayList<BusinessRule> findAllBusinessRules() {
         return BDAO.findAll();
     }
+
+    public BusinessRule getBusinessRule(int id){
+        return BDAO.findByID(id);
+    }
+
     TransformBusinessRuleDao tDao = new TransformBusinessRule();
 
     public boolean transform(BusinessRule rule) {
@@ -26,5 +31,4 @@ public class TransformService {
         return tDao.transform(rule);
 
     }
-
 }

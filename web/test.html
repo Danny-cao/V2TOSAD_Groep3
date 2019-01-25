@@ -38,7 +38,7 @@
 
             var encData = new URLSearchParams(formData.entries());
 
-            fetch("restservices/generate", { method: 'POST', body: encData })
+            fetch("rest/generate", { method: 'POST', body: encData })
                 .then(response => response.json()).then( posts => console.log(posts));
 
         });
