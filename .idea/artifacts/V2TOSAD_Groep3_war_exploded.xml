@@ -24,6 +24,8 @@
           <element id="library" level="project" name="Maven: org.javassist:javassist:3.18.1-GA" />
           <element id="library" level="project" name="Maven: javax.validation:validation-api:1.1.0.Final" />
           <element id="library" level="project" name="Maven: org.glassfish.jersey.core:jersey-client:2.19" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-jdbc:7.0.42" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-juli:7.0.42" />
         </element>
       </element>
       <element id="directory" name="META-INF">
