@@ -4,6 +4,8 @@ import persistence.OracleBaseDao;
 import transform.model.Constraint;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ConstraintOracleDaoImpl extends OracleBaseDao implements ConstraintDao {
@@ -21,5 +23,34 @@ public class ConstraintOracleDaoImpl extends OracleBaseDao implements Constraint
     @Override
     public Constraint findAll() {
         return null;
+    }
+
+    @Override
+    public Constraint findByID(int id) {
+
+        try {
+            String queryText =  "SELECT ID, NAAM" +
+                    "FROM Constraint " +
+                    "WHERE ID = ?";
+
+            PreparedStatement stmt = conn.prepareStatement(queryText);
+
+            stmt.setInt(1, id);
+            ResultSet result = stmt.executeQuery();
+
+            result.next();
+
+            //
+            String naam = result.getString("NAAM");
+            String table = "test";
+
+
+            return new Constraint(naam, table, id);
+
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

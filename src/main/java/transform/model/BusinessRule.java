@@ -37,4 +37,8 @@ public class BusinessRule {
     public Constraint getConstraint() {
         return constraint;
     }
+
+    public String toString(){
+        return getId() + " " + getNaam() + " " + constraint.toString() + " " + type.toString();
+    }
     }
