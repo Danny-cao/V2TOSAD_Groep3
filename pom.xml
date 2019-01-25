@@ -75,10 +75,17 @@
             <artifactId>jersey-client</artifactId>
             <version>${jersey2.version}</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.oracle</groupId>-->
+            <!--<artifactId>ojdbc7</artifactId>-->
+            <!--<version>12.1.0.2</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc7</artifactId>
             <version>12.1.0.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/ojdbc7.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat</groupId>

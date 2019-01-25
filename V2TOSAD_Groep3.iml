@@ -28,7 +28,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 9.0.14" level="application_server_libraries" />
-    <orderEntry type="library" name="ojdbc7" level="project" />
     <orderEntry type="library" name="Maven: javax.ws.rs:javax.ws.rs-api:2.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish.jersey.containers:jersey-container-servlet:2.19" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish.jersey.containers:jersey-container-servlet-core:2.19" level="project" />
@@ -46,8 +45,17 @@
     <orderEntry type="library" name="Maven: org.javassist:javassist:3.18.1-GA" level="project" />
     <orderEntry type="library" name="Maven: javax.validation:validation-api:1.1.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish.jersey.core:jersey-client:2.19" level="project" />
-    <orderEntry type="library" name="Maven: com.oracle:ojdbc7:12.1.0.2" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: com.oracle:ojdbc7:12.1.0.2">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/main/ojdbc7.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-jdbc:7.0.42" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-juli:7.0.42" level="project" />
+    <orderEntry type="library" name="ojdbc7" level="project" />
   </component>
 </module>
