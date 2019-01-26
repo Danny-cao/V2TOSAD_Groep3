@@ -29,8 +29,8 @@ public class ConstraintOracleDaoImpl extends OracleBaseDao implements Constraint
     public Constraint findByID(int id) {
 
         try {
-            String queryText =  "SELECT ID, NAAM" +
-                    "FROM Constraint " +
+            String queryText =  "SELECT ID, NAAM, TABLE_NAME " +
+                    "FROM CONSTRAINT " +
                     "WHERE ID = ?";
 
             PreparedStatement stmt = conn.prepareStatement(queryText);
@@ -42,7 +42,7 @@ public class ConstraintOracleDaoImpl extends OracleBaseDao implements Constraint
 
             //
             String naam = result.getString("NAAM");
-            String table = "test";
+            String table = result.getString("TABLE_NAME");
 
 
             return new Constraint(naam, table, id);
