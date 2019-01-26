@@ -14,7 +14,7 @@ public class ConstraintDao extends OracleBaseDao {
     public Attribute_Compare save(Attribute_Compare compare) {
         try (Connection con = getConnection()) {
             Statement stmt = con.createStatement();
-            String query = "INSERT INTO constraint (id, naam, table,ref_attribute, operator, value)VALUES(2, '" +
+            String query = "INSERT INTO constraint (id, naam, table_name ,ref_attribute, operator, value)VALUES(2, '" +
                     compare.getNaam() + "', '" + compare.getTable() + "', '" + compare.getAttribute() + "', '" + compare.getOperator() + "', '" + compare.getValue()+ "')";
             stmt.executeUpdate(query);
         } catch (SQLException sqle) {
