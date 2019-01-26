@@ -7,8 +7,6 @@ import java.util.ArrayList;
 public class TransformService {
     private BusinessRuleDao BDAO = new BusinessRuleOracleDaoImpl();
     private BusinessRuleTypeDao BTDAO = new BusinessRuleTypeOracleDaoImpl();
-    private ConstraintDao conDAO = new ConstraintOracleDaoImpl();
-
 
     public ArrayList<BusinessRule> getAllBusinessRules(){
         return BDAO.findAll();
@@ -26,17 +24,13 @@ public class TransformService {
         return BTDAO.findByID(id);
     }
 
-    public Constraint getConstraint(int id) {
-        return conDAO.findByID(id);
-    }
-
-
-
-    TransformBusinessRuleDao tDao = new TransformBusinessRuleDaoImpl();
+    private TransformBusinessRuleDao tDao = new TransformBusinessRuleDaoImpl();
 
     public boolean transform(BusinessRule rule) {
 
         return tDao.transform(rule);
 
     }
+
+
 }

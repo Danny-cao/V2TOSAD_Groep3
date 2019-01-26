@@ -9,12 +9,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class TransformBusinessRuleDaoImpl extends OracleBaseDao implements TransformBusinessRuleDao {
-
+    private Attribute_RangeDao adao;
     private Connection conn;
 
     public TransformBusinessRuleDaoImpl() {
         try {
             conn = super.getConnection();
+            adao = new Attribute_RangeOracleDaoImpl();
         } catch (SQLException e) {
             System.out.println("Error: could not connect to database.");
             e.printStackTrace();
@@ -49,9 +50,12 @@ public class TransformBusinessRuleDaoImpl extends OracleBaseDao implements Trans
 
     public boolean transform(BusinessRule rule) {
 
+        System.out.println("reached");
+
         if (rule.getType().equals("Attribute_Compare")) {
 
             Attribute_Compare constraint = ((Attribute_Compare) rule.getConstraint());
+
 
             String table = constraint.getTable();
             String name = constraint.getNaam();
@@ -104,34 +108,35 @@ public class TransformBusinessRuleDaoImpl extends OracleBaseDao implements Trans
 
             return transformDatabase(query);
 
-        } else if (rule.getType().equals("Attribute_Range")) {
+        } else if (rule.getType().getNaam().equals("Attribute Range rule")) {
 
-            Attribute_Range constraint = ((Attribute_Range) rule.getConstraint());
+            Attribute_Range range = adao.getAttribute_Range(rule);
 
-            String table = constraint.getTable();
-            String name = constraint.getNaam();
-            String attribute = constraint.getAttribute();
-            String value1 = String.valueOf(constraint.getValue1());
-            String value2 = String.valueOf(constraint.getValue2());
+            String generatedCode = GenerateAttributeRange(range);
 
-            if (constraint.getOperator().equals("between")) {
-
-                String query = "ALTER TABLE " + table + " ADD CONSTRAINT " + name + " CHECK (" + attribute + " > " + value1 + " AND " + attribute + " < " + value2 + ")";
-                return transformDatabase(query);
-
-            } else {
-
-                String query = "ALTER TABLE " + table + " ADD CONSTRAINT " + name + " CHECK (" + attribute + " < " + value1 + " AND " + attribute + " > " + value2 + ")";
-                return transformDatabase(query);
-
-            }
+            System.out.println(generatedCode);
+            return true;
+            //return transformDatabase(generatedCode);
 
         } else {
 
             return false;
 
         }
-
     }
 
+    @Override
+    public String GenerateAttributeRange(Attribute_Range range) {
+
+        if (range.getOperator().equals("between")) {
+
+            String query = "ALTER TABLE " + range.getTable() + " ADD CONSTRAINT " + range.getNaam() + " CHECK (" + range.getAttribute() + " > " + range.getValue1() + " AND " + range.getAttribute() + " < " + range.getValue2() + ")";
+            return query;
+
+        } else {
+
+            String query = "ALTER TABLE " + range.getTable() + " ADD CONSTRAINT " + range.getNaam() + " CHECK (" + range.getAttribute() + " < " + range.getValue1() + " AND " + range.getAttribute() + " > " + range.getValue2() + ")";
+            return query;
+        }
+    }
 }
