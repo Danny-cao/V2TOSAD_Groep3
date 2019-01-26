@@ -30,7 +30,9 @@ public class TransformService {
         return conDAO.findByID(id);
     }
 
-    TransformBusinessRuleDao tDao = new TransformBusinessRule();
+
+
+    TransformBusinessRuleDao tDao = new TransformBusinessRuleDaoImpl();
 
     public boolean transform(BusinessRule rule) {
 

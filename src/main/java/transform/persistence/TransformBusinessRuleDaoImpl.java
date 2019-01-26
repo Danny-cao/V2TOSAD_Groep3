@@ -8,11 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-public class TransformBusinessRule extends OracleBaseDao implements TransformBusinessRuleDao {
+public class TransformBusinessRuleDaoImpl extends OracleBaseDao implements TransformBusinessRuleDao {
 
     private Connection conn;
 
-    public TransformBusinessRule() {
+    public TransformBusinessRuleDaoImpl() {
         try {
             conn = super.getConnection();
         } catch (SQLException e) {
@@ -114,7 +114,7 @@ public class TransformBusinessRule extends OracleBaseDao implements TransformBus
             String value1 = String.valueOf(constraint.getValue1());
             String value2 = String.valueOf(constraint.getValue2());
 
-            if (constraint.getBetween().equals("yes")) {
+            if (constraint.getOperator().equals("between")) {
 
                 String query = "ALTER TABLE " + table + " ADD CONSTRAINT " + name + " CHECK (" + attribute + " > " + value1 + " AND " + attribute + " < " + value2 + ")";
                 return transformDatabase(query);
