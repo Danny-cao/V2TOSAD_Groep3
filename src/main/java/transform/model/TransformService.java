@@ -24,7 +24,7 @@ public class TransformService {
         return BTDAO.findByID(id);
     }
 
-    private TransformBusinessRuleDao tDao = new TransformBusinessRuleDaoImpl();
+    private TransformBusinessRuleDao tDao = new TransformBusinessRuleOracleDaoImpl();
 
     public boolean transform(BusinessRule rule) {
 

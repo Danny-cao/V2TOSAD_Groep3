@@ -6,7 +6,7 @@ import transform.model.Constraint;
 
 public interface TransformBusinessRuleDao {
 
-    public boolean transform(BusinessRule rule);
+    boolean transform(BusinessRule rule);
 
-    public String GenerateAttributeRange(Attribute_Range range);
+    String GenerateAttributeRange(Attribute_Range range);
 }

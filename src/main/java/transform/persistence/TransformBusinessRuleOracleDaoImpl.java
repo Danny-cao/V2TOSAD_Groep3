@@ -8,11 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-public class TransformBusinessRuleDaoImpl extends OracleBaseDao implements TransformBusinessRuleDao {
+public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements TransformBusinessRuleDao {
     private Attribute_RangeDao adao;
     private Connection conn;
 
-    public TransformBusinessRuleDaoImpl() {
+    public TransformBusinessRuleOracleDaoImpl() {
         try {
             conn = super.getConnection();
             adao = new Attribute_RangeOracleDaoImpl();
