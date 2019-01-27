@@ -1,9 +1,6 @@
 package transform.persistence;
 
-import transform.model.Attribute_Compare;
-import transform.model.Attribute_Range;
-import transform.model.BusinessRule;
-import transform.model.Constraint;
+import transform.model.*;
 
 public interface TransformBusinessRuleDao {
 
@@ -11,4 +8,5 @@ public interface TransformBusinessRuleDao {
 
     String GenerateAttributeRange(Attribute_Range range);
     String GenerateAttributeCompare(Attribute_Compare compare);
+    String GenerateTupleCompare(Tuple_Compare compare);
 }

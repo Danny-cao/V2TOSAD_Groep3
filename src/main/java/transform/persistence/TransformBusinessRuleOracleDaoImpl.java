@@ -11,6 +11,7 @@ import java.util.List;
 public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements TransformBusinessRuleDao {
     private Attribute_RangeDao adao;
     private Attribute_CompareDao acdao;
+    private Tuple_CompareDao tcdao;
     private Connection conn;
 
     public TransformBusinessRuleOracleDaoImpl() {
@@ -18,6 +19,8 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
             conn = super.getConnection();
             adao = new Attribute_RangeOracleDaoImpl();
             acdao = new Attribute_CompareOracleDaoImpl();
+            tcdao = new Tuple_CompareOracleDaoImpl();
+
         } catch (SQLException e) {
             System.out.println("Error: could not connect to database.");
             e.printStackTrace();
@@ -51,8 +54,6 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
     }
 
     public boolean transform(BusinessRule rule) {
-
-        System.out.println("reached");
 
         if (rule.getType().getNaam().equals("Attribute Compare rule")) {
 
@@ -117,6 +118,16 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
             return true;
             //return transformDatabase(generatedCode);
 
+        } else if (rule.getType().getNaam().equals("Tuple Compare rule")){
+
+            Tuple_Compare compare = tcdao.getTuple_Compare(rule);
+
+            String generatedCode = GenerateTupleCompare(compare);
+            System.out.println(generatedCode);
+
+            return true;
+            //return transformDatabase(generatedCode);
+
         } else {
 
             return false;
@@ -129,12 +140,12 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
 
         if (range.getOperator().equals("between")) {
 
-            String query = "ALTER TABLE " + range.getTable() + " ADD CONSTRAINT " + range.getNaam() + " CHECK (" + range.getAttribute() + " > " + range.getValue1() + " AND " + range.getAttribute() + " < " + range.getValue2() + ")";
+            String query = "ALTER TABLE " + range.getTable() + " ADD CONSTRAINT " + range.getNaam() + " CHECK (" + range.getAttribute() + " > " + range.getValue1() + " AND " + range.getAttribute() + " < " + range.getValue2() + ");";
             return query;
 
         } else {
 
-            String query = "ALTER TABLE " + range.getTable() + " ADD CONSTRAINT " + range.getNaam() + " CHECK (" + range.getAttribute() + " < " + range.getValue1() + " AND " + range.getAttribute() + " > " + range.getValue2() + ")";
+            String query = "ALTER TABLE " + range.getTable() + " ADD CONSTRAINT " + range.getNaam() + " CHECK (" + range.getAttribute() + " < " + range.getValue1() + " AND " + range.getAttribute() + " > " + range.getValue2() + ");";
             return query;
         }
     }
@@ -144,9 +155,18 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
 
         String operator = compare.getOperator();
 
-        String query = "ALTER TABLE " + compare.getTable() + " ADD CONSTRAINT " + compare.getNaam() + " CHECK (" + compare.getAttribute() + " " + operator + " " + compare.getValue() + ")";
+        String query = "ALTER TABLE " + compare.getTable() + " ADD CONSTRAINT " + compare.getNaam() + " CHECK (" + compare.getAttribute() + " " + operator + " " + compare.getValue() + ");";
         return query;
 
 
+    }
+
+    @Override
+    public String GenerateTupleCompare(Tuple_Compare compare) {
+
+        String operator = compare.getOperator();
+
+        String query = "ALTER TABLE " + compare.getTable() + " ADD CONSTRAINT " + compare.getNaam() + " CHECK (" + compare.getAttribute() + " " + operator + " " + compare.getRef_attribute() + ");";
+        return query;
     }
 }
