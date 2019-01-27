@@ -12,6 +12,7 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
     private Attribute_RangeDao adao;
     private Attribute_CompareDao acdao;
     private Tuple_CompareDao tcdao;
+    private InterEntity_CompareDao iecdao;
     private Connection conn;
 
     public TransformBusinessRuleOracleDaoImpl() {
@@ -20,6 +21,7 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
             adao = new Attribute_RangeOracleDaoImpl();
             acdao = new Attribute_CompareOracleDaoImpl();
             tcdao = new Tuple_CompareOracleDaoImpl();
+            iecdao = new InterEntity_CompareDaoOracleImpl();
 
         } catch (SQLException e) {
             System.out.println("Error: could not connect to database.");
@@ -128,6 +130,16 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
             return true;
             //return transformDatabase(generatedCode);
 
+        } else if (rule.getType().getNaam().equals("Inter-Entity Compare rule")){
+
+            InterEntity_Compare compare = iecdao.getInterEntityCompare(rule);
+
+            String generatedCode = GenerateInterEntityCompare(compare);
+            System.out.println(generatedCode);
+
+            return true;
+            //return transformDatabase(generatedCode);
+
         } else {
 
             return false;
@@ -167,6 +179,14 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
         String operator = compare.getOperator();
 
         String query = "ALTER TABLE " + compare.getTable() + " ADD CONSTRAINT " + compare.getNaam() + " CHECK (" + compare.getAttribute() + " " + operator + " " + compare.getRef_attribute() + ");";
+        return query;
+    }
+
+    @Override
+    public String GenerateInterEntityCompare(InterEntity_Compare compare) {
+
+        String operator = compare.getOperator();
+        String query = "ALTER TABLE " + compare.getTable() + " ADD CONSTRAINT " + compare.getNaam() + " CHECK (" + compare.getTable() + "." + compare.getAttribute() + " " + operator + " " + compare.getRef_table() + "." + compare.getRef_attribute() + ");";
         return query;
     }
 }

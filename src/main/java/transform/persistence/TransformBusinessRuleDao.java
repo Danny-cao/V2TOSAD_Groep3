@@ -9,4 +9,5 @@ public interface TransformBusinessRuleDao {
     String GenerateAttributeRange(Attribute_Range range);
     String GenerateAttributeCompare(Attribute_Compare compare);
     String GenerateTupleCompare(Tuple_Compare compare);
+    String GenerateInterEntityCompare(InterEntity_Compare compare);
 }
