@@ -10,12 +10,14 @@ import java.util.List;
 
 public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements TransformBusinessRuleDao {
     private Attribute_RangeDao adao;
+    private Attribute_CompareDao acdao;
     private Connection conn;
 
     public TransformBusinessRuleOracleDaoImpl() {
         try {
             conn = super.getConnection();
             adao = new Attribute_RangeOracleDaoImpl();
+            acdao = new Attribute_CompareOracleDaoImpl();
         } catch (SQLException e) {
             System.out.println("Error: could not connect to database.");
             e.printStackTrace();
@@ -52,19 +54,16 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
 
         System.out.println("reached");
 
-        if (rule.getType().equals("Attribute_Compare")) {
+        if (rule.getType().getNaam().equals("Attribute Compare rule")) {
 
-            Attribute_Compare constraint = ((Attribute_Compare) rule.getConstraint());
+            Attribute_Compare compare = acdao.getAttribute_Compare(rule);
 
+            String generatedCode = GenerateAttributeCompare(compare);
 
-            String table = constraint.getTable();
-            String name = constraint.getNaam();
-            String attribute = constraint.getAttribute();
-            String operator = constraint.getOperator();
-            String value = constraint.getValue();
+            System.out.println(generatedCode);
+            return true;
 
-            String query = "ALTER TABLE " + table + " ADD CONSTRAINT " + name + " CHECK (" + attribute + " " + operator + " " + value + ")";
-            return transformDatabase(query);
+            //return transformDatabase(generatedCode);
 
         } else if (rule.getType().equals("Attribute_List")) {
 
@@ -138,5 +137,16 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
             String query = "ALTER TABLE " + range.getTable() + " ADD CONSTRAINT " + range.getNaam() + " CHECK (" + range.getAttribute() + " < " + range.getValue1() + " AND " + range.getAttribute() + " > " + range.getValue2() + ")";
             return query;
         }
+    }
+
+    @Override
+    public String GenerateAttributeCompare(Attribute_Compare compare) {
+
+        String operator = compare.getOperator();
+
+        String query = "ALTER TABLE " + compare.getTable() + " ADD CONSTRAINT " + compare.getNaam() + " CHECK (" + compare.getAttribute() + " " + operator + " " + compare.getValue() + ")";
+        return query;
+
+
     }
 }
