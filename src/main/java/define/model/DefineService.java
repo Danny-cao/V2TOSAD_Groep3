@@ -2,15 +2,22 @@ package define.model;
 
 import define.persistence.*;
 
+import java.util.List;
+
 public class DefineService {
-    private BusinessRuleDao BDAO = new BusinessRuleOracleDaoImpl();
+    private BusinessRuleDao bdao = new BusinessRuleOracleDaoImpl();
 
 
     public BusinessRule getBusinessRuleByID(int id){
-        return BDAO.getBusinessRuleById(id);
+        return bdao.getBusinessRuleById(id);
     }
 
     public BusinessRule getBusinessRule(String naam, String table, int type){
-        return BDAO.getBusinessRule(naam, table, type);
+        return bdao.getBusinessRule(naam, table, type);
     }
+
+    public List<BusinessRule> getAllBusinessRules(){
+        return bdao.getAllBusinessRules();
+    }
+
 }

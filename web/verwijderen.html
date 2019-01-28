@@ -26,19 +26,15 @@
             <a class="nav-item nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link" href="toevoegen.html">Rule toevoegen</a>
             <a class="nav-item nav-link" href="genereren.html">Genereren</a>
-            <a class="nav-item nav-link active" href="selecteren.html">Selecteren</a>
-            <a class="nav-item nav-link" href="verwijderen.html">Rule verwijderen</a>
+            <a class="nav-item nav-link" href="selecteren.html">Selecteren</a>
+            <a class="nav-item nav-link active" href="verwijderen.html">Rule verwijderen</a>
         </div>
     </div>
 </nav>
 
 <section id="rule_selecteren">
-        Check console of die het doet.
+    Check console of die het doet.
     <form id="generateRule">
-        <input type="text" name="type" id="type" value="6">
-        <input type="text" name="name" id="name" value="BRG_VBMG_ORDER_RANGE_05">
-        <input type="text" name="table" id="table" value="Order">
-
         <select name="rules" id="rules">
             <option value="1">1 name</option>
         </select>
@@ -49,18 +45,9 @@
 
 <script>
 
+    function getBusinessRules(){}
 
-    function findBusinessRule(){
-        document.querySelector("#generate").addEventListener("click", function() {
-            var formData = new FormData(document.querySelector("#generateRule"));
 
-            var encData = new URLSearchParams(formData.entries());
-
-            fetch("rest/define/selecteren", { method: 'POST', body: encData })
-                .then(response => response.json()).then( posts => console.log(posts));
-
-        });
-    } findBusinessRule();
 </script>
 
 

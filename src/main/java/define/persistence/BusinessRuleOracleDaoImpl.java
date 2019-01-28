@@ -5,10 +5,13 @@ import persistence.OracleBaseDao;
 import define.model.BusinessRule;
 import define.model.Constraint;
 
+import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements BusinessRuleDao {
 
@@ -93,6 +96,44 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
             return new BusinessRule(id, naam, businessRuleType, constraint);
 
         } catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<BusinessRule> getAllBusinessRules() {
+
+        try{
+
+            List<BusinessRule> allBusinessRules = new ArrayList<>();
+
+            String queryText =  "select * from BusinessRule";
+
+            PreparedStatement stmt = conn.prepareStatement(queryText);
+
+            ResultSet result = stmt.executeQuery();
+
+            int id, businessruletypeid, constraintid;
+            String naam;
+
+            while(result.next()) {
+
+                id = result.getInt("ID");
+                naam = result.getString("NAAM");
+                businessruletypeid = result.getInt("BUSINESSRULETYPEID");
+                constraintid = result.getInt("CONSTRAINTID");
+
+                Constraint constraint = cdao.getConstraintByID(constraintid);
+                BusinessRuleType businessRuleType = tdao.getBusinessRuleTypeByID(businessruletypeid);
+
+                BusinessRule businessRule = new BusinessRule(id, naam, businessRuleType, constraint);
+
+                allBusinessRules.add(businessRule);
+            }
+
+            return allBusinessRules;
+        }catch(SQLException e) {
             e.printStackTrace();
             return null;
         }

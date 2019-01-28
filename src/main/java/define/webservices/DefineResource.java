@@ -7,19 +7,30 @@ import define.model.BusinessRule;
 import define.model.DefineService;
 import define.model.ServiceProvider;
 
-import java.sql.SQLException;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 
-@Path("/compare")
+@Path("/define")
 public class DefineResource {
 
         private DefineService defineService = ServiceProvider.getDefineService();
 
+        @GET
+        @Path("/businessrules")
+        @Produces("application/json")
+        public Response getAllBusinessRules(){
+
+                List<BusinessRule> rules = defineService.getAllBusinessRules();
+                Gson gson = new Gson();
+                String json = gson.toJson(rules);
+
+                return Response.ok(json).build();
+        }
 
         @POST
+        @Path("/selecteren")
         @Produces("application/json")
         public Response getBusinessRuleWithParam(@FormParam("name") String naam, @FormParam("table") String table, @FormParam("type") String type){
 
@@ -32,6 +43,22 @@ public class DefineResource {
 
             return Response.ok(json).build();
         }
+
+        @PUT
+        @Produces("application/json")
+        public Response updateBusinessRule(){
+
+                return Response.ok().build();
+        }
+
+        @DELETE
+        @Path("{rule}")
+        @Produces("application/json")
+        public Response delete(@PathParam("rule") String rule){
+                return Response.ok().build();
+        }
+
+
 
 //        @POST
 //        @Produces("application/json")
