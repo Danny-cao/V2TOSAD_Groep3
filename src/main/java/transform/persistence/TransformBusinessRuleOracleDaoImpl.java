@@ -174,8 +174,6 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
 
         String query = "ALTER TABLE " + compare.getTable() + " ADD CONSTRAINT " + compare.getNaam() + " CHECK (" + compare.getAttribute() + " " + operator + " " + compare.getValue() + ");";
         return query;
-
-
     }
 
     public String GenerateAttributeList(Attribute_List list) {
