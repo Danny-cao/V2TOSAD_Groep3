@@ -1,7 +1,9 @@
 package transform.webservices;
 
-import transform.model.ServiceProvider;
-import transform.model.TransformService;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import transform.model.*;
+
+import com.google.gson.Gson;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -10,7 +12,7 @@ import javax.ws.rs.core.Response;
 @Path("/generate")
 public class TransformResource {
 
-    private static TransformService transformService = ServiceProvider.getTransformService();
+    private TransformService transformService = ServiceProvider.getTransformService();
 
     @POST
     @Produces("application/json")
@@ -18,15 +20,18 @@ public class TransformResource {
 
         // Haal business rule op
         int result = Integer.parseInt(type);
-        transformService.getBusinessRule(result);
-
-        // Haal constraint op
-
-        // Haal businessrule type op
+        BusinessRule businessRule = transformService.getBusinessRule(result);
 
         // generate businessrule code
 
-        return Response.ok(type).build();
+        Boolean transform = transformService.transform(businessRule);
+        System.out.println(transform);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(businessRule);
+
+        //return Response.status(200).entity(businessRuleType).build();
+        return Response.ok(json).build();
     }
 
     // testen of restservices het doen
@@ -34,8 +39,13 @@ public class TransformResource {
     @Produces("application/json")
     public String gettestData(){
 
-        String test = "hallo";
-        return test;
+        BusinessRuleType businessRuleType = transformService.getBusinessRuleType(1);
+
+        Gson gson = new Gson();
+
+        String result = gson.toJson(businessRuleType);
+
+        return result;
     }
 
 }

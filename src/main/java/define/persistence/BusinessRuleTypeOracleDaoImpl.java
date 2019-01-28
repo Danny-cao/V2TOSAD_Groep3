@@ -35,7 +35,9 @@ public class BusinessRuleTypeOracleDaoImpl extends OracleBaseDao implements Busi
             String naam = result.getString("NAAM");
             String categorie = result.getString("CATEGORIE");
 
+            System.out.println("type impl" + id + naam + categorie);
             return new BusinessRuleType(id, naam, categorie);
+
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

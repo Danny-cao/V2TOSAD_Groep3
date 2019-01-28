@@ -1,7 +1,9 @@
 package define.webservices;
 
 
+import com.google.gson.Gson;
 import define.model.Attribute_Compare;
+import define.model.BusinessRule;
 import define.model.DefineService;
 import define.model.ServiceProvider;
 
@@ -21,36 +23,40 @@ public class DefineResource {
         @Produces("application/json")
         public Response getBusinessRuleWithParam(@FormParam("name") String naam, @FormParam("table") String table, @FormParam("type") String type){
 
-            // haal businessruletype op.
+                int result = Integer.parseInt(type);
 
-            // haal businessrule op...
-            //defineService.getBusinessRule(naam, table, type);
+                BusinessRule rule = defineService.getBusinessRule(naam, table, result);
 
-            return Response.ok().build();
+                Gson gson = new Gson();
+                String json = gson.toJson(rule);
+
+            return Response.ok(json).build();
         }
 
-        @POST
-        @Produces("application/json")
-        public Response createConstraint(@FormParam("tabel_compare") String table,
-                                     @FormParam("atribuut_compare") String attribute,@FormParam("operator_compare") String operator,
-                @FormParam("value_compare")String value) throws SQLException{
-
-//            String cnaam = "vbmg_constraint";
-//            //String bnaam = "vbmg_rule";
-//            //int btypeid = 2;
-//            //int bconstraint = 2;
-//            //int bId = 2;
+//        @POST
+//        @Produces("application/json")
+//        public Response createConstraint(@FormParam("tabel_compare") String table,
+//                                     @FormParam("atribuut_compare") String attribute,@FormParam("operator_compare") String operator,
+//                @FormParam("value_compare")String value) throws SQLException{
 //
-//            System.out.println("constraint opslaan");
-//            Attribute_Compare compare = new Attribute_Compare(cnaam,table,attribute,value,operator);
-//            Service.Save(compare);
-//            System.out.println("gelukt");
-//            //System.out.println("rule opslaan");
-//            //BusinessRule businessRule = new BusinessRule(bId,bnaam,btypeid,bconstraint);
-//            //bService.Save(businessRule);
-//            //System.out.println("gelukt");
-            //return Response.ok(compare).build();
+////            String cnaam = "vbmg_constraint";
+////            //String bnaam = "vbmg_rule";
+////            //int btypeid = 2;
+////            //int bconstraint = 2;
+////            //int bId = 2;
+////
+////            System.out.println("constraint opslaan");
+////            Attribute_Compare compare = new Attribute_Compare(cnaam,table,attribute,value,operator);
+////            Service.Save(compare);
+////            System.out.println("gelukt");
+////            //System.out.println("rule opslaan");
+////            //BusinessRule businessRule = new BusinessRule(bId,bnaam,btypeid,bconstraint);
+////            //bService.Save(businessRule);
+////            //System.out.println("gelukt");
+//            //return Response.ok(compare).build();
+//
+//            return Response.ok().build();
+//        }
 
-            return Response.ok().build();
-        }}
+}
 

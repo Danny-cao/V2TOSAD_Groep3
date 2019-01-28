@@ -10,7 +10,7 @@ public class DefineService {
         return BDAO.getBusinessRuleById(id);
     }
 
-    public BusinessRule getBusinessRule(String naam, String table, BusinessRuleType type){
+    public BusinessRule getBusinessRule(String naam, String table, int type){
         return BDAO.getBusinessRule(naam, table, type);
     }
 }
