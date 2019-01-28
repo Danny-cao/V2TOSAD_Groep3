@@ -14,7 +14,7 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
     private Attribute_ListDao aldao;
     private Attribute_OtherDao aodao;
     private Tuple_CompareDao tcdao;
-    private Tuple_Other todao;
+    private Tuple_OtherDao todao;
     private InterEntity_CompareDao iecdao;
     private Entity_OtherDao eodao;
     private Connection conn;
@@ -119,7 +119,7 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
 
             Tuple_Other other = todao.getTuple_Other(rule);
 
-            String generatedCode = GeneratedTupleOther(other);
+            String generatedCode = GenerateTupleOther(other);
             System.out.println(generatedCode);
 
             return true;
@@ -137,7 +137,7 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
 
         } else if (rule.getType().getNaam().equals("Entity Other rule")) {
 
-            Entity_Other other = eodao.getEntityOther(rule);
+            Entity_Other other = eodao.getEntity_Other(rule);
 
             String generatedCode = GenerateEntityOther(other);
             System.out.println(generatedCode);
@@ -178,7 +178,6 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
 
     }
 
-    @Override
     public String GenerateAttributeList(Attribute_List list) {
 
         String table = list.getTable();
@@ -213,7 +212,6 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
 
     }
 
-    @Override
     public String GenerateAttributeOther(Attribute_Other other) {
 
         String table = other.getTable();
@@ -234,10 +232,10 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
         return query;
     }
 
-    @Override
     public String GenerateTupleOther(Tuple_Other other) {
 
-
+        String query = "";
+        return query;
 
     }
 
@@ -249,10 +247,10 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
         return query;
     }
 
-    @Override
     public String GenerateEntityOther(Entity_Other other) {
 
-
+        String query = "";
+        return query;
 
     }
 
