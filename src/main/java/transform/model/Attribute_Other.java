@@ -2,18 +2,18 @@ package transform.model;
 
 public class Attribute_Other extends Constraint {
 
-    private String attribute;
+    private String constraint;
 
-    public Attribute_Other(String naam, String table, int id, String attribute) {
+    public Attribute_Other(String naam, String table, int id, String constraint) {
 
         super(naam, table, id);
-        this.attribute = attribute;
+        this.constraint = constraint;
 
     }
 
-    public String getAttribute() {
+    public String getConstraint() {
 
-        return this.attribute;
+        return this.constraint;
 
     }
 
