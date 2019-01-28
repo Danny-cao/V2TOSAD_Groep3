@@ -11,8 +11,12 @@ import java.util.List;
 public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements TransformBusinessRuleDao {
     private Attribute_RangeDao adao;
     private Attribute_CompareDao acdao;
+    private Attribute_ListDao aldao;
+    private Attribute_OtherDao aodao;
     private Tuple_CompareDao tcdao;
+    private Tuple_Other todao;
     private InterEntity_CompareDao iecdao;
+    private Entity_OtherDao eodao;
     private Connection conn;
 
     public TransformBusinessRuleOracleDaoImpl() {
