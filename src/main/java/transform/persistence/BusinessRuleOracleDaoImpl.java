@@ -2,6 +2,8 @@ package transform.persistence;
 
 import persistence.OracleBaseDao;
 import transform.model.BusinessRule;
+import transform.model.BusinessRuleType;
+import transform.model.Constraint;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -36,7 +38,32 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
 
     @Override
     public BusinessRule findByID(int id) {
-        return null;
+        try {
+            String queryText =  "SELECT ID, NAAM, BUSINESSRULETYPEID, CONSTRAINTID " +
+                    "FROM BUSINESSRULE " +
+                    "WHERE ID = ?";
+            PreparedStatement stmt = conn.prepareStatement(queryText);
+
+            stmt.setInt(1, id);
+            ResultSet result = stmt.executeQuery();
+
+            result.next();
+
+            //
+            String naam = result.getString("NAAM");
+            int businessruletypeid = result.getInt("BUSINESSRULETYPEID");
+            int constraintid = result.getInt("CONSTRAINTID");
+
+            BusinessRuleType businessRuleType = tdao.findByID(businessruletypeid);
+            Constraint constraint = cdao.findByID(constraintid);
+
+
+            return new BusinessRule(id, naam, businessRuleType, constraint);
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

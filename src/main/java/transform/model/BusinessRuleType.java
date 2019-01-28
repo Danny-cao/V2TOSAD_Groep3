@@ -22,5 +22,9 @@ public class BusinessRuleType {
     public String getCategorie() {
         return categorie;
     }
+
+    public String toString(){
+        return getId() + " " + getNaam() + " " + getCategorie();
+    }
     
 }

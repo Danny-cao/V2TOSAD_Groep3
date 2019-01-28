@@ -1,12 +1,12 @@
 package transform.model;
 
-public abstract class Constraint {
+public class Constraint {
 
     private int id;
     private String naam;
     private String table;
 
-    Constraint(String naam, String table, int id) {
+    public Constraint(String naam, String table, int id) {
 
         this.id = id;
         this.naam = naam;
@@ -24,5 +24,9 @@ public abstract class Constraint {
 
     public String getTable() {
         return table;
+    }
+
+    public String toString(){
+        return getId() + " " + getNaam() + " " + getTable();
     }
 }

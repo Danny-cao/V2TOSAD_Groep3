@@ -8,7 +8,7 @@ public interface BusinessRuleDao {
 
     ArrayList<BusinessRule> selectBusinessRules(String query);
     ArrayList<BusinessRule> findAll();
-    public BusinessRule executeQuery(String query);
+    BusinessRule executeQuery(String query);
 
     BusinessRule findByID(int id);
 

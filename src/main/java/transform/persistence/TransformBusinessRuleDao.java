@@ -1,9 +1,13 @@
 package transform.persistence;
 
-import transform.model.BusinessRule;
+import transform.model.*;
 
 public interface TransformBusinessRuleDao {
 
-    public boolean transform(BusinessRule rule);
+    boolean transform(BusinessRule rule);
 
+    String GenerateAttributeRange(Attribute_Range range);
+    String GenerateAttributeCompare(Attribute_Compare compare);
+    String GenerateTupleCompare(Tuple_Compare compare);
+    String GenerateInterEntityCompare(InterEntity_Compare compare);
 }
