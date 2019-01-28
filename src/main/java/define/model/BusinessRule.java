@@ -27,9 +27,6 @@ public class BusinessRule {
         return id;
     }
 
-
-
-
     public String getNaam() {
         return naam;
     }

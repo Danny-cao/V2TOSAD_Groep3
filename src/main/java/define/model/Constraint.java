@@ -1,12 +1,12 @@
 package define.model;
 
-public abstract class Constraint {
+public class Constraint {
 
     private int id;
     private String naam;
     private String table;
 
-    Constraint(String naam, String table, int id) {
+    public Constraint(String naam, String table, int id) {
 
         this.id = id;
         this.naam = naam;
@@ -14,7 +14,7 @@ public abstract class Constraint {
 
     }
 
-    Constraint(String naam, String table) {
+    public Constraint(String naam, String table) {
 
         this.naam = naam;
         this.table = table;
