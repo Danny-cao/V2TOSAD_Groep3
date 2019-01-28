@@ -14,7 +14,7 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
     private Attribute_ListDao aldao;
     private Attribute_OtherDao aodao;
     private Tuple_CompareDao tcdao;
-    private Tuple_Other todao;
+    private Tuple_OtherDao todao;
     private InterEntity_CompareDao iecdao;
     private Entity_OtherDao eodao;
     private Connection conn;
