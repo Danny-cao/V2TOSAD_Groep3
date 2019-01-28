@@ -20,4 +20,12 @@ public class DefineService {
         return bdao.getAllBusinessRules();
     }
 
+    public boolean delete(BusinessRule rule){
+        return bdao.delete(rule);
+    }
+
+    public BusinessRule update(BusinessRule rule){
+        return bdao.update(rule);
+    }
+
 }

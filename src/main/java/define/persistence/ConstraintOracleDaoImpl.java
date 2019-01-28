@@ -46,4 +46,29 @@ public class ConstraintOracleDaoImpl extends OracleBaseDao implements Constraint
             return null;
         }
     }
+
+    @Override
+    public boolean delete(Constraint constraint) {
+
+        boolean success = false;
+
+        try{
+
+            String queryText = "DELETE " +
+                    "FROM CONSTRAINT " +
+                    "WHERE ID = ?";
+
+            PreparedStatement stmt = conn.prepareStatement(queryText);
+            stmt.setInt(1, constraint.getId());
+
+            if(stmt.executeUpdate() > 0) {
+                success = true;
+            }
+
+            return success;
+        }catch(SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

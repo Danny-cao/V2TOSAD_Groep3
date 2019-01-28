@@ -43,4 +43,29 @@ public class BusinessRuleTypeOracleDaoImpl extends OracleBaseDao implements Busi
             return null;
         }
     }
+
+    @Override
+    public boolean delete(BusinessRuleType type) {
+
+        boolean success = false;
+
+        try{
+
+            String queryText = "DELETE " +
+                    "FROM BUSINESSRULETYPE " +
+                    "WHERE ID = ?";
+
+            PreparedStatement stmt = conn.prepareStatement(queryText);
+            stmt.setInt(1, type.getId());
+
+            if(stmt.executeUpdate() > 0) {
+                success = true;
+            }
+
+            return success;
+        }catch(SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

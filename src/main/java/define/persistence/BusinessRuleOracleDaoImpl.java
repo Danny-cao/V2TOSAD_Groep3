@@ -138,4 +138,38 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
             return null;
         }
     }
+
+    @Override
+    public BusinessRule update(BusinessRule rule) {
+        return null;
+    }
+
+    @Override
+    public boolean delete(BusinessRule rule) {
+
+        boolean success = false;
+
+        try{
+
+            cdao.delete(rule.getConstraint());
+
+            tdao.delete(rule.getType());
+
+            String queryText =  "DELETE " +
+                    "FROM BUSINESSRULE " +
+                    "WHERE ID = ?";
+
+            PreparedStatement stmt = conn.prepareStatement(queryText);
+            stmt.setInt(1, rule.getId());
+
+            if(stmt.executeUpdate() > 0) {
+               success = true;
+            }
+
+            return success;
+        }catch(SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

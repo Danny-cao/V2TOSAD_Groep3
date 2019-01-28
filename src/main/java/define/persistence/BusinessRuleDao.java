@@ -8,5 +8,7 @@ public interface BusinessRuleDao {
     BusinessRule getBusinessRuleById(int id);
     BusinessRule getBusinessRule(String naam, String table, int type);
     List<BusinessRule> getAllBusinessRules();
+    BusinessRule update(BusinessRule rule);
+    boolean delete(BusinessRule rule);
 }
 
