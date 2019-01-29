@@ -1,3 +1,0 @@
-https://bootstrapious.com/p/bootstrap-sidebar
-https://fezvrasta.github.io/bootstrap-material-design/
-https://fezvrasta.github.io/bootstrap-material-design/docs/4.0/material-design/snackbars/

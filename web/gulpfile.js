@@ -51,6 +51,11 @@ gulp.task('bootstrap-js', function(){
 		.pipe(gulp.dest(config.outputDir + '/js')); 
 });
 
+gulp.task('popper-js', function(){
+	return gulp.src('./node_modules/popper.js/dist/popper.min.js')
+		.pipe(gulp.dest(config.outputDir + '/js'));
+});
+
 gulp.task('js', function() {
 	return gulp.src(config.jsPath+'/*')
 		.pipe(filter('**/*.js'))
@@ -65,4 +70,4 @@ gulp.task('watch', function(){
 	gulp.watch([config.imagesPath + '/**/*'], ['images']);
 });
 
-gulp.task('default', ['icons', 'css', 'jquery', 'bootstrap-js', 'js']);
+gulp.task('default', ['icons', 'css', 'jquery', 'bootstrap-js', 'popper-js','js']);

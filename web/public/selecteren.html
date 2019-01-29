@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="V2C Team 3 TOSAD">
+
+    <!-- Bootstrap CSS -->
+    <link href="dist/css/main.css" rel="stylesheet">
+    <title>Test</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Business rule generator</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="toevoegen.html">Rule toevoegen</a>
+            <a class="nav-item nav-link active" href="selecteren.html">Selecteren</a>
+            <a class="nav-item nav-link" href="verwijderen.html">Rule verwijderen</a>
+        </div>
+    </div>
+</nav>
+
+<section id="rule_selecteren">
+        Check console of die het doet.
+    <form id="generateRule">
+        <input type="text" name="type" id="type" value="6">
+        <input type="text" name="name" id="name" value="BRG_VBMG_ORDER_RANGE_05">
+        <input type="text" name="table" id="table" value="Order">
+
+        <select name="rules" id="rules">
+            <option value="1">1 name</option>
+        </select>
+
+        <input type="button" id="generate" value="generate">
+    </form>
+</section>
+
+<script src="dist/js/jquery.min.js"></script>
+<script src="dist/js/bootstrap.min.js"></script>
+<script src="dist/js/popper.min.js"></script>
+<script src="dist/js/main.js"></script>
+<script>
+
+
+    function findBusinessRule(){
+        document.querySelector("#generate").addEventListener("click", function() {
+            var formData = new FormData(document.querySelector("#generateRule"));
+
+            var encData = new URLSearchParams(formData.entries());
+
+            fetch("rest/define/selecteren", { method: 'POST', body: encData })
+                .then(response => response.json()).then( posts => console.log(posts));
+
+        });
+    } findBusinessRule();
+</script>
+
+
+</body>
+</html>
+</html>

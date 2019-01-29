@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="V2C Team 3 TOSAD">
+
+    <!-- Bootstrap CSS -->
+    <link href="dist/css/main.css" rel="stylesheet">
+    <title>Business Rule Generator | Rule Toevoegen</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Business rule generator</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link active" href="toevoegen.html">Rule toevoegen</a>
+            <a class="nav-item nav-link" href="selecteren.html">Selecteren</a>
+            <a class="nav-item nav-link" href="verwijderen.html">Rule verwijderen</a>
+        </div>
+    </div>
+</nav>
+
+<section id="rule_toevoegen">
+
+    <div id="selecteer_rule">
+
+
+        <select class="form-control" id="rule">
+            <option value="Range" id="test1">Range</option>
+            <option value="Compare" id="test2">Compare</option>
+            <option value="Tuple Compare" id="test3">Tuple Compare</option>
+            <option value="Inter-Entity Compare" id="test4">Inter-Entity Compare</option>
+
+        </select>
+        <button type="button" class="btn btn-success" id="select">Select</button>
+
+    </div>
+
+
+    <div id="types">
+        <form id="range">
+            <div class="row">
+                <div class="col-25">
+                    <label for="tabel_range">table:</label>
+                </div>
+                <div class="col-75">
+                    <select id="tabel_range" name="tabel_range">
+                        <option value="phonenumber">phonenumber</option>
+                        <option value="bestelling">Bestelling</option>
+                        <option value="orders">Orders</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="atribuut_range">Atribute:</label>
+                </div>
+                <div class="col-75">
+                    <select id="atribuut_range" name="atribuut_range">
+                        <option value="phonenumber">phonenumber</option>
+                        <option value="bestelling">Bestelling</option>
+                        <option value="orders">Orders</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="operator_range">Operator:</label>
+                </div>
+                <div class="col-75">
+                    <select id="Operator_range" name="operator_range">
+                        <option value="Between">Between</option>
+                        <option value="NotBetween">NotBetween</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="mvalue_range">Minimum Value:</label>
+                </div>
+                <div class="col-75">
+                    <input type="number" id="mvalue_range"  placeholder="min">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="maxvalue_range">Maximum Value:</label>
+                </div>
+                <div class="col-75">
+                    <input type="number" id="maxvalue_range"  placeholder="max">
+                </div>
+            </div>
+            <button type="button" class="btn btn-success" id="ok">Opslaan</button>
+
+    </form>
+        <form id="compare">
+            <div class="row">
+                <div class="col-25">
+                    <label for="tabel_compare">Tabel:</label>
+                </div>
+                <div class="col-75">
+                    <select id="tabel_compare" name="tabel_compare">
+                        <option value="Order">Order</option>
+                        <option value="Product">Product</option>
+                        <option value="Orderregel">Orderregel</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="atribuut_compare">Atribute:</label>
+                </div>
+                <div class="col-75">
+                    <select id="atribuut_compare" name="atribuut_compare">
+                        <option value="phonenumber">phonenumber</option>
+                        <option value="bestelling">Bestelling</option>
+                        <option value="orders">Orders</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="operator_compare">Operator:</label>
+                </div>
+                <div class="col-75">
+                    <select id="operator_compare" name="operator_compare">
+                        <option value="Equals">Equals</option>
+                        <option value="NotEquals">NotEquals</option>
+                        <option value="LessThan">LessThan</option>
+                        <option value="GreaterThan">GreaterThan</option>
+                        <option value="LessOrEqualTo">LessOrEqualTo</option>
+                        <option value="GreaterOrEqualTo">GreaterOrEqualTo</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="value_compare">Comapre with literal value:</label>
+                </div>
+                <div class="col-75">
+                    <input id="value_compare" name="value_compare" placeholder="value">
+                </div>
+
+            </div>
+            <button type="button" class="btn btn-success" id="ok_compare">Opslaan</button>
+
+        </form>
+        <form id="tuple_compare">
+            <div class="row">
+                <div class="col-25">
+                    <label for="tabel_tcompare">Atribute:</label>
+                </div>
+                <div class="col-75">
+                    <select id="tabel_tcompare" name="tabel_tcompare">
+                        <option value="phonenumber">phonenumber</option>
+                        <option value="bestelling">Bestelling</option>
+                        <option value="orders">Orders</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="atribuut_tcompare">Atribute:</label>
+                </div>
+                <div class="col-75">
+                    <select id="atribuut_tcompare" name="atribuut_tcompare">
+                        <option value="phonenumber">phonenumber</option>
+                        <option value="bestelling">Bestelling</option>
+                        <option value="orders">Orders</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="operator_tcompare">Operator:</label>
+                </div>
+                <div class="col-75">
+                    <select id="Operator_tcompare" name="operator_tcompare">
+                        <option value="Equals">Equals</option>
+                        <option value="NotEquals">NotEquals</option>
+                        <option value="LessThan">LessThan</option>
+                        <option value="GreaterThan">GreaterThan</option>
+                        <option value="LessOrEqualTo">LessOrEqualTo</option>
+                        <option value="GreaterOrEqualTo">GreaterOrEqualTo</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="atribuut_acompare">Comapre with Entity-Atribute:</label>
+                </div>
+                <div class="col-75">
+                    <select id="atribuut_acompare" name="atribuut_acompare">
+                        <option value="phonenumber">phonenumber</option>
+                        <option value="bestelling">Bestelling</option>
+                        <option value="orders">Orders</option>
+                    </select>
+                </div>
+            </div>
+            <button type="button" class="btn btn-success" id="ok_tcompare">Opslaan</button>
+
+
+        </form>
+        <form id="inter_compare">
+            <div class="row">
+                <div class="col-25">
+                    <label for="tabel_inter">Table:</label>
+                </div>
+                <div class="col-75">
+                    <select id="tabel_inter" name="tabel_inter">
+                        <option value="phonenumber">phonenumber</option>
+                        <option value="bestelling">Bestelling</option>
+                        <option value="orders">Orders</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="atribuut_inter">Atribute:</label>
+                </div>
+                <div class="col-75">
+                    <select id="atribuut_inter" name="atribuut_inter">
+                        <option value="phonenumber">phonenumber</option>
+                        <option value="bestelling">Bestelling</option>
+                        <option value="orders">Orders</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="operator_inter">Operator:</label>
+                </div>
+                <div class="col-75">
+                    <select id="operator_inter" name="operator_inter">
+                        <option value="Equals">Equals</option>
+                        <option value="NotEquals">NotEquals</option>
+                        <option value="LessThan">LessThan</option>
+                        <option value="GreaterThan">GreaterThan</option>
+                        <option value="LessOrEqualTo">LessOrEqualTo</option>
+                        <option value="GreaterOrEqualTo">GreaterOrEqualTo</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="tabel_interA">Entity table:</label>
+                </div>
+                <div class="col-75">
+                    <select id="tabel_interA" name="tabel_interA">
+                        <option value="phonenumber">Orders</option>
+                        <option value="bestelling">Bestelregel</option>
+                        <option value="orders">Orderregel</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="atribuut_interA">Entity atribuut:</label>
+                </div>
+                <div class="col-75">
+                    <select id="atribuut_interA" name="atribuut_interA">
+                        <option value="phonenumber">phonenumber</option>
+                        <option value="bestelling">regel</option>
+                        <option value="orders">datum</option>
+                    </select>
+                </div>
+            </div>
+            <button type="button" class="btn btn-success" id="ok_etcompare">Opslaan</button>
+
+        </form>
+
+
+    </div>
+</section>
+
+
+<script src="dist/js/jquery.min.js"></script>
+<script src="dist/js/bootstrap.min.js"></script>
+<script src="dist/js/popper.min.js"></script>
+<script src="dist/js/main.js"></script>
+<!-- Optional JavaScript --->
+<script>
+
+    var compare = document.getElementById('compare');
+    var range = document.getElementById('range');
+    var tuple = document.getElementById('tuple_compare');
+    var inter = document.getElementById('inter_compare');
+    var btn = document.getElementById('select');
+
+    range.style.display="none";
+    compare.style.display="none";
+    tuple.style.display="none";
+    inter.style.display="none";
+
+
+
+
+
+
+
+    "use strict";
+
+
+    function test() {
+        var selector = document.getElementById('rule');
+
+        var value = selector[selector.selectedIndex].value;
+        console.log(value);
+
+        if (value=="Range") {
+            range.style.display="";
+            compare.style.display="none";
+            tuple.style.display="none";
+            inter.style.display="none";
+        }
+        else if(value=="Compare") {
+            compare.style.display="";
+            range.style.display="none";
+            tuple.style.display="none";
+            inter.style.display="none";
+        }
+        else if(value=="Tuple Compare") {
+            tuple.style.display="";
+            compare.style.display="none";
+            range.style.display="none";
+            inter.style.display="none";
+        }
+        else if(value=="Inter-Entity Compare") {
+            inter.style.display="";
+            compare.style.display="none";
+            tuple.style.display="none";
+            range.style.display="none";
+        }
+    }
+    btn.addEventListener('click',test);
+
+
+    var voegToe = document.querySelector("#ok_compare");
+    voegToe.addEventListener("click",function(){
+        var formData = new FormData(document.querySelector("#compare"));
+        var encData = new URLSearchParams(formData.entries());
+          fetch("rest/compare",{ method: 'POST', body: encData})
+            .then(function(myJson) {
+                if (myJson.ok)
+                    console.log("Business rule added!");
+                else if (myJson.status == 404)
+                    console.log("Business rule not added!");
+
+            })
+
+    });
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
+</html>
