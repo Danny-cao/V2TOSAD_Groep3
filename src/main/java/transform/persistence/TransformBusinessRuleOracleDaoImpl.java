@@ -232,7 +232,11 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
 
     public String GenerateTupleOther(Tuple_Other other) {
 
-        String query = "";
+        String table = other.getTable();
+        String name = other.getNaam();
+        String constraintValue = other.getConstraint();
+
+        String query = "ALTER TABLE " + table + " ADD CONSTRAINT " + name + " CHECK (" + constraintValue + ")";
         return query;
 
     }
@@ -241,13 +245,18 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
     public String GenerateInterEntityCompare(InterEntity_Compare compare) {
 
         String operator = compare.getOperator();
+
         String query = "ALTER TABLE " + compare.getTable() + " ADD CONSTRAINT " + compare.getNaam() + " CHECK (" + compare.getTable() + "." + compare.getAttribute() + " " + operator + " " + compare.getRef_table() + "." + compare.getRef_attribute() + ");";
         return query;
     }
 
     public String GenerateEntityOther(Entity_Other other) {
 
-        String query = "";
+        String table = other.getTable();
+        String name = other.getNaam();
+        String constraintValue = other.getConstraint();
+
+        String query = "ALTER TABLE " + table + " ADD CONSTRAINT " + name + " CHECK (" + constraintValue + ")";
         return query;
 
     }
