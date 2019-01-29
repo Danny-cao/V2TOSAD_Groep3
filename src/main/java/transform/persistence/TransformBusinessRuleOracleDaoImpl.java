@@ -114,7 +114,7 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
             return true;
             //return transformDatabase(generatedCode);
 
-        } else if (rule.getType().equals("Attribute_List")) {
+        } else if (rule.getType().getNaam().equals("Attribute List rule")) {
 
             Attribute_List list = aldao.getAttribute_List(rule);
 
@@ -124,7 +124,7 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
             return true;
             //return transformDatabase(generatedCode);
 
-        } else if (rule.getType().equals("Attribute_Other")) {
+        } else if (rule.getType().getNaam().equals("Attribute Other rule")) {
 
             Attribute_Other other = aodao.getAttribute_Other(rule);
 

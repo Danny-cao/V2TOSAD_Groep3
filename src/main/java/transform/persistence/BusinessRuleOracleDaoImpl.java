@@ -1,15 +1,21 @@
 package transform.persistence;
 
 import persistence.OracleBaseDao;
-import transform.model.BusinessRule;
-import transform.model.BusinessRuleType;
-import transform.model.Constraint;
+import transform.model.*;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements BusinessRuleDao {
+    private Attribute_RangeDao ardao;
+    private Attribute_CompareDao acdao;
+    private Attribute_ListDao aldao;
+    private Attribute_OtherDao aodao;
+    private Tuple_CompareDao tcdao;
+    private Tuple_OtherDao todao;
+    private InterEntity_CompareDao iecdao;
+    private Entity_OtherDao eodao;
     private ConstraintDao cdao;
     private BusinessRuleTypeDao tdao;
     private Connection conn;
@@ -17,6 +23,14 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
     public BusinessRuleOracleDaoImpl() {
         try {
             conn = super.getConnection();
+            ardao = new Attribute_RangeOracleDaoImpl();
+            acdao = new Attribute_CompareOracleDaoImpl();
+            aldao = new Attribute_ListOracleDaoImpl();
+            aodao = new Attribute_OtherOracleDaoImpl();
+            tcdao = new Tuple_CompareOracleDaoImpl();
+            todao = new Tuple_OtherOracleDaoImpl();
+            iecdao = new InterEntity_CompareDaoOracleImpl();
+            eodao = new Entity_OtherOracleDaoImpl();
             cdao = new ConstraintOracleDaoImpl();
             tdao = new BusinessRuleTypeOracleDaoImpl();
         } catch (SQLException e) {
@@ -49,16 +63,60 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
 
             result.next();
 
-            //
             String naam = result.getString("NAAM");
             int businessruletypeid = result.getInt("BUSINESSRULETYPEID");
             int constraintid = result.getInt("CONSTRAINTID");
 
             BusinessRuleType businessRuleType = tdao.findByID(businessruletypeid);
-            Constraint constraint = cdao.findByID(constraintid);
+            //Constraint constraint = cdao.findByID(constraintid);
 
+            if (businessRuleType.getNaam().equals("Attribute Range rule")){
 
-            return new BusinessRule(id, naam, businessRuleType, constraint);
+                Attribute_Range constraint = ardao.findByID(constraintid);
+                return new BusinessRule(id, naam, businessRuleType, constraint);
+
+            } else if (businessRuleType.getNaam().equals("Attribute Compare rule")) {
+
+                Attribute_Compare constraint = acdao.findByID(constraintid);
+                return new BusinessRule(id, naam, businessRuleType, constraint);
+
+            } else if (businessRuleType.getNaam().equals("Attribute List rule")) {
+
+                Attribute_List constraint = aldao.findByID(constraintid);
+                return new BusinessRule(id, naam, businessRuleType, constraint);
+
+            } else if (businessRuleType.getNaam().equals("Attribute Other rule")) {
+
+                Attribute_List constraint = aldao.findByID(constraintid);
+                return new BusinessRule(id, naam, businessRuleType, constraint);
+
+            } else if(businessRuleType.getNaam().equals("Tuple Compare rule")) {
+
+                Tuple_Compare constraint = tcdao.findByID(constraintid);
+                return new BusinessRule(id, naam, businessRuleType, constraint);
+
+            } else if (businessRuleType.getNaam().equals("Tuple Other rule")){
+
+                Tuple_Other constraint = todao.findByID(constraintid);
+                return new BusinessRule(id, naam, businessRuleType, constraint);
+
+            } else if (businessRuleType.getNaam().equals("Inter-Entity Compare rule")) {
+
+                InterEntity_Compare constraint = iecdao.findByID(constraintid);
+                return new BusinessRule(id, naam, businessRuleType, constraint);
+
+            } else if (businessRuleType.getNaam().equals("Entity Other rule")){
+
+                Entity_Other constraint = eodao.findByID(constraintid);
+                return new BusinessRule(id, naam, businessRuleType, constraint);
+
+            } else {
+
+                return null;
+
+            }
+
+            //return new BusinessRule(id, naam, businessRuleType, constraint);
 
         } catch(SQLException e) {
             e.printStackTrace();

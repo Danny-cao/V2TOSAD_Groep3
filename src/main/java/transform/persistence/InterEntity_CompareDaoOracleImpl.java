@@ -23,6 +23,34 @@ public class InterEntity_CompareDaoOracleImpl extends OracleBaseDao implements I
         }
     }
 
+    public InterEntity_Compare findByID(int id) {
+
+        try {
+            String queryText =  "SELECT * " +
+                    "FROM CONSTRAINT " +
+                    "WHERE ID = ?";
+
+            PreparedStatement stmt = conn.prepareStatement(queryText);
+            stmt.setInt(1, id);
+            ResultSet result = stmt.executeQuery();
+
+            result.next();
+            String naam = result.getString("NAAM");
+            String table = result.getString("TABLE_NAME");
+            String attribute = result.getString("ATTRIBUTE_NAME");
+            String ref_attribute = result.getString("REF_ATTRIBUTE");
+            String ref_table = result.getString("REF_TABLE");
+            String operator = result.getString("OPERATOR");
+
+            return new InterEntity_Compare(naam, table, id, attribute, ref_table, ref_attribute, operator);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
     @Override
     public InterEntity_Compare getInterEntityCompare(BusinessRule rule) {
         try {
