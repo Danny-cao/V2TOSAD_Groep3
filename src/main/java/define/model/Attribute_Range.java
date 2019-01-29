@@ -17,6 +17,16 @@ public class Attribute_Range extends Constraint{
 
     }
 
+    public Attribute_Range(String table, int id, String attribute, int value1, int value2, String operator){
+
+        super(table, id);
+        this.attribute = attribute;
+        this.value1 = value1;
+        this.value2 = value2;
+        this.operator = operator;
+
+    }
+
     public String getAttribute() {
 
         return this.attribute;

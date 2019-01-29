@@ -79,48 +79,39 @@
 
             <div class="form-group">
                 <label for="mvalue_range">Minimum Value:</label>
-                <input class="form-control" type="number" id="mvalue_range"  placeholder="min">
+                <input class="form-control" id="mvalue_range" name="mvalue_range" placeholder="min">
             </div>
 
             <div class="form-group">
                 <label for="maxvalue_range">Maximum Value:</label>
-                <input class="form-control" type="number" id="maxvalue_range"  placeholder="max">
+                <input class="form-control" id="maxvalue_range" name="maxvalue_range"  placeholder="max">
             </div>
             <button type="button" class="btn btn-success" id="ok">Opslaan</button>
 
         </form>
 
-        <form id="compare" method="post">
-            <div class="row">
-                <div class="col-25">
-                    <label for="tabel_compare">Tabel:</label>
-                </div>
-                <div class="col-75">
-                    <select id="tabel_compare" name="tabel_compare">
+        <form id="compare">
+            <div class="form-group">
+             <label for="tabel_compare">Tabel:</label>
+                    <select class="form-control" id="tabel_compare" name="tabel_compare">
                         <option value="Order">Order</option>
                         <option value="Product">Product</option>
                         <option value="Orderregel">Orderregel</option>
                     </select>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
+
+            <div class="form-group">
                     <label for="atribuut_compare">Atribute:</label>
-                </div>
-                <div class="col-75">
-                    <select id="atribuut_compare" name="atribuut_compare">
+                    <select class="form-control" id="atribuut_compare" name="atribuut_compare">
                         <option value="phonenumber">phonenumber</option>
                         <option value="bestelling">Bestelling</option>
                         <option value="orders">Orders</option>
                     </select>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
+
+            <div class="form-group">
                     <label for="operator_compare">Operator:</label>
-                </div>
-                <div class="col-75">
-                    <select id="operator_compare" name="operator_compare">
+                    <select class="form-control" id="operator_compare" name="operator_compare">
                         <option value="Equals">Equals</option>
                         <option value="NotEquals">NotEquals</option>
                         <option value="LessThan">LessThan</option>
@@ -129,50 +120,36 @@
                         <option value="GreaterOrEqualTo">GreaterOrEqualTo</option>
                     </select>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
+
+            <div class="form-group">
                     <label for="value_compare">Comapre with literal value:</label>
-                </div>
-                <div class="col-75">
-                    <input id="value_compare" name="value_compare" placeholder="value">
+                    <input class="form-control" id="value_compare" name="value_compare" placeholder="value">
                 </div>
 
-            </div>
+
             <button type="button" class="btn btn-success" id="ok_compare">Opslaan</button>
 
         </form>
         <form id="tuple_compare">
-            <div class="row">
-                <div class="col-25">
+            <div class="form-group">
                     <label for="tabel_tcompare">Table:</label>
-                </div>
-                <div class="col-75">
-                    <select id="tabel_tcompare" name="tabel_tcompare">
+                    <select class="form-control" id="tabel_tcompare" name="tabel_tcompare">
                         <option value="phonenumber">phonenumber</option>
                         <option value="bestelling">Bestelling</option>
                         <option value="orders">Orders</option>
                     </select>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
+            <div class="form-group">
                     <label for="atribuut_tcompare">Atribute:</label>
-                </div>
-                <div class="col-75">
-                    <select id="atribuut_tcompare" name="atribuut_tcompare">
+                    <select class="form-control" id="atribuut_tcompare" name="atribuut_tcompare">
                         <option value="phonenumber">phonenumber</option>
                         <option value="bestelling">Bestelling</option>
                         <option value="orders">Orders</option>
                     </select>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
+            <div class="form-group">
                     <label for="operator_tcompare">Operator:</label>
-                </div>
-                <div class="col-75">
-                    <select id="Operator_tcompare" name="operator_tcompare">
+                    <select class="form-control" id="Operator_tcompare" name="operator_tcompare">
                         <option value="Equals">Equals</option>
                         <option value="NotEquals">NotEquals</option>
                         <option value="LessThan">LessThan</option>
@@ -181,54 +158,38 @@
                         <option value="GreaterOrEqualTo">GreaterOrEqualTo</option>
                     </select>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
+            <div class="form-group">
                     <label for="atribuut_acompare">Comapre with Entity-Atribute:</label>
-                </div>
-                <div class="col-75">
-                    <select id="atribuut_acompare" name="atribuut_acompare">
+                    <select class="form-control" id="atribuut_acompare" name="atribuut_acompare">
                         <option value="phonenumber">phonenumber</option>
                         <option value="bestelling">Bestelling</option>
                         <option value="orders">Orders</option>
                     </select>
                 </div>
-            </div>
             <button type="button" class="btn btn-success" id="ok_tcompare">Opslaan</button>
 
 
         </form>
         <form id="inter_compare">
-            <div class="row">
-                <div class="col-25">
+            <div class="form-group">
                     <label for="tabel_inter">Table:</label>
-                </div>
-                <div class="col-75">
-                    <select id="tabel_inter" name="tabel_inter">
+                    <select class="form-control" id="tabel_inter" name="tabel_inter">
                         <option value="phonenumber">phonenumber</option>
                         <option value="bestelling">Bestelling</option>
                         <option value="orders">Orders</option>
                     </select>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
+            <div class="form-group">
                     <label for="atribuut_inter">Atribute:</label>
-                </div>
-                <div class="col-75">
-                    <select id="atribuut_inter" name="atribuut_inter">
+                    <select class="form-control" id="atribuut_inter" name="atribuut_inter">
                         <option value="phonenumber">phonenumber</option>
                         <option value="bestelling">Bestelling</option>
                         <option value="orders">Orders</option>
                     </select>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
+            <div class="form-group">
                     <label for="operator_inter">Operator:</label>
-                </div>
-                <div class="col-75">
-                    <select id="operator_inter" name="operator_inter">
+                    <select class="form-control" id="operator_inter" name="operator_inter">
                         <option value="Equals">Equals</option>
                         <option value="NotEquals">NotEquals</option>
                         <option value="LessThan">LessThan</option>
@@ -237,31 +198,22 @@
                         <option value="GreaterOrEqualTo">GreaterOrEqualTo</option>
                     </select>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
+            <div class="form-group">
                     <label for="tabel_interA">Entity table:</label>
-                </div>
-                <div class="col-75">
-                    <select id="tabel_interA" name="tabel_interA">
+                    <select class="form-control" id="tabel_interA" name="tabel_interA">
                         <option value="phonenumber">Orders</option>
                         <option value="bestelling">Bestelregel</option>
                         <option value="orders">Orderregel</option>
                     </select>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
+            <div class="form-group">
                     <label for="atribuut_interA">Entity atribuut:</label>
-                </div>
-                <div class="col-75">
-                    <select id="atribuut_interA" name="atribuut_interA">
+                    <select class="form-control" id="atribuut_interA" name="atribuut_interA">
                         <option value="phonenumber">phonenumber</option>
                         <option value="bestelling">regel</option>
                         <option value="orders">datum</option>
                     </select>
                 </div>
-            </div>
             <button type="button" class="btn btn-success" id="ok_etcompare">Opslaan</button>
 
         </form>
@@ -334,7 +286,7 @@
     voegToe.addEventListener("click",function(){
         var formData = new FormData(document.querySelector("#compare"));
         var encData = new URLSearchParams(formData.entries());
-        fetch("restservices/compare",{method:'POST', body: encData})
+        fetch("rest/define/postCompare",{method:'POST', body: encData})
         //fetch("restservices/rule",{method:'POST', body: encData})
             .then(function(myJson) {
                 if (myJson.ok){
@@ -351,7 +303,7 @@
     voegToeRange.addEventListener("click",function(){
         var formData = new FormData(document.querySelector("#range"));
         var encData = new URLSearchParams(formData.entries());
-        fetch("restservices/compare/postRange",{method:'POST', body: encData})
+        fetch("rest/define/postRange",{method:'POST', body: encData})
         //fetch("restservices/rule",{method:'POST', body: encData})
             .then(function(myJson) {
                 if (myJson.ok){
@@ -368,7 +320,7 @@
     voegToeOther.addEventListener("click",function(){
         var formData = new FormData(document.querySelector("#tuple_compare"));
         var encData = new URLSearchParams(formData.entries());
-        fetch("restservices/compare/postOther",{method:'POST', body: encData})
+        fetch("rest/define/postOther",{method:'POST', body: encData})
         //fetch("restservices/rule",{method:'POST', body: encData})
             .then(function(myJson) {
                 if (myJson.ok){
@@ -381,11 +333,11 @@
 
     });
 
-    var voegToeOther = document.querySelector("#ok_etcompare");
-    voegToeOther.addEventListener("click",function(){
+    var voegToeInter = document.querySelector("#ok_etcompare");
+    voegToeInter.addEventListener("click",function(){
         var formData = new FormData(document.querySelector("#inter_compare"));
         var encData = new URLSearchParams(formData.entries());
-        fetch("restservices/compare/postInter",{method:'POST', body: encData})
+        fetch("rest/define/postInter",{method:'POST', body: encData})
         //fetch("restservices/rule",{method:'POST', body: encData})
             .then(function(myJson) {
                 if (myJson.ok){

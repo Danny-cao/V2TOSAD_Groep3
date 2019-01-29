@@ -24,6 +24,17 @@ public class Attribute_Compare extends Constraint {
 
     }
 
+    public Attribute_Compare(String table, int id, String attribute, String value, String operator) {
+
+        super(table, id);
+        this.attribute = attribute;
+        this.value = value;
+        this.operator = operator;
+
+    }
+
+
+
 
 
 
@@ -44,5 +55,18 @@ public class Attribute_Compare extends Constraint {
         return this.operator;
 
     }
+
+    public void setAttribute(String attribute) {
+        this.attribute = attribute;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public void setOperator(String operator){
+        this.operator = operator;
+    }
+
 
 }

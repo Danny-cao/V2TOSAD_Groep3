@@ -17,6 +17,16 @@ public class Attribute_Other extends Constraint {
 
     }
 
+    public Attribute_Other(String table, int id, String attribute1,String attribute2,
+                           String operator) {
+
+        super(table, id);
+        this.attribute1 = attribute1;
+        this.attribute2 = attribute2;
+        this.operator = operator;
+
+    }
+
     public String getAttribute1() {
 
         return this.attribute1;

@@ -16,12 +16,12 @@ public class Attribute_InterEntityDaoImpl extends OracleBaseDao implements Attri
 	public Attribute_InterEntity save(Attribute_InterEntity inter) {
         try (Connection con = getConnection()) {
             Statement stmt = con.createStatement();
-            int id = 37;
+            int id = 67;
             int type = 7;
-            String constraintNaam = "BRG_VBMG_" + inter.getTable().toUpperCase() + "_CNS_ICMP_"+"01"; 
-            String businessruleNaam = "BRG_VBMG_" + inter.getTable().toUpperCase() + "_ICMP_"+"01"; 
+            String constraintNaam = "BRG_VBMG_" + inter.getTable().toUpperCase() + "_CNS_ICMP_"+inter.getId();
+            String businessruleNaam = "BRG_VBMG_" + inter.getTable().toUpperCase() + "_ICMP_"+inter.getId();
             
-            String query = "INSERT INTO constraint (id, naam, table_name,ref_table,ref_attribute,attribute_name,operator,type)VALUES('" + inter.getId() + "', '"+
+            String query = "INSERT INTO constraint (id, naam,table_name,ref_table,ref_attribute,attribute_name,operator,type)VALUES('" + inter.getId() + "', '"+
                     constraintNaam + "', '" + inter.getTable() + "', '"  + inter.getRef_table()+ "', '" + inter.getAttribute1()+ "', '" + inter.getAttribute2()+ "', '" + inter.getOperator()+ "', '" + "check"  + "')";
             String query1 = "INSERT INTO businessrule (id, naam,businessruletypeid,constraintid)VALUES('" +id + "', '"+
                     businessruleNaam + "', '" + type + "', '" + inter.getId()+ "')";

@@ -17,13 +17,13 @@ public class Attribute_CompareDaoImpl extends OracleBaseDao implements Attribute
 			Statement stmt = con.createStatement();
 
 
-			int id = 28;
+			int id =40;
 			int type = 2;
-			String constraintNaam = "BRG_VBMG_" + compare.getTable().toUpperCase() + "_CNS_ACMP_"+"01";
-			String businessruleNaam = "BRG_VBMG_" + compare.getTable().toUpperCase() + "_ACMP_"+"01";
+			String constraintNaam = "BRG_VBMG_" + compare.getTable().toUpperCase() + "_CNS_ACMP_"+compare.getId();
+			String businessruleNaam = "BRG_VBMG_" + compare.getTable().toUpperCase() + "_ACMP_"+compare.getId();
 			System.out.println(businessruleNaam);
 
-			String query = "INSERT INTO constraint (id, naam, table_name ,ref_attribute, operator, value,type)VALUES('" + compare.getId() + "', '"+
+			String query = "INSERT INTO constraint (id, naam, table_name ,attribute_name, operator, value,type)VALUES('" + compare.getId() + "', '"+
 					constraintNaam + "', '" + compare.getTable() +  "', '" + compare.getAttribute() + "', '" + compare.getOperator() + "', '" + compare.getValue()+ "', '" + "check"  + "')";
 			String query1 = "INSERT INTO businessrule (id, naam,businessruletypeid,constraintid)VALUES('" +id + "', '"+
 					businessruleNaam + "', '" + type + "', '" + compare.getId()+ "')";

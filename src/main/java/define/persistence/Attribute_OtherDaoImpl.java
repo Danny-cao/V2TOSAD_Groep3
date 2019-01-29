@@ -15,12 +15,12 @@ public class Attribute_OtherDaoImpl extends OracleBaseDao implements Attribute_O
 	public Attribute_Other save(Attribute_Other other) {
         try (Connection con = getConnection()) {
             Statement stmt = con.createStatement();
-            int id = 30;
+            int id = 77;
             int type = 4;
-            String constraintNaam = "BRG_VBMG_" + other.getTable().toUpperCase() + "_CNS_TCMP_"+"01"; 
-            String businessruleNaam = "BRG_VBMG_" + other.getTable().toUpperCase() + "_TCMP_"+"01"; 
+            String constraintNaam = "BRG_VBMG_" + other.getTable().toUpperCase() + "_CNS_TCMP_"+other.getId();
+            String businessruleNaam = "BRG_VBMG_" + other.getTable().toUpperCase() + "_TCMP_"+other.getId();
             
-            String query = "INSERT INTO constraint (id, naam, table_name,ref_attribute,attribute_name,operator,type)VALUES('" + other.getId() + "', '"+
+            String query = "INSERT INTO constraint (id, naam, table_name,attribute_name,ref_attribute,operator,type)VALUES('" + other.getId() + "', '"+
                     constraintNaam + "', '" + other.getTable() + "', '"  + other.getAttribute1()+ "', '" + other.getAttribute2() + "', '" + other.getOperator()+ "', '" + "check"  + "')";
             String query1 = "INSERT INTO businessrule (id, naam,businessruletypeid,constraintid)VALUES('" +id + "', '"+
                     businessruleNaam + "', '" + type + "', '" + other.getId()+ "')";

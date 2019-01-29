@@ -19,6 +19,17 @@ public class Attribute_InterEntity extends Constraint {
 
     }
 
+    public Attribute_InterEntity(String table, int id, String attribute1,String attribute2,
+                                 String operator, String ref_table) {
+
+        super(table, id);
+        this.attribute1 = attribute1;
+        this.attribute2 = attribute2;
+        this.operator = operator;
+        this.ref_tabel = ref_table;
+
+    }
+
     public String getAttribute1() {
 
         return this.attribute1;

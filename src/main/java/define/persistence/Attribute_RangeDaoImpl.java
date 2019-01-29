@@ -15,12 +15,12 @@ public class Attribute_RangeDaoImpl extends OracleBaseDao implements Attribute_R
 	public Attribute_Range save(Attribute_Range range) {
         try (Connection con = getConnection()) {
             Statement stmt = con.createStatement();
-            int id = 32;
+            int id = 53;
             int type = 1;
-            String constraintNaam = "BRG_VBMG_" + range.getTable().toUpperCase() + "_CNS_RCMP_"+"01"; 
-            String businessruleNaam = "BRG_VBMG_" + range.getTable().toUpperCase() + "_RCMP_"+"01"; 
+            String constraintNaam = "BRG_VBMG_" + range.getTable().toUpperCase() + "_CNS_ARNG_"+range.getId();
+            String businessruleNaam = "BRG_VBMG_" + range.getTable().toUpperCase() + "_ARNG_"+range.getId();
             
-            String query = "INSERT INTO constraint (id, naam, table_name ,ref_attribute, operator, value,value2,type)VALUES('" + range.getId() + "', '"+
+            String query = "INSERT INTO constraint (id, naam, table_name ,attribute_name, operator, value,value2,type)VALUES('" + range.getId() + "', '"+
                     constraintNaam + "', '" + range.getTable()  + "', '" + range.getAttribute() + "', '" + range.getOperator() + "', '" + range.getValue1()+"', '" + range.getValue2()+ "', '" + "check"  + "')";
             String query1 = "INSERT INTO businessrule (id, naam,businessruletypeid,constraintid)VALUES('" +id + "', '"+
                     businessruleNaam + "', '" + type + "', '" + range.getId()+ "')";

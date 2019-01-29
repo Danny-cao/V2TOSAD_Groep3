@@ -21,6 +21,14 @@ public class Constraint {
 
     }
 
+    public Constraint(String table, int id) {
+
+
+        this.table = table;
+        this.id = id;
+
+    }
+
     public int getId() {
         return id;
     }
@@ -32,4 +40,17 @@ public class Constraint {
     public String getTable() {
         return table;
     }
+
+    public void setId(int id) {
+        this.id= id;
+    }
+
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
+
+    public void setTable(String table) {
+        this.table = table;
+    }
+
 }
