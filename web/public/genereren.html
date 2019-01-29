@@ -9,7 +9,8 @@
 
     <!-- Bootstrap CSS -->
     <link href="dist/css/main.css" rel="stylesheet">
-    <title>Test</title>
+
+    <title>Business Rule Generator | Rule Toevoegen</title>
 </head>
 <body>
 
@@ -20,61 +21,29 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="index.html">Home</a>
             <a class="nav-item nav-link" href="toevoegen.html">Rule toevoegen</a>
+            <a class="nav-item nav-link active" href="genereren.html">Genereren <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link" href="selecteren.html">Selecteren</a>
-            <a class="nav-item nav-link active" href="verwijderen.html">Rule verwijderen</a>
+            <a class="nav-item nav-link" href="verwijderen.html">Rule verwijderen</a>
+
         </div>
     </div>
 </nav>
 
-<section id="rule_selecteren">
-    Check console of die het doet.
-    <form id="generateRule">
-        <select name="rules" id="rules">
-        </select>
+<div class="container">
+    <h1>Rule Genereren</h1>
 
-        <input type="button" id="delete" value="delete">
-    </form>
-</section>
+    <p>
+        Dit is de homepagina.
+    </p>
+</div>
 
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="dist/js/jquery.min.js"></script>
 <script src="dist/js/popper.min.js"></script>
 <script src="dist/js/bootstrap.min.js"></script>
 <script src="dist/js/main.js"></script>
-<script>
-
-    function getBusinessRules(){
-        fetch('rest/define/businessrules')
-            .then((resp) => resp.json())
-            .then(function(bRules){
-
-            console.log(bRules);
-            var select = document.querySelector("#rules");
-
-
-            for(let b of bRules){
-                console.log(b.naam);
-                console.log(b.id);
-
-                var option = document.createElement("option");
-
-                option.setAttribute('id', "rule");
-                option.value = b.id;
-                option.innerHTML = b.naam;
-
-                select.appendChild(option);
-
-                //option.appendChild(b.id).innerHTML = b.naam;
-            }
-
-        });
-    }getBusinessRules();
-
-
-</script>
-
-
 </body>
-</html>
 </html>
