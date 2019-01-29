@@ -13,10 +13,8 @@ var config = {
 	outputDir: 'public/dist'
 }
 
-
-
 gulp.task('icons', function() { 
-	return gulp.src('./node_modules/@fortawesome/fontawesome-free/webfonts/**.*') 
+	return gulp.src('./node_modules/font-awesome/fonts/**.*') 
 		.pipe(gulp.dest(config.outputDir + '/fonts')); 
 });
 
@@ -33,7 +31,7 @@ gulp.task('css', function() {
 				includePaths: [
 					config.stylesPath,
 					'./node_modules/bootstrap/scss',
-					'./node_modules/@fortawesome/fontawesome-free/scss'
+					'./node_modules/font-awesome/scss'
 				]
 			}).on('error', sass.logError))
 		.pipe(autoprefixer())

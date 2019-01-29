@@ -1,11 +1,62 @@
 //import your stylesheets below
 
 @import "bootstrap";
-@import "fontawesome";
+@import "font-awesome";
 
 //import your stylesheets below
 
 @import "common";
+
+@media screen and (max-width: 600px) {
+  #usagediagram {
+    display: none;
+  }
+}
+
+.inline {
+	display: inline;
+}
+
+#usagediagram {
+	width: 100%;
+	margin-top: 2em;
+}
+
+.green-faded {
+	background-image: linear-gradient(#28A745, #93D3A2);
+}
+
+.blue-faded {
+	background-image: linear-gradient(#007BFF, #7FBDFF);
+}
+
+.red-faded {
+	background-image: linear-gradient(#DC3545, #ED9AA2);
+}
+
+.card-link {
+	color: white !important;
+	text-decoration-color: white !important;
+}
+
+.row{
+    overflow: hidden; 
+}
+
+[class*="col-"]{
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
+
+.nav-item {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.card {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
 
 .btn-success {
 	float: right;
