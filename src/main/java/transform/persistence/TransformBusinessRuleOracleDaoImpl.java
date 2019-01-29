@@ -226,8 +226,7 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
 
         for (String x : valuesList) {
 
-            String v = "'" + x + "'";
-            values += "'" + v + "'";
+            values += x;
             values += ",";
 
         }
