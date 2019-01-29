@@ -57,10 +57,20 @@ public class DefineResource {
         }
 
         @DELETE
-        @Path("{rule}")
+        @Path("delete")
         @Produces("application/json")
-        public Response delete(@PathParam("rule") String rule){
-                return Response.ok().build();
+        public Response delete(@FormParam("rules") String rule){
+
+                int result = Integer.parseInt(rule);
+
+                BusinessRule businessRule = defineService.getBusinessRuleByID(result);
+
+                Boolean del = defineService.delete(businessRule);
+
+                Gson gson = new Gson();
+                String json = gson.toJson(del);
+
+                return Response.ok(json).build();
         }
 
         @POST

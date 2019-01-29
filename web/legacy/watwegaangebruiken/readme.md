@@ -1,11 +1,28 @@
-# Bootstrap 4 project boilerplate
+# Bootstrap 4 boilerplate with sass and gulp 4
+A Bootstrap 4.1.3 boilerplate with font-awesome, sass, gulp 4 tasks, browserSync (with hot-reloading). You can override bootstrap sass variables by placing those variables in `bootstrap-4-sass-gulp-4-boilerplate/assets/scss/_bootstrap_variable_overrides.scss`
 
-A boilerplate for Bootstrap 4, FontAwesome and jQuery using Yarn and Gulp
+## Pre-requisite
+- [Node.js](https://nodejs.org/en/download/ "Node Js")
+- NPM (Comes with Node.js)
+- [Gulp](https://gulpjs.com/ "Gulp")
 
+Install Gulp Globally
 
-## Installation
+    $ npm -g install gulp
 
-1. Clone this repo.
-2. cd into directory and run `yarn`
-3. Run `gulp` to compile Sass and JS
-4. Run `gulp watch` to monitor your JS and SASS
+## Getting started
+
+1. Clone repository:
+`git clone https://github.com/JayeshLab/bootstrap-4-sass-gulp-4-boilerplate.git`
+
+2. Change directory:
+`cd bootstrap-4-sass-gulp-4-boilerplate`
+    
+3. Install all dependencies and libraries:
+`npm install`
+
+4. Run Gulp Task:
+  - `gulp`      - To compile scss to css, minify css and js and build ready for production files in **dist** folder.
+
+  - `gulp dev`  - Starts a local server with browserSync and hot reloading on changes to files (HTML, SCSS, JS).
+   

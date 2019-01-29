@@ -8,31 +8,137 @@
 	<meta name="author" content="V2C Team 3 TOSAD">
 	<title>Business Rule Generator | Home</title>
 	<link href="dist/css/main.css" rel="stylesheet">
+
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['line']});
+      google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'Day');
+      data.addColumn('number', 'Compare');
+      data.addColumn('number', 'List');
+      data.addColumn('number', 'Range');
+
+      data.addRows([
+        [1,  37.8, 80.8, 41.8],
+        [2,  30.9, 69.5, 32.4],
+        [3,  25.4,   57, 25.7],
+        [4,  11.7, 18.8, 10.5],
+        [5,  11.9, 17.6, 10.4],
+        [6,   8.8, 13.6,  7.7],
+        [7,   7.6, 12.3,  9.6],
+        [8,  12.3, 29.2, 10.6],
+        [9,  16.9, 42.9, 14.8],
+        [10, 12.8, 30.9, 11.6],
+        [11,  5.3,  7.9,  4.7],
+        [12,  6.6,  8.4,  5.2],
+        [13,  4.8,  6.3,  3.6],
+        [14,  4.2,  6.2,  3.4]
+      ]);
+
+      var options = {
+        chart: {
+          title: 'Business Rules made this 15 days',
+          subtitle: 'per 1 Business Rule'
+        },
+        width: 900,
+        height: 500,
+        axes: {
+          x: {
+            0: {side: 'top'}
+          }
+        }
+      };
+
+      var chart = new google.charts.Line(document.getElementById('usagediagram'));
+
+      chart.draw(data, google.charts.Line.convertOptions(options));
+    }
+  </script>
 </head>
 <body>
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Business rule generator</a>
+    <a class="navbar-brand" href="index.html">Business rule generator</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="index.html">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="toevoegen.html">Toevoegen</a>
-			<a class="nav-item nav-link" href="genereren.html">Genereren</a>
-            <a class="nav-item nav-link" href="selecteren.html">Selecteren</a>
-            <a class="nav-item nav-link" href="verwijderen.html">Verwijderen</a>
+            <a class="nav-item nav-link active" href="index.html"><i class="fa fa-home" aria-hidden="true"></i> Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="toevoegen.html"><i class="fa fa-plus-circle" aria-hidden="true"></i> Toevoegen</a>
+			<a class="nav-item nav-link" href="genereren.html"><i class="fa fa-cogs" aria-hidden="true"></i> Genereren</a>
+            <a class="nav-item nav-link" href="selecteren.html"><i class="fa fa-hand-pointer-o" aria-hidden="true"></i> Selecteren</a>
+            <a class="nav-item nav-link" href="verwijderen.html"><i class="fa fa-trash" aria-hidden="true"></i> Verwijderen</a>
         </div>
     </div>
 </nav>
 
 	<div class="container">
-		<h1>Homepage</h1>
+		<h1>Dashboard</h1>
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="card green-faded">
+					<div class="card-body text-light">
+						<a class="card-link" href="toevoegen.html">
+						<h3 class="card-title">
+							Business Rules
+						</h3>
+						<p class="card-text">
+							Maak hier nu een nieuwe business rule.
+						</p>
+						<div class="float-right">
+							<h5 class="inline">Toegevoegd: </h3>
+							<h1 id="toegevoegdeRules" class="card-stats inline">45</h1>
+						</div>
+						</a>
+					</div>
+				</div>
+			</div>
 
-		<p>
-			Dit is de homepagina.
-		</p>
+			<div class="col-sm-4">
+				<div class="card blue-faded">
+					<div class="card-body text-light">
+						<a class="card-link" href="genereren.html">
+						<h3 class="card-title">
+							Afgelopen generaties
+						</h3>
+						<p class="card-text">
+							Genereer hier je code uit business rules.
+						</p>
+						<div class="float-right">
+								<h5 class="inline">Gegenereerd: </h3>
+								<h1 id="gegenereerdeRules" class="card-stats inline">34</h1>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-4">
+				<div class="card red-faded">
+					<div class="card-body text-light">
+						<a class="card-link" href="verwijderen.html">
+							<h3 class="card-title">
+								Verwijderde rules
+							</h3>
+							<p class="card-text">
+								Verwijder hier je business rules.
+							</p>
+							<div class="float-right">
+								<h5 class="inline">Verwijderd: </h3>
+								<h1 id="verwijderdeRules" class="card-stats inline">11</h1>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="usagediagram"></div>
 	</div>
 
 

@@ -15,35 +15,76 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Business rule generator</a>
+    <a class="navbar-brand" href="index.html">Business rule generator</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link" href="index.html">Home</a>
-            <a class="nav-item nav-link" href="toevoegen.html">Toevoegen</a>
-            <a class="nav-item nav-link active" href="genereren.html">Genereren <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="selecteren.html">Selecteren</a>
-            <a class="nav-item nav-link" href="verwijderen.html">Verwijderen</a>
-
+            <a class="nav-item nav-link" href="index.html"><i class="fa fa-home" aria-hidden="true"></i> Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="toevoegen.html"><i class="fa fa-plus-circle" aria-hidden="true"></i> Toevoegen</a>
+            <a class="nav-item nav-link active" href="genereren.html"><i class="fa fa-cogs" aria-hidden="true"></i> Genereren</a>
+            <a class="nav-item nav-link" href="selecteren.html"><i class="fa fa-hand-pointer-o" aria-hidden="true"></i> Selecteren</a>
+            <a class="nav-item nav-link" href="verwijderen.html"><i class="fa fa-trash" aria-hidden="true"></i> Verwijderen</a>
         </div>
     </div>
 </nav>
 
 <div class="container">
-    <h1>Rule Genereren</h1>
+    <section id="rule_selecteren">
+        Check console of die het doet.
+        <form id="generateRule">
+            <select name="rules" id="rules">
+            </select>
 
-    <p>
-        Dit is de homepagina.
-    </p>
+            <input type="button" id="generate" value="generate">
+        </form>
+    </section>
 </div>
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="dist/js/jquery.min.js"></script>
 <script src="dist/js/popper.min.js"></script>
 <script src="dist/js/bootstrap.min.js"></script>
 <script src="dist/js/main.js"></script>
+<script>
+
+    function getBusinessRules(){
+        fetch('rest/define/businessrules')
+            .then((resp) => resp.json())
+            .then(function(bRules){
+
+            console.log(bRules);
+            var select = document.querySelector("#rules");
+
+
+            for(let b of bRules){
+                console.log(b.naam);
+                console.log(b.id);
+
+                var option = document.createElement("option");
+
+                option.setAttribute('id', "rule");
+                option.value = b.id;
+                option.innerHTML = b.naam;
+
+                select.appendChild(option);
+
+                //option.appendChild(b.id).innerHTML = b.naam;
+            }
+
+        });
+    }getBusinessRules();
+
+    function sendBusinessRule(){
+        document.querySelector("#generate").addEventListener("click", function() {
+            var formData = new FormData(document.querySelector("#generateRule"));
+
+            var encData = new URLSearchParams(formData.entries());
+
+            fetch("rest/generate", { method: 'POST', body: encData })
+                .then(response => response.json()).then( posts => console.log(posts));
+        });
+    } sendBusinessRule();
+</script>
 </body>
 </html>

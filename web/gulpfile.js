@@ -13,8 +13,6 @@ var config = {
 	outputDir: 'public/dist'
 }
 
-
-
 gulp.task('icons', function() { 
 	return gulp.src('./node_modules/font-awesome/fonts/**.*') 
 		.pipe(gulp.dest(config.outputDir + '/fonts')); 

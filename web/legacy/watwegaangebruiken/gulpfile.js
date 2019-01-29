@@ -1,68 +1,137 @@
+"use strict";
+
 var gulp = require('gulp'),
-		sass = require ('gulp-sass'),
-		notify = require('gulp-notify'),
-		filter = require('gulp-filter'),
-		autoprefixer = require('gulp-autoprefixer'),
-		concat = require('gulp-concat'),
-		uglify = require('gulp-uglify'),
-		imagemin = require('gulp-imagemin');
-		
-var config = {
-	stylesPath: 'assets/styles',
-	jsPath: 'assets/scripts',
-	outputDir: 'public/dist'
-}
+  sass = require('gulp-sass'),
+  del = require('del'),
+  uglify = require('gulp-uglify'),
+  cleanCSS = require('gulp-clean-css'),
+  rename = require("gulp-rename"),
+  merge = require('merge-stream'),
+  htmlreplace = require('gulp-html-replace'),
+  autoprefixer = require('gulp-autoprefixer'),
+  browserSync = require('browser-sync').create();
 
-
-
-gulp.task('icons', function() { 
-	return gulp.src('./node_modules/font-awesome/fonts/**.*') 
-		.pipe(gulp.dest(config.outputDir + '/fonts')); 
+// Clean task
+gulp.task('clean', function() {
+  return del(['dist', 'assets/css/app.css']);
 });
 
-gulp.task('images', function() { 
-	return gulp.src(config.imagesPath + '/*')
-		.pipe(imagemin())
-		.pipe(gulp.dest(config.outputDir + '/images'))
+// Copy third party libraries from node_modules into /vendor
+gulp.task('vendor:js', function() {
+  return gulp.src([
+    './node_modules/bootstrap/dist/js/*',
+    './node_modules/jquery/dist/*',
+    '!./node_modules/jquery/dist/core.js',
+    './node_modules/popper.js/dist/umd/popper.*'
+  ])
+    .pipe(gulp.dest('./assets/js/vendor'));
 });
 
-gulp.task('css', function() {
-	return gulp.src(config.stylesPath + '/main.sass')
-		.pipe(sass({
-				outputStyle: 'compressed',
-				includePaths: [
-					config.stylesPath,
-					'./node_modules/bootstrap/scss',
-					'./node_modules/font-awesome/scss'
-				]
-			}).on('error', sass.logError))
-		.pipe(autoprefixer())
-		.pipe(gulp.dest(config.outputDir + '/css'));
+// Copy font-awesome from node_modules into /fonts
+gulp.task('vendor:fonts', function() {
+  return  gulp.src([
+    './node_modules/font-awesome/**/*',
+    '!./node_modules/font-awesome/{less,less/*}',
+    '!./node_modules/font-awesome/{scss,scss/*}',
+    '!./node_modules/font-awesome/.*',
+    '!./node_modules/font-awesome/*.{txt,json,md}'
+  ])
+    .pipe(gulp.dest('./assets/fonts/font-awesome'))
 });
 
+// vendor task
+gulp.task('vendor', gulp.parallel('vendor:fonts', 'vendor:js'));
 
-gulp.task('jquery', function(){
-	return gulp.src('./node_modules/jquery/dist/jquery.min.js') 
-		.pipe(gulp.dest(config.outputDir + '/js')); 
+// Copy vendor's js to /dist
+gulp.task('vendor:build', function() {
+  var jsStream = gulp.src([
+    './assets/js/vendor/bootstrap.bundle.min.js',
+    './assets/js/vendor/jquery.slim.min.js',
+    './assets/js/vendor/popper.min.js'
+  ])
+    .pipe(gulp.dest('./dist/assets/js/vendor'));
+  var fontStream = gulp.src(['./assets/fonts/font-awesome/**/*.*']).pipe(gulp.dest('./dist/assets/fonts/font-awesome'));
+  return merge (jsStream, fontStream);
+})
+
+// Copy Bootstrap SCSS(SASS) from node_modules to /assets/scss/bootstrap
+gulp.task('bootstrap:scss', function() {
+  return gulp.src(['./node_modules/bootstrap/scss/**/*'])
+    .pipe(gulp.dest('./assets/scss/bootstrap'));
 });
 
-gulp.task('bootstrap-js', function(){
-	return gulp.src('./node_modules/bootstrap/dist/js/bootstrap.min.js') 
-		.pipe(gulp.dest(config.outputDir + '/js')); 
+// Compile SCSS(SASS) files
+gulp.task('scss', gulp.series('bootstrap:scss', function compileScss() {
+  return gulp.src(['./assets/scss/*.scss'])
+    .pipe(sass.sync({
+      outputStyle: 'expanded'
+    }).on('error', sass.logError))
+    .pipe(autoprefixer())
+    .pipe(gulp.dest('./assets/css'))
+}));
+
+// Minify CSS
+gulp.task('css:minify', gulp.series('scss', function cssMinify() {
+  return gulp.src("./assets/css/app.css")
+    .pipe(cleanCSS())
+    .pipe(rename({
+      suffix: '.min'
+    }))
+    .pipe(gulp.dest('./dist/assets/css'))
+    .pipe(browserSync.stream());
+}));
+
+// Minify Js
+gulp.task('js:minify', function () {
+  return gulp.src([
+    './assets/js/app.js'
+  ])
+    .pipe(uglify())
+    .pipe(rename({
+      suffix: '.min'
+    }))
+    .pipe(gulp.dest('./dist/assets/js'))
+    .pipe(browserSync.stream());
 });
 
-gulp.task('js', function() {
-	return gulp.src(config.jsPath+'/*')
-		.pipe(filter('**/*.js'))
-		.pipe(concat('main.js'))
-		.pipe(uglify())
-		.pipe(gulp.dest(config.outputDir + '/js'));
+// Replace HTML block for Js and Css file upon build and copy to /dist
+gulp.task('replaceHtmlBlock', function () {
+  return gulp.src(['*.html'])
+    .pipe(htmlreplace({
+      'js': 'assets/js/app.min.js',
+      'css': 'assets/css/app.min.css'
+    }))
+    .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('watch', function(){
-	gulp.watch([config.stylesPath + '**/*.scss', config.stylesPath + '**/*.sass', config.stylesPath + '**/*.css'], ['css']);
-	gulp.watch([config.jsPath + '**/*.js'], ['js']);
-	gulp.watch([config.imagesPath + '/**/*'], ['images']);
+// Configure the browserSync task and watch file path for change
+gulp.task('dev', function browserDev(done) {
+  browserSync.init({
+    server: {
+      baseDir: "./"
+    }
+  });
+  gulp.watch(['assets/scss/*.scss','assets/scss/**/*.scss','!assets/scss/bootstrap/**'], gulp.series('css:minify', function cssBrowserReload (done) {
+    browserSync.reload();
+    done(); //Async callback for completion.
+  }));
+  gulp.watch('assets/js/app.js', gulp.series('js:minify', function jsBrowserReload (done) {
+    browserSync.reload();
+    done();
+  }));
+  gulp.watch(['*.html']).on('change', browserSync.reload);
+  done();
 });
 
-gulp.task('default', ['icons', 'css', 'jquery', 'bootstrap-js', 'js']);
+// Build task
+gulp.task("build", gulp.series(gulp.parallel('css:minify', 'js:minify', 'vendor'), 'vendor:build', function copyAssets() {
+  return gulp.src([
+    '*.html',
+    'favicon.ico',
+    "assets/img/**"
+  ], { base: './'})
+    .pipe(gulp.dest('dist'));
+}));
+
+// Default task
+gulp.task("default", gulp.series("clean", 'build', 'replaceHtmlBlock'));
