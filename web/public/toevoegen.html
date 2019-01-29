@@ -49,60 +49,46 @@
 
     <div class="container" id="types">
         <form id="range">
-            <div class="row">
-                <div class="col-25">
-                    <label for="tabel_range">table:</label>
-                </div>
-                <div class="col-75">
-                    <select id="tabel_range" name="tabel_range">
-                        <option value="phonenumber">phonenumber</option>
-                        <option value="bestelling">Bestelling</option>
-                        <option value="orders">Orders</option>
-                    </select>
-                </div>
+
+            <div class="form-group">
+                <label for="tabel_range">Table</label>
+                <select class="form-control" id="tabel_range" name="tabel_range">
+                    <option value="phonenumber">phonenumber</option>
+                    <option value="bestelling">Bestelling</option>
+                    <option value="orders">Orders</option>
+                </select>
             </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="atribuut_range">Atribute:</label>
-                </div>
-                <div class="col-75">
-                    <select id="atribuut_range" name="atribuut_range">
-                        <option value="phonenumber">phonenumber</option>
-                        <option value="bestelling">Bestelling</option>
-                        <option value="orders">Orders</option>
-                    </select>
-                </div>
+
+            <div class="form-group">
+                <label for="atribuut_range">Atribute:</label>
+                <select class="form-control" id="atribuut_range" name="atribuut_range">
+                    <option value="phonenumber">phonenumber</option>
+                    <option value="bestelling">Bestelling</option>
+                    <option value="orders">Orders</option>
+                </select>
             </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="operator_range">Operator:</label>
-                </div>
-                <div class="col-75">
-                    <select id="Operator_range" name="operator_range">
-                        <option value="Between">Between</option>
-                        <option value="NotBetween">NotBetween</option>
-                    </select>
-                </div>
+
+            <div class="form-group">
+                <label for="operator_range">Operator:</label>
+                <select class="form-control" id="Operator_range" name="operator_range">
+                    <option value="Between">Between</option>
+                    <option value="NotBetween">NotBetween</option>
+                </select>
             </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="mvalue_range">Minimum Value:</label>
-                </div>
-                <div class="col-75">
-                    <input type="number" id="mvalue_range"  placeholder="min">
-                </div>
+
+            <div class="form-group">
+                <label for="mvalue_range">Minimum Value:</label>
+                <input class="form-control" type="number" id="mvalue_range"  placeholder="min">
             </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="maxvalue_range">Maximum Value:</label>
-                </div>
-                <div class="col-75">
-                    <input type="number" id="maxvalue_range"  placeholder="max">
-                </div>
+
+            <div class="form-group">
+                <label for="maxvalue_range">Maximum Value:</label>
+                <input class="form-control" type="number" id="maxvalue_range"  placeholder="max">
             </div>
             <button type="button" class="btn btn-success" id="ok">Opslaan</button>
 
         </form>
+
         <form id="compare" method="post">
             <div class="row">
                 <div class="col-25">
