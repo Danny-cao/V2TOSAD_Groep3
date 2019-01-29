@@ -36,7 +36,6 @@
     Check console of die het doet.
     <form id="generateRule">
         <select name="rules" id="rules">
-            <option value="1">1 name</option>
         </select>
 
         <input type="button" id="delete" value="delete">
@@ -60,7 +59,9 @@
 
                 var option = document.createElement("option");
 
-                option.setAttribute('id', b.id);
+                option.setAttribute('id', "rule");
+                option.value = b.id;
+                option.innerHTML = b.naam;
 
                 select.appendChild(option);
 
