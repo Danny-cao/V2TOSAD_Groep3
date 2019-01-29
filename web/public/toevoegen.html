@@ -8,10 +8,7 @@
     <meta name="author" content="V2C Team 3 TOSAD">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link rel="stylesheet" href="CSS/styles.css">
-    <link rel="stylesheet" href="css/toevoegen.css">
+    <link href="dist/css/main.css" rel="stylesheet">
     <title>Business Rule Generator | Rule Toevoegen</title>
 </head>
 <body>
@@ -24,18 +21,19 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <a class="nav-item nav-link" href="index.html">Home</a>
-            <a class="nav-item nav-link active" href="toevoegen.html">Rule toevoegen <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link active" href="toevoegen.html">Toevoegen <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link" href="genereren.html">Genereren</a>
-            <a class="nav-item nav-link" href="verwijderen.html">Rule verwijderen</a>
-
             <a class="nav-item nav-link" href="selecteren.html">Selecteren</a>
+            <a class="nav-item nav-link" href="verwijderen.html">Verwijderen</a>
+
+
         </div>
     </div>
 </nav>
 
 <section id="rule_toevoegen">
 
-    <div id="selecteer_rule">
+    <div class="container" id="selecteer_rule">
 
 
         <select class="form-control" id="rule">
@@ -50,62 +48,48 @@
     </div>
 
 
-    <div id="types">
+    <div class="container" id="types">
         <form id="range">
-            <div class="row">
-                <div class="col-25">
-                    <label for="tabel_range">table:</label>
-                </div>
-                <div class="col-75">
-                    <select id="tabel_range" name="tabel_range">
-                        <option value="phonenumber">phonenumber</option>
-                        <option value="bestelling">Bestelling</option>
-                        <option value="orders">Orders</option>
-                    </select>
-                </div>
+
+            <div class="form-group">
+                <label for="tabel_range">Table</label>
+                <select class="form-control" id="tabel_range" name="tabel_range">
+                    <option value="phonenumber">phonenumber</option>
+                    <option value="bestelling">Bestelling</option>
+                    <option value="orders">Orders</option>
+                </select>
             </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="atribuut_range">Atribute:</label>
-                </div>
-                <div class="col-75">
-                    <select id="atribuut_range" name="atribuut_range">
-                        <option value="phonenumber">phonenumber</option>
-                        <option value="bestelling">Bestelling</option>
-                        <option value="orders">Orders</option>
-                    </select>
-                </div>
+
+            <div class="form-group">
+                <label for="atribuut_range">Atribute:</label>
+                <select class="form-control" id="atribuut_range" name="atribuut_range">
+                    <option value="phonenumber">phonenumber</option>
+                    <option value="bestelling">Bestelling</option>
+                    <option value="orders">Orders</option>
+                </select>
             </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="operator_range">Operator:</label>
-                </div>
-                <div class="col-75">
-                    <select id="Operator_range" name="operator_range">
-                        <option value="Between">Between</option>
-                        <option value="NotBetween">NotBetween</option>
-                    </select>
-                </div>
+
+            <div class="form-group">
+                <label for="operator_range">Operator:</label>
+                <select class="form-control" id="Operator_range" name="operator_range">
+                    <option value="Between">Between</option>
+                    <option value="NotBetween">NotBetween</option>
+                </select>
             </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="mvalue_range">Minimum Value:</label>
-                </div>
-                <div class="col-75">
-                    <input type="number" id="mvalue_range"  placeholder="min">
-                </div>
+
+            <div class="form-group">
+                <label for="mvalue_range">Minimum Value:</label>
+                <input class="form-control" type="number" id="mvalue_range"  placeholder="min">
             </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="maxvalue_range">Maximum Value:</label>
-                </div>
-                <div class="col-75">
-                    <input type="number" id="maxvalue_range"  placeholder="max">
-                </div>
+
+            <div class="form-group">
+                <label for="maxvalue_range">Maximum Value:</label>
+                <input class="form-control" type="number" id="maxvalue_range"  placeholder="max">
             </div>
             <button type="button" class="btn btn-success" id="ok">Opslaan</button>
 
         </form>
+
         <form id="compare" method="post">
             <div class="row">
                 <div class="col-25">
@@ -286,8 +270,10 @@
     </div>
 </section>
 
-
-<!-- Optional JavaScript --->
+<script src="dist/js/jquery.min.js"></script>
+<script src="dist/js/popper.min.js"></script>
+<script src="dist/js/bootstrap.min.js"></script>
+<script src="dist/js/main.js"></script>
 <script>
 
     var compare = document.getElementById('compare');
@@ -420,17 +406,6 @@
 
 
 </script>
-
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
 </body>
 </html>
 </html>
