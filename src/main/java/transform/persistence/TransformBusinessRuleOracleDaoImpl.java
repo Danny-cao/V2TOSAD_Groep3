@@ -235,7 +235,7 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
         values.substring(0,values.length()-1);
         values += ")";
 
-        if (list.getInList().equals("yes")) {
+        if (list.getInList().equals("in")) {
 
             String query = "ALTER TABLE " + table + " ADD CONSTRAINT " + name + " CHECK (" + value + " IN " + values + ")";
             return query;
