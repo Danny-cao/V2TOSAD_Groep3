@@ -140,6 +140,121 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
     }
 
     @Override
+    public List<BusinessRule> findAllRange() {
+
+        try{
+
+            List<BusinessRule> allBusinessRules = new ArrayList<>();
+
+            String queryText =  "select * from BusinessRule WHERE BUSINESSRULETYPEID = 1";
+
+            PreparedStatement stmt = conn.prepareStatement(queryText);
+
+            ResultSet result = stmt.executeQuery();
+
+            int id, businessruletypeid, constraintid;
+            String naam;
+
+            while(result.next()) {
+
+                id = result.getInt("ID");
+                naam = result.getString("NAAM");
+                businessruletypeid = result.getInt("BUSINESSRULETYPEID");
+                constraintid = result.getInt("CONSTRAINTID");
+
+                Constraint constraint = cdao.getConstraintByID(constraintid);
+                BusinessRuleType businessRuleType = tdao.getBusinessRuleTypeByID(businessruletypeid);
+
+                BusinessRule businessRule = new BusinessRule(id, naam, businessRuleType, constraint);
+
+                allBusinessRules.add(businessRule);
+            }
+
+            return allBusinessRules;
+
+        }catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<BusinessRule> findAllOther() {
+        try{
+
+            List<BusinessRule> allBusinessRules = new ArrayList<>();
+
+            String queryText =  "select * from BusinessRule WHERE BUSINESSRULETYPEID = 4";
+
+            PreparedStatement stmt = conn.prepareStatement(queryText);
+
+            ResultSet result = stmt.executeQuery();
+
+            int id, businessruletypeid, constraintid;
+            String naam;
+
+            while(result.next()) {
+
+                id = result.getInt("ID");
+                naam = result.getString("NAAM");
+                businessruletypeid = result.getInt("BUSINESSRULETYPEID");
+                constraintid = result.getInt("CONSTRAINTID");
+
+                Constraint constraint = cdao.getConstraintByID(constraintid);
+                BusinessRuleType businessRuleType = tdao.getBusinessRuleTypeByID(businessruletypeid);
+
+                BusinessRule businessRule = new BusinessRule(id, naam, businessRuleType, constraint);
+
+                allBusinessRules.add(businessRule);
+            }
+
+            return allBusinessRules;
+
+        }catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<BusinessRule> findAllInter() {
+        try{
+
+            List<BusinessRule> allBusinessRules = new ArrayList<>();
+
+            String queryText =  "select * from BusinessRule WHERE BUSINESSRULETYPEID = 7";
+
+            PreparedStatement stmt = conn.prepareStatement(queryText);
+
+            ResultSet result = stmt.executeQuery();
+
+            int id, businessruletypeid, constraintid;
+            String naam;
+
+            while(result.next()) {
+
+                id = result.getInt("ID");
+                naam = result.getString("NAAM");
+                businessruletypeid = result.getInt("BUSINESSRULETYPEID");
+                constraintid = result.getInt("CONSTRAINTID");
+
+                Constraint constraint = cdao.getConstraintByID(constraintid);
+                BusinessRuleType businessRuleType = tdao.getBusinessRuleTypeByID(businessruletypeid);
+
+                BusinessRule businessRule = new BusinessRule(id, naam, businessRuleType, constraint);
+
+                allBusinessRules.add(businessRule);
+            }
+
+            return allBusinessRules;
+
+        }catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
     public BusinessRule update(BusinessRule rule) {
         return null;
     }

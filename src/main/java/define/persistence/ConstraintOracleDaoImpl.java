@@ -1,12 +1,11 @@
 package define.persistence;
 
-import define.model.Constraint;
+import define.model.*;
 import persistence.OracleBaseDao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConstraintOracleDaoImpl extends OracleBaseDao implements ConstraintDao {
 
@@ -70,5 +69,120 @@ public class ConstraintOracleDaoImpl extends OracleBaseDao implements Constraint
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public Constraint findByidRange(int id) throws SQLException {
+
+        Attribute_Range constraint = null;
+        Connection c = super.getConnection();
+        PreparedStatement ps = c.prepareStatement("SELECT * FROM constraint WHERE id = ?");
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+
+            constraint = new Attribute_Range(
+                    rs.getString("naam"),
+                    rs.getString("table_name"),
+                    rs.getInt("id"),
+                    rs.getString("ref_attribute"),
+                    rs.getInt("value"),
+                    rs.getInt("value2"),
+                    rs.getString("operator")
+
+
+            );
+
+        }
+        return constraint;
+    }
+
+    @Override
+    public Constraint findByidOther(int id) throws SQLException{
+
+        Attribute_Other constraint = null;
+        Connection c = super.getConnection();
+        PreparedStatement ps = c.prepareStatement("SELECT * FROM constraint WHERE id = ?");
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+
+            constraint = new Attribute_Other(
+                    rs.getString("naam"),
+                    rs.getString("table_name"),
+                    rs.getInt("id"),
+                    rs.getString("ref_attribute"),
+                    rs.getString("operator"),
+                    rs.getString("attribute_name")
+
+
+            );
+
+        }
+        return constraint;
+
+    }
+
+    @Override
+    public Constraint findByidInter(int id) throws SQLException{
+
+        Attribute_InterEntity constraint = null;
+        Connection c = super.getConnection();
+        PreparedStatement ps = c.prepareStatement("SELECT * FROM constraint WHERE id = ?");
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+
+            constraint = new Attribute_InterEntity(
+                    rs.getString("naam"),
+                    rs.getString("table_name"),
+                    rs.getInt("id"),
+                    rs.getString("ref_table"),
+                    rs.getString("ref_attribute"),
+                    rs.getString("operator"),
+                    rs.getString("attribute_name")
+
+
+
+            );
+
+        }
+        return constraint;
+    }
+
+    @Override
+    public List<Constraint> selectConstraint(String query) {
+
+        ArrayList<Constraint> results = new ArrayList<Constraint>();
+        try (Connection con = super.getConnection()){
+            Statement stmt = con.createStatement();
+            ResultSet dbResultSet = stmt.executeQuery(query);
+
+            while (dbResultSet.next()) {
+                int constraintnummer = dbResultSet.getInt("id");
+                String naam = dbResultSet.getString("naam");
+                String table = dbResultSet.getString("table_name");
+                String atribuut = dbResultSet.getString("ref_attribute");
+                String operator = dbResultSet.getString("operator");
+                String value = dbResultSet.getString("value");
+
+
+                Constraint beperking = new Attribute_Compare(table,naam,constraintnummer,atribuut,operator,value);
+
+
+                results.add(beperking);
+            }
+        } catch (SQLException sqle) { sqle.printStackTrace(); }
+
+        return results;
+    }
+
+    @Override
+    public List<Constraint> findAll() {
+        return selectConstraint("SELECT * from constraint");
+    }
+
+    public Constraint findByConstraintnummer(int constraintnummer) {
+        return selectConstraint("SELECT * from constraint where id = " + constraintnummer).get(0);
     }
 }
