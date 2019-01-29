@@ -16,7 +16,7 @@ public class TransformResource {
 
     @POST
     @Produces("application/json")
-    public Response getGeneratedBusinessRule(@FormParam("type") String type){
+    public Response getGeneratedBusinessRule(@FormParam("rules") String type){
 
         // Haal business rule op
         int result = Integer.parseInt(type);
