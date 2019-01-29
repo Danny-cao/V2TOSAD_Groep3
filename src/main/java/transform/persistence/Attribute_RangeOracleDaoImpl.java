@@ -39,7 +39,7 @@ public class Attribute_RangeOracleDaoImpl extends OracleBaseDao implements Attri
             String naam = result.getString("NAAM");
             String table = result.getString("TABLE_NAME");
             int id = result.getInt("ID");
-            String attribute = result.getString("REF_ATTRIBUTE");
+            String attribute = result.getString("ATTRIBUTE_NAME");
             String operator = result.getString("OPERATOR");
             double value = result.getDouble("VALUE");
             double value2 = result.getDouble("VALUE2");

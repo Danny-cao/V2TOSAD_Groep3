@@ -16,5 +16,6 @@ public interface BusinessRuleDao {
 
     BusinessRule update(BusinessRule rule);
     boolean delete(BusinessRule rule);
+    int createUniqueID();
 }
 

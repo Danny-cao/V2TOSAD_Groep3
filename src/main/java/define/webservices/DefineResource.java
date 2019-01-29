@@ -104,10 +104,16 @@ public class DefineResource {
 
 
                 System.out.println("constraint_range opslaan");
-                Attribute_Range range = new Attribute_Range(table,result,attribute,value1,value2,operator);
+
+                int uniqueID = defineService.createUniqueIDConstraint();
+
+                System.out.println(uniqueID);
+                Attribute_Range range = new Attribute_Range(table, uniqueID,attribute,value1,value2,operator);
                 defineService.Save(range);
                 System.out.println("constraint_range opgeslagen");
-                return Response.ok(range).build();
+                Gson gson = new Gson();
+                String json = gson.toJson(range);
+                return Response.ok(json).build();
 
         }
 

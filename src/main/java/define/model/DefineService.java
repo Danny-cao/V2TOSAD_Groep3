@@ -125,4 +125,8 @@ public class DefineService {
         return bdao.update(rule);
     }
 
+    public int createUniqueIDConstraint(){
+        return cdao.createUniqueID();
+    }
+
 }
