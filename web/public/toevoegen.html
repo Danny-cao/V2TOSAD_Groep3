@@ -8,7 +8,10 @@
     <meta name="author" content="V2C Team 3 TOSAD">
 
     <!-- Bootstrap CSS -->
-    <link href="dist/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="css/toevoegen.css">
     <title>Business Rule Generator | Rule Toevoegen</title>
 </head>
 <body>
@@ -20,10 +23,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link active" href="toevoegen.html">Rule toevoegen</a>
-            <a class="nav-item nav-link" href="selecteren.html">Selecteren</a>
+            <a class="nav-item nav-link" href="index.html">Home</a>
+            <a class="nav-item nav-link active" href="toevoegen.html">Rule toevoegen <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="genereren.html">Genereren</a>
             <a class="nav-item nav-link" href="verwijderen.html">Rule verwijderen</a>
+
+            <a class="nav-item nav-link" href="selecteren.html">Selecteren</a>
         </div>
     </div>
 </nav>
@@ -100,8 +105,8 @@
             </div>
             <button type="button" class="btn btn-success" id="ok">Opslaan</button>
 
-    </form>
-        <form id="compare">
+        </form>
+        <form id="compare" method="post">
             <div class="row">
                 <div class="col-25">
                     <label for="tabel_compare">Tabel:</label>
@@ -156,7 +161,7 @@
         <form id="tuple_compare">
             <div class="row">
                 <div class="col-25">
-                    <label for="tabel_tcompare">Atribute:</label>
+                    <label for="tabel_tcompare">Table:</label>
                 </div>
                 <div class="col-75">
                     <select id="tabel_tcompare" name="tabel_tcompare">
@@ -282,10 +287,6 @@
 </section>
 
 
-<script src="dist/js/jquery.min.js"></script>
-<script src="dist/js/popper.min.js"></script>
-<script src="dist/js/bootstrap.min.js"></script>
-<script src="dist/js/main.js"></script>
 <!-- Optional JavaScript --->
 <script>
 
@@ -347,12 +348,65 @@
     voegToe.addEventListener("click",function(){
         var formData = new FormData(document.querySelector("#compare"));
         var encData = new URLSearchParams(formData.entries());
-          fetch("rest/compare",{ method: 'POST', body: encData})
+        fetch("restservices/compare",{method:'POST', body: encData})
+        //fetch("restservices/rule",{method:'POST', body: encData})
             .then(function(myJson) {
-                if (myJson.ok)
+                if (myJson.ok){
                     console.log("Business rule added!");
+                    console.log(myJson);}
                 else if (myJson.status == 404)
                     console.log("Business rule not added!");
+
+            })
+
+    });
+
+    var voegToeRange = document.querySelector("#ok");
+    voegToeRange.addEventListener("click",function(){
+        var formData = new FormData(document.querySelector("#range"));
+        var encData = new URLSearchParams(formData.entries());
+        fetch("restservices/compare/postRange",{method:'POST', body: encData})
+        //fetch("restservices/rule",{method:'POST', body: encData})
+            .then(function(myJson) {
+                if (myJson.ok){
+                    console.log("Business rule added/range!");
+                    console.log(myJson);}
+                else if (myJson.status == 404)
+                    console.log("Business rule not added/range!");
+
+            })
+
+    });
+
+    var voegToeOther = document.querySelector("#ok_tcompare");
+    voegToeOther.addEventListener("click",function(){
+        var formData = new FormData(document.querySelector("#tuple_compare"));
+        var encData = new URLSearchParams(formData.entries());
+        fetch("restservices/compare/postOther",{method:'POST', body: encData})
+        //fetch("restservices/rule",{method:'POST', body: encData})
+            .then(function(myJson) {
+                if (myJson.ok){
+                    console.log("Business rule added/other!");
+                    console.log(myJson);}
+                else if (myJson.status == 404)
+                    console.log("Business rule not added/other!");
+
+            })
+
+    });
+
+    var voegToeOther = document.querySelector("#ok_etcompare");
+    voegToeOther.addEventListener("click",function(){
+        var formData = new FormData(document.querySelector("#inter_compare"));
+        var encData = new URLSearchParams(formData.entries());
+        fetch("restservices/compare/postInter",{method:'POST', body: encData})
+        //fetch("restservices/rule",{method:'POST', body: encData})
+            .then(function(myJson) {
+                if (myJson.ok){
+                    console.log("Business rule added/Inter!");
+                    console.log(myJson);}
+                else if (myJson.status == 404)
+                    console.log("Business rule not added/Inter!");
 
             })
 
@@ -366,6 +420,17 @@
 
 
 </script>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
 </body>
 </html>
 </html>
