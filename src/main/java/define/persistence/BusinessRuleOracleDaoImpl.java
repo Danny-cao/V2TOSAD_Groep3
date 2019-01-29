@@ -127,11 +127,11 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
                 Constraint constraint = cdao.getConstraintByID(constraintid);
                 BusinessRuleType businessRuleType = tdao.getBusinessRuleTypeByID(businessruletypeid);
 
+
                 BusinessRule businessRule = new BusinessRule(id, naam, businessRuleType, constraint);
 
                 allBusinessRules.add(businessRule);
             }
-
             return allBusinessRules;
         }catch(SQLException e) {
             e.printStackTrace();
@@ -266,10 +266,6 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
 
         try{
 
-            cdao.delete(rule.getConstraint());
-
-            tdao.delete(rule.getType());
-
             String queryText =  "DELETE " +
                     "FROM BUSINESSRULE " +
                     "WHERE ID = ?";
@@ -278,8 +274,10 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
             stmt.setInt(1, rule.getId());
 
             if(stmt.executeUpdate() > 0) {
-               success = true;
+                success = true;
             }
+
+            cdao.delete(rule.getConstraint());
 
             return success;
         }catch(SQLException e) {

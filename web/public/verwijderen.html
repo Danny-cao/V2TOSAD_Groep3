@@ -31,7 +31,7 @@
 
 <section id="rule_selecteren">
     Check console of die het doet.
-    <form id="generateRule">
+    <form id="deleteRule">
         <select name="rules" id="rules">
         </select>
 
@@ -71,6 +71,16 @@
 
         });
     }getBusinessRules();
+
+    function deleteBusinessrule(){
+        document.querySelector("#delete").addEventListener("click", function () {
+            var formData = new FormData(document.querySelector("#deleteRule"));
+            var encData = new URLSearchParams(formData.entries());
+
+            fetch("rest/define/delete", {method: 'DELETE', body: encData})
+                .then(response => response.json()).then(posts => console.log(posts));
+        });
+    } deleteBusinessrule();
 
 
 </script>
