@@ -111,8 +111,8 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
             String generatedCode = GenerateAttributeCompare(compare);
             System.out.println(generatedCode);
 
-            return true;
-            //return transformDatabase(generatedCode);
+            //return true;
+            return transformDatabase(generatedCode);
 
         } else if (rule.getType().getNaam().equals("Attribute List rule")) {
 
@@ -121,8 +121,8 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
             String generatedCode = GenerateAttributeList(list);
             System.out.println(generatedCode);
 
-            return true;
-            //return transformDatabase(generatedCode);
+            //return true;
+            return transformDatabase(generatedCode);
 
         } else if (rule.getType().getNaam().equals("Attribute Other rule")) {
 
@@ -131,8 +131,8 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
             String generatedCode = GenerateAttributeOther(other);
             System.out.println(generatedCode);
 
-            return true;
-            //return transformDatabase(generatedCode);
+            //return true;
+            return transformDatabase(generatedCode);
 
         } else if (rule.getType().getNaam().equals("Attribute Range rule")) {
 
@@ -141,8 +141,8 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
             String generatedCode = GenerateAttributeRange(range);
             System.out.println(generatedCode);
             deleteConstraintIfExist(rule);
-            //return true;
-            return transformDatabase(generatedCode);
+            return true;
+            //return transformDatabase(generatedCode);
 
         } else if (rule.getType().getNaam().equals("Tuple Compare rule")){
 
@@ -151,8 +151,8 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
             String generatedCode = GenerateTupleCompare(compare);
             System.out.println(generatedCode);
 
-            return true;
-            //return transformDatabase(generatedCode);
+            //return true;
+            return transformDatabase(generatedCode);
 
         } else if (rule.getType().getNaam().equals("Tuple Other rule")) {
 
@@ -161,8 +161,8 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
             String generatedCode = GenerateTupleOther(other);
             System.out.println(generatedCode);
 
-            return true;
-            //return transformDatabase(generatedCode);
+            //return true;
+            return transformDatabase(generatedCode);
 
         } else if (rule.getType().getNaam().equals("Inter-Entity Compare rule")){
 
@@ -171,8 +171,8 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
             String generatedCode = GenerateInterEntityCompare(compare);
             System.out.println(generatedCode);
 
-            return true;
-            //return transformDatabase(generatedCode);
+            //return true;
+            return transformDatabase(generatedCode);
 
         } else if (rule.getType().getNaam().equals("Entity Other rule")) {
 
@@ -181,8 +181,8 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
             String generatedCode = GenerateEntityOther(other);
             System.out.println(generatedCode);
 
-            return true;
-            //return transformDatabase(generatedCode);
+            //return true;
+            return transformDatabase(generatedCode);
 
         } else {
 
