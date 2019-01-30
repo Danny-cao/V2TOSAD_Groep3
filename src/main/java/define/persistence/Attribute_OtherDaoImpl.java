@@ -69,13 +69,18 @@ public class Attribute_OtherDaoImpl extends OracleBaseDao implements Attribute_O
 	
 	public boolean updateOther (Attribute_Other other) throws SQLException {
 		Connection c = super.getConnection();
-		PreparedStatement ps = c.prepareStatement("UPDATE constraint SET table_name = ?, ref_attribute = ?, operator = ?, attribute_name =? WHERE id = ?");
-		ps.setString(1, other.getTable());
-		ps.setString(2, other.getAttribute1());
-		ps.setString(3, other.getOperator());
-		ps.setString(4, other.getAttribute2());
-		ps.setDouble(5, other.getId());
+		PreparedStatement ps = c.prepareStatement("UPDATE constraint SET naam=?,table_name = ?, ref_attribute = ?, operator = ?, attribute_name =? WHERE id = ?");
+		PreparedStatement ps1 = c.prepareStatement("UPDATE businessrule SET naam=? WHERE constraintid = ?");
+		ps.setString(1, "BRG_VBMG_" + other.getTable().toUpperCase() + "_CNS_TCMP_"+other.getId());
+		ps.setString(2, other.getTable());
+		ps.setString(3, other.getAttribute1());
+		ps.setString(4, other.getOperator());
+		ps.setString(5, other.getAttribute2());
+		ps.setDouble(6, other.getId());
+		ps1.setString(1,"BRG_VBMG_" + other.getTable().toUpperCase() + "_TCMP_"+other.getId());
+		ps1.setInt(2,other.getId());
 		boolean result = ps.executeUpdate() > 0;
+		boolean result1 = ps1.executeUpdate() > 0;
         ps.close();
         c.close();
         return result;

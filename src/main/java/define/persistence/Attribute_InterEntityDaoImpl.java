@@ -70,14 +70,19 @@ public class Attribute_InterEntityDaoImpl extends OracleBaseDao implements Attri
 	
 	public boolean updateInter (Attribute_InterEntity inter) throws SQLException {
 		Connection c = super.getConnection();
-		PreparedStatement ps = c.prepareStatement("UPDATE constraint SET table_name = ?,ref_table = ?, ref_attribute = ?, operator = ?, attribute_name =? WHERE id = ?");
-		ps.setString(1, inter.getTable());
-		ps.setString(2, inter.getRef_table());
-		ps.setString(3, inter.getAttribute1());
-		ps.setString(4, inter.getOperator());
-		ps.setString(5, inter.getAttribute2());
-		ps.setDouble(6, inter.getId());
+		PreparedStatement ps = c.prepareStatement("UPDATE constraint SET naam=? table_name = ?,ref_table = ?, ref_attribute = ?, operator = ?, attribute_name =? WHERE id = ?");
+		PreparedStatement ps1 = c.prepareStatement("UPDATE businessrule SET naam = ? WHERE constraintid = ?");
+		ps.setString(1,"BRG_VBMG_" + inter.getTable().toUpperCase() + "_CNS_ICMP_"+inter.getId());
+		ps.setString(2, inter.getTable());
+		ps.setString(3, inter.getRef_table());
+		ps.setString(4, inter.getAttribute1());
+		ps.setString(5, inter.getOperator());
+		ps.setString(6, inter.getAttribute2());
+		ps.setDouble(7, inter.getId());
+		ps1.setString(1,"BRG_VBMG_" + inter.getTable().toUpperCase() + "_ICMP_"+inter.getId());
+		ps1.setInt(2,inter.getId());
 		boolean result = ps.executeUpdate() > 0;
+		boolean result1 = ps1.executeUpdate() > 0;
         ps.close();
         c.close();
         return result;

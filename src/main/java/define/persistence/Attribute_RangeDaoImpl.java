@@ -73,14 +73,19 @@ public class Attribute_RangeDaoImpl extends OracleBaseDao implements Attribute_R
 			
 	public boolean updateRange (Attribute_Range range) throws SQLException {
 				Connection c = super.getConnection();
-				PreparedStatement ps = c.prepareStatement("UPDATE constraint SET table_name = ?, ref_attribute = ?, operator = ?, value = ?,value2=? WHERE id = ?");
-				ps.setString(1, range.getTable());
-				ps.setString(2, range.getAttribute());
-				ps.setString(3, range.getOperator());
-				ps.setDouble(4, range.getValue1());
-				ps.setDouble(5, range.getValue2());
-				ps.setInt(6,range.getId());
+				PreparedStatement ps = c.prepareStatement("UPDATE constraint naam = ? SET table_name = ?, ref_attribute = ?, operator = ?, value = ?,value2=? WHERE id = ?");
+	        	PreparedStatement ps1 = c.prepareStatement("UPDATE businessrule SET naam = ? WHERE constraintid = ?");
+				ps.setString(1,"BRG_VBMG_" + range.getTable().toUpperCase() + "_CNS_ARNG_"+range.getId());
+	        	ps.setString(2, range.getTable());
+				ps.setString(3, range.getAttribute());
+				ps.setString(4, range.getOperator());
+				ps.setDouble(5, range.getValue1());
+				ps.setDouble(6, range.getValue2());
+				ps.setInt(7,range.getId());
+				ps1.setString(1,"BRG_VBMG_" + range.getTable().toUpperCase() + "_CNS_ARNG_"+range.getId());
+				ps1.setInt(2,range.getId());
 				boolean result = ps.executeUpdate() > 0;
+		        boolean result1 = ps1.executeUpdate() > 0;
 		        ps.close();
 		        c.close();
 		        return result;
