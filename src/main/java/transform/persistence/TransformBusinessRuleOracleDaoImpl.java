@@ -45,7 +45,7 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
         String table = rule.getConstraint().getTable();
 
         try{
-            String queryText =  "SELECT COUNT(*) " +
+            String queryText =  "SELECT COUNT(*) as counter " +
                     "FROM all_constraints " +
                     "WHERE constraint_name = ?";
             System.out.println("reached delete function 2");
@@ -55,14 +55,20 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
 
             System.out.println("reached delete function 3");
 
-            int result = stmt.executeUpdate();
+            ResultSet result = stmt.executeQuery();
+
+            result.next();
+
+            int count = result.getInt("counter");
+
+            System.out.println(result);
 
             System.out.println("reached delete function 4");
             System.out.println(table);
             System.out.println(name);
 
 
-            if(result > 0 ){
+            if(count > 0 ){
                 String queryDelete =  "ALTER TABLE " + rule.getConstraint().getTable() + " DROP CONSTRAINT " + rule.getNaam();
 
                 System.out.println(queryDelete);
@@ -141,8 +147,8 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
             String generatedCode = GenerateAttributeRange(range);
             System.out.println(generatedCode);
             deleteConstraintIfExist(rule);
-            return true;
-            //return transformDatabase(generatedCode);
+            //return true;
+            return transformDatabase(generatedCode);
 
         } else if (rule.getType().getNaam().equals("Tuple Compare rule")){
 
