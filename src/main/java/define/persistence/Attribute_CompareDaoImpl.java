@@ -12,16 +12,17 @@ import persistence.OracleBaseDao;
 
 public class Attribute_CompareDaoImpl extends OracleBaseDao implements Attribute_CompareDao {
 
+	private BusinessRuleDao bdao = new BusinessRuleOracleDaoImpl();
+
 	public Attribute_Compare save(Attribute_Compare compare) {
 		try (Connection con = getConnection()) {
 			Statement stmt = con.createStatement();
 
 
-			int id =40;
+			int id = bdao.createUniqueID();
 			int type = 2;
 			String constraintNaam = "BRG_VBMG_" + compare.getTable().toUpperCase() + "_CNS_ACMP_"+compare.getId();
-			String businessruleNaam = "BRG_VBMG_" + compare.getTable().toUpperCase() + "_ACMP_"+compare.getId();
-			System.out.println(businessruleNaam);
+			String businessruleNaam = "BRG_VBMG_" + compare.getTable().toUpperCase() + "_CNS_ACMP_"+compare.getId();
 
 			String query = "INSERT INTO constraint (id, naam, table_name ,attribute_name, operator, value,type)VALUES('" + compare.getId() + "', '"+
 					constraintNaam + "', '" + compare.getTable() +  "', '" + compare.getAttribute() + "', '" + compare.getOperator() + "', '" + compare.getValue()+ "', '" + "check"  + "')";

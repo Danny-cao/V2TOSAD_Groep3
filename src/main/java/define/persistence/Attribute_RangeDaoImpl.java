@@ -23,7 +23,7 @@ public class Attribute_RangeDaoImpl extends OracleBaseDao implements Attribute_R
             int id = bdao.createUniqueID();
             int type = 1;
             String constraintNaam = "BRG_VBMG_" + range.getTable().toUpperCase() + "_CNS_ARNG_"+range.getId();
-            String businessruleNaam = "BRG_VBMG_" + range.getTable().toUpperCase() + "_ARNG_"+range.getId();
+            String businessruleNaam = "BRG_VBMG_" + range.getTable().toUpperCase() + "_CNS_ARNG_"+range.getId();
             
             String query = "INSERT INTO constraint (id, naam, table_name ,attribute_name, operator, value,value2,type)VALUES('" + range.getId() + "', '"+
                     constraintNaam + "', '" + range.getTable()  + "', '" + range.getAttribute() + "', '" + range.getOperator() + "', '" + range.getValue1()+"', '" + range.getValue2()+ "', '" + "check"  + "')";

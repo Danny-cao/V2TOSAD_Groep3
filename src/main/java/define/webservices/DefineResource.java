@@ -81,17 +81,16 @@ public class DefineResource {
                                          @FormParam("value_compare")String value) throws SQLException {
 
 
+                int uniqueID = defineService.createUniqueIDConstraint();
 
-
-
-
-
-                System.out.println("constraint opslaan");
-                Attribute_Compare compare = new Attribute_Compare(table,result,attribute,value,operator);
+                Attribute_Compare compare = new Attribute_Compare(table,uniqueID ,attribute,value,operator);
                 defineService.Save(compare);
                 System.out.println("gelukt");
-                return Response.ok(compare).build();
 
+                Gson gson = new Gson();
+                String json = gson.toJson(compare);
+
+                return Response.ok(json).build();
         }
 
         @POST
@@ -102,7 +101,6 @@ public class DefineResource {
                                     @FormParam("mvalue_range")int value1,@FormParam("maxvalue_range")int value2) throws SQLException{
 
 
-
                 System.out.println("constraint_range opslaan");
 
                 int uniqueID = defineService.createUniqueIDConstraint();
@@ -110,6 +108,7 @@ public class DefineResource {
                 System.out.println(uniqueID);
                 Attribute_Range range = new Attribute_Range(table, uniqueID,attribute,value1,value2,operator);
                 defineService.Save(range);
+
                 System.out.println("constraint_range opgeslagen");
                 Gson gson = new Gson();
                 String json = gson.toJson(range);
