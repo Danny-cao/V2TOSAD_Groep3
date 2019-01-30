@@ -72,6 +72,31 @@ public class ConstraintOracleDaoImpl extends OracleBaseDao implements Constraint
     }
 
     @Override
+    public Constraint findByidCompare(int id) throws SQLException {
+
+        Attribute_Compare constraint = null;
+        Connection c = super.getConnection();
+        PreparedStatement ps = c.prepareStatement("SELECT * FROM constraint WHERE id = ?");
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+
+            constraint = new Attribute_Compare(
+                    rs.getString("naam"),
+                    rs.getString("table_name"),
+                    rs.getInt("id"),
+                    rs.getString("ref_attribute"),
+                    rs.getString("value"),
+                    rs.getString("operator")
+
+
+            );
+
+        }
+        return constraint;
+    }
+
+    @Override
     public Constraint findByidRange(int id) throws SQLException {
 
         Attribute_Range constraint = null;

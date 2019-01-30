@@ -1,10 +1,10 @@
 package define.persistence;
 
-import define.model.BusinessRuleType;
+import define.model.*;
 import persistence.OracleBaseDao;
-import define.model.BusinessRule;
-import define.model.Constraint;
 
+import java.sql.ResultSet;
+import java.sql.*;
 import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -139,6 +139,48 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
         }
     }
 
+
+
+    @Override
+    public List<BusinessRule> findAllCompare() {
+
+        try{
+
+            List<BusinessRule> allBusinessRules = new ArrayList<>();
+
+            String queryText =  "select * from BusinessRule WHERE BUSINESSRULETYPEID = 2";
+
+            PreparedStatement stmt = conn.prepareStatement(queryText);
+
+            ResultSet result = stmt.executeQuery();
+
+            int id, businessruletypeid, constraintid;
+            String naam;
+
+            while(result.next()) {
+
+                id = result.getInt("ID");
+                naam = result.getString("NAAM");
+                businessruletypeid = result.getInt("BUSINESSRULETYPEID");
+                constraintid = result.getInt("CONSTRAINTID");
+
+                Constraint constraint = cdao.getConstraintByID(constraintid);
+                BusinessRuleType businessRuleType = tdao.getBusinessRuleTypeByID(businessruletypeid);
+                Attribute_Compare constraintCompare = (Attribute_Compare) cdao.findByidCompare(result.getInt("constraintid"));
+
+                BusinessRule businessRule = new BusinessRule(id, naam, businessRuleType, constraint);
+                businessRule.setCompare(constraintCompare);
+                allBusinessRules.add(businessRule);
+            }
+
+            return allBusinessRules;
+
+        }catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     @Override
     public List<BusinessRule> findAllRange() {
 
@@ -164,9 +206,10 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
 
                 Constraint constraint = cdao.getConstraintByID(constraintid);
                 BusinessRuleType businessRuleType = tdao.getBusinessRuleTypeByID(businessruletypeid);
+                Attribute_Range constraintRange = (Attribute_Range) cdao.findByidRange(result.getInt("constraintid"));
 
                 BusinessRule businessRule = new BusinessRule(id, naam, businessRuleType, constraint);
-
+                businessRule.setRange(constraintRange);
                 allBusinessRules.add(businessRule);
             }
 
@@ -202,9 +245,10 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
 
                 Constraint constraint = cdao.getConstraintByID(constraintid);
                 BusinessRuleType businessRuleType = tdao.getBusinessRuleTypeByID(businessruletypeid);
+                Attribute_Other constraintOther = (Attribute_Other) cdao.findByidOther(result.getInt("constraintid"));
 
                 BusinessRule businessRule = new BusinessRule(id, naam, businessRuleType, constraint);
-
+                businessRule.setOther(constraintOther);
                 allBusinessRules.add(businessRule);
             }
 
@@ -240,9 +284,10 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
 
                 Constraint constraint = cdao.getConstraintByID(constraintid);
                 BusinessRuleType businessRuleType = tdao.getBusinessRuleTypeByID(businessruletypeid);
+                Attribute_InterEntity constraintInter = (Attribute_InterEntity) cdao.findByidInter(result.getInt("constraintid"));
 
                 BusinessRule businessRule = new BusinessRule(id, naam, businessRuleType, constraint);
-
+                businessRule.setInter(constraintInter);
                 allBusinessRules.add(businessRule);
             }
 

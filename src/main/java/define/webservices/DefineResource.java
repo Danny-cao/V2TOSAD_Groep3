@@ -4,12 +4,14 @@ package define.webservices;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import define.model.*;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import javax.xml.ws.Service;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
+
+
 
 
 @Path("/define")
@@ -143,7 +145,7 @@ public class DefineResource {
 
         }
 
-        /*
+
         @GET
         @Path("{id}")
         @Produces("application/json")
@@ -156,10 +158,10 @@ public class DefineResource {
                 return job.build().toString();
         }
 
-        */
+
 
         @PUT
-        @Path("{constraintnummerCompare}")
+        @Path("/compare/{constraintnummerCompare}")
         @Produces("application/json")
         public Response updateCompare(@PathParam("constraintnummerCompare") int constraintnummerCompare,
                                       @FormParam("compare_tabel") String tabel,@FormParam("compare_atribuut") String atribuut
@@ -276,15 +278,16 @@ public class DefineResource {
                 }
         }
 
-        /*
+
+
         @GET
         @Path("/getRulesCompare")
         @Produces("application/json")
-        public String getRules() throws SQLException {
+        public String getRulesCompare() throws SQLException {
 
 
                 JsonArrayBuilder jab = Json.createArrayBuilder();
-                for (BusinessRule r : defineService.findAllRules()) {
+                for (BusinessRule r : defineService.findAllBusinessRulesCompare()) {
                         JsonObjectBuilder job = Json.createObjectBuilder();
                         job.add("rule_id", r.getId());
                         job.add("naam", r.getNaam());
@@ -311,7 +314,7 @@ public class DefineResource {
 
 
                 JsonArrayBuilder jab = Json.createArrayBuilder();
-                for (BusinessRule r : Service.findAllRulesRange()) {
+                for (BusinessRule r : defineService.findAllBusinessRulesRange()) {
                         JsonObjectBuilder job = Json.createObjectBuilder();
                         job.add("rule_id", r.getId());
                         job.add("naam", r.getNaam());
@@ -339,7 +342,7 @@ public class DefineResource {
 
 
                 JsonArrayBuilder jab = Json.createArrayBuilder();
-                for (BusinessRule r : Service.findAllRulesOther()) {
+                for (BusinessRule r : defineService.findAllBusinessRulesOther()) {
                         JsonObjectBuilder job = Json.createObjectBuilder();
                         job.add("rule_id", r.getId());
                         job.add("naam", r.getNaam());
@@ -366,7 +369,7 @@ public class DefineResource {
 
 
                 JsonArrayBuilder jab = Json.createArrayBuilder();
-                for (BusinessRule r : Service.findAllRulesInter()) {
+                for (BusinessRule r : defineService.findAllBusinessRulesInter()) {
                         JsonObjectBuilder job = Json.createObjectBuilder();
                         job.add("rule_id", r.getId());
                         job.add("naam", r.getNaam());
@@ -388,7 +391,9 @@ public class DefineResource {
         }
 
 
-   */
+
+
+
 
 
 

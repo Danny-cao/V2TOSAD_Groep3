@@ -73,6 +73,12 @@ public class DefineService {
 
     //businessrule dao
 
+    // compare lijst
+
+    public List<BusinessRule> findAllBusinessRulesCompare(){
+        return bdao.findAllCompare();
+    }
+
     // range lijst
 
     public List<BusinessRule> findAllBusinessRulesRange(){

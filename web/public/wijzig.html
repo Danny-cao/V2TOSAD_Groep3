@@ -1,10 +1,573 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <title>...</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" type="text/css" href="dist/css/aanpassen.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library -- >
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
 </head>
 <body>
 
+<!-- Navbar -->
+
+
+<div class="container">
+    <h1>Attribute Compare rules</h1>
+    <div id="ruleList">
+        <table id ="rules">
+            <tr>
+                <th>RuleID</th>
+                <th>RuleNaam</th>
+                <th>Type</th>
+                <th>constraintid</th>
+                <th>constraint_id</th>
+                <th>constraintnaam</th>
+                <th>tabel</th>
+                <th>value</th>
+                <th>atribuut</th>
+                <th>operator</th>
+                <th>Wijzigen</th>
+                <th>Verwijderen</th>
+            </tr>
+        </table>
+    </div>
+    <div class="container">
+        <form id = "PUTformCompare">
+
+            <label for="compare_tabel">Tabel:</label>
+            <input type="text" id="compare_tabel" name="compare_tabel" >
+
+            <label for="compare_atribuut">Atribuut:</label>
+            <textarea id="compare_atribuut" name="compare_atribuut" style="height:200px"></textarea>
+
+            <label for="compare_operator">Operator:</label>
+            <input type="text" id="compare_operator" name="compare_operator" >
+
+            <label for="compare_value">Value:</label>
+            <input type="number" id="compare_value" name="compare_value" >
+
+            <button type="button" id="put" name="button">wijzig</button>
+        </form>
+    </div>
+
+    <h1>Attribute Range rules</h1>
+    <div id="ruleListRange">
+        <table id ="rulesRange">
+            <tr>
+                <th>RuleID</th>
+                <th>RuleNaam</th>
+                <th>Type</th>
+                <th>constraintid</th>
+                <th>constraint_id</th>
+                <th>constraintnaam</th>
+                <th>tabel</th>
+                <th>Operator</th>
+                <th>atribuut</th>
+                <th>Value1</th>
+                <th>Value2</th>
+                <th>Wijzigen</th>
+                <th>Verwijderen</th>
+            </tr>
+        </table>
+    </div>
+
+
+    <div class="container">
+        <form id = "PUTformRange">
+
+            <label for="range_tabel">Tabel:</label>
+            <input type="text" id="range_tabel" name="range_tabel" >
+
+            <label for="range_atribuut">Atribuut:</label>
+            <textarea id="range_atribuut" name="range_atribuut" style="height:200px"></textarea>
+
+            <label for="range_operator">Operator:</label>
+            <input type="text" id="range_operator" name="range_operator" >
+
+            <label for="range_value1">Minimum:</label>
+            <input type="number" id="range_value1" name="range_value1" >
+
+            <label for="range_value2">Maximum:</label>
+            <input type="number" id="range_value2" name="range_value2" >
+
+            <button type="button" id="putRange" name="button">wijzig</button>
+        </form>
+    </div>
+
+
+    <h1>Attribute tuple rules</h1>
+    <div id="ruleListTuple">
+        <table id ="rulesTuple">
+            <tr>
+                <th>RuleID</th>
+                <th>RuleNaam</th>
+                <th>Type</th>
+                <th>constraintid</th>
+                <th>constraint_id</th>
+                <th>constraintnaam</th>
+                <th>tabel</th>
+                <th>Operator</th>
+                <th>atribuut</th>
+                <th>ref_atribuut</th>
+                <th>Wijzigen</th>
+                <th>Verwijderen</th>
+            </tr>
+        </table>
+    </div>
+
+
+    <div class="container">
+        <form id = "PUTformTuple">
+
+            <label for="tuple_tabel">Tabel:</label>
+            <input type="text" id="tuple_tabel" name="tuple_tabel" >
+
+            <label for="tuple_atribuut">Atribuut:</label>
+            <textarea id="tuple_atribuut" name="tuple_atribuut" style="height:200px"></textarea>
+
+            <label for="tuple_operator">Operator:</label>
+            <input type="text" id="tuple_operator" name="tuple_operator" >
+
+            <label for="tuple_refatribuut">ref_Atribuut:</label>
+            <textarea id="tuple_refatribuut" name="tuple_refatribuut" style="height:200px"></textarea>
+
+            <button type="button" id="putTuple" name="button">wijzig</button>
+        </form>
+    </div>
+
+
+    <h1>Inter-Entity rules</h1>
+    <div id="ruleListInter">
+        <table id ="rulesInter">
+            <tr>
+                <th>RuleID</th>
+                <th>RuleNaam</th>
+                <th>Type</th>
+                <th>constraintid</th>
+                <th>constraint_id</th>
+                <th>constraintnaam</th>
+                <th>table</th>
+                <th>ref_table</th>
+                <th>atribuut</th>
+                <th>ref_atribuut</th>
+                <th>Operator</th>
+                <th>Wijzigen</th>
+                <th>Verwijderen</th>
+            </tr>
+        </table>
+    </div>
+
+    <div class="container">
+        <form id = "PUTformInter">
+
+            <label for="inter_tabel">Tabel:</label>
+            <input type="text" id="inter_tabel" name="inter_tabel" >
+
+            <label for="inter_reftabel">Ref_Tabel:</label>
+            <input type="text" id="inter_reftabel" name="inter_reftabel" >
+
+            <label for="inter_atribuut">Atribuut:</label>
+            <textarea id="inter_atribuut" name="inter_atribuut" style="height:200px"></textarea>
+
+            <label for="inter_refatribuut">Ref_Atribuut:</label>
+            <textarea id="inter_refatribuut" name="inter_refatribuut" style="height:200px"></textarea>
+
+            <label for="inter_operator">Operator:</label>
+            <input type="text" id="inter_operator" name="inter_operator" >
+
+
+            <button type="button" id="putInter" name="button">wijzig</button>
+        </form>
+    </div>
+</div>
+
 </body>
+<script>
+
+    function loadReviews(){
+        var fetchoptions = {
+            method: 'GET',
+
+        }
+
+        fetch('http://localhost:8088/V2TOSAD_Groep3_war_exploded/rest/define/getRulesCompare/', fetchoptions)
+            .then(response => response.json())
+    .then(function(myJson) {
+            console.log(myJson);
+            let content = document.querySelector('#ruleList table tbody');
+            for(let rule of myJson){
+                let tablerow = content.insertRow();
+                tablerow.code= rule.id;
+                tablerow.insertCell().innerHTML = rule.rule_id;
+                tablerow.insertCell().innerHTML = rule.naam;
+                tablerow.insertCell().innerHTML = rule.typeRule;
+                tablerow.insertCell().innerHTML = rule.constraintid;
+                tablerow.insertCell().innerHTML = rule.constraint_id;
+                tablerow.insertCell().innerHTML = rule.constraint_naam;
+                tablerow.insertCell().innerHTML = rule.tabel;
+                tablerow.insertCell().innerHTML = rule.operator;
+                tablerow.insertCell().innerHTML = rule.atribuut;
+                tablerow.insertCell().innerHTML = rule.value;
+
+
+                let wijzigen = tablerow.insertCell();
+                wijzigen.innerHTML = 'Wijzigen';
+                let verwijder = tablerow.insertCell();
+                verwijder.innerHTML = 'verwijderen';
+
+                var fetchoptions = {
+                    method: 'DELETE',
+
+                }
+
+                verwijder.addEventListener("click",function(){
+                    fetch("http://localhost:8088/V2TOSAD_Groep3_war_exploded/rest/define/"+rule.constraint_id,fetchoptions)
+                        .then(function (response) {
+                            if (response.ok) // response-status = 200 OK
+                                console.log("review deleted!");
+                            else if (response.status == 404)
+                                console.log("Review not found!");
+                            else console.log("Cannot delete review!");
+                        })
+                        .catch(error => console.log(error));
+
+
+
+                });
+
+                wijzigen.addEventListener("click",function(){
+
+                    var form = document.getElementById("PUTformCompare");
+                    fetch("http://localhost:8088/V2TOSAD_Groep3_war_exploded/rest/define/" + rule.constraint_id)
+                        .then(response => response.json())
+                .then(function(myJson){
+                        console.log(myJson);
+                        var tabel = document.getElementById("compare_tabel").value = myJson.value;
+                        var atribuut = document.getElementById("compare_atribuut").value = myJson.atribuut;
+                        var operator = document.getElementById("compare_operator").value = myJson.operator;
+                        var value = document.getElementById("compare_value").value = myJson.value;
+                        form.style.display = "block";
+
+
+
+                    });
+
+                    var wijzigButton = document.getElementById("put");
+
+                    wijzigButton.addEventListener("click",function(){
+                        console.log(rule.constraint_id)
+
+                        var formData = new FormData(document.querySelector("#PUTformCompare"));
+                        var encData = new URLSearchParams(formData.entries());
+                        fetch("rest/define/compare/" + rule.constraint_id, { method: 'PUT', body: encData })
+                        //	                       .then(response => response.json())
+                            .then(function (myJson) {
+                                if (myJson.ok)
+                                    console.log("constraintCompare edited!");
+                                else console.log("Cannot delete constraint compare!");
+                            })
+                    });
+
+
+                });
+
+            }
+
+        });
+
+    }
+
+    loadReviews();
+
+
+    function loadReviews1(){
+        var fetchoptions = {
+            method: 'GET',
+
+        }
+
+        fetch('http://localhost:8088/V2TOSAD_Groep3_war_exploded/rest/define/getRulesRange/', fetchoptions)
+            .then(response => response.json())
+    .then(function(myJson) {
+            console.log(myJson);
+            let content = document.querySelector('#ruleListRange table tbody');
+            for(let rule of myJson){
+                let tablerow = content.insertRow();
+                tablerow.code= rule.id;
+                tablerow.insertCell().innerHTML = rule.rule_id;
+                tablerow.insertCell().innerHTML = rule.naam;
+                tablerow.insertCell().innerHTML = rule.typeRule;
+                tablerow.insertCell().innerHTML = rule.constraintid;
+                tablerow.insertCell().innerHTML = rule.constraint_id;
+                tablerow.insertCell().innerHTML = rule.constraint_naam;
+                tablerow.insertCell().innerHTML = rule.tabel;
+                tablerow.insertCell().innerHTML = rule.operator;
+                tablerow.insertCell().innerHTML = rule.atribuut;
+                tablerow.insertCell().innerHTML = rule.value1;
+                tablerow.insertCell().innerHTML = rule.value2;
+                let wijzigen = tablerow.insertCell();
+                wijzigen.innerHTML = 'Wijzigen';
+                let verwijder = tablerow.insertCell();
+                verwijder.innerHTML = 'verwijderen';
+
+                var fetchoptions = {
+                    method: 'DELETE',
+
+                }
+
+                verwijder.addEventListener("click",function(){
+                    fetch("http://localhost:8088/rest/define/"+rule.constraint_id,fetchoptions)
+                        .then(function (response) {
+                            if (response.ok) // response-status = 200 OK
+                                console.log("review deleted!");
+                            else if (response.status == 404)
+                                console.log("Review not found!");
+                            else console.log("Cannot delete review!");
+                        })
+                        .catch(error => console.log(error));
+
+
+
+                });
+
+                wijzigen.addEventListener("click",function(){
+
+                    var form = document.getElementById("PUTformRange");
+                    fetch("http://localhost:8088/rest/define/" + rule.constraint_id)
+                        .then(response => response.json())
+                .then(function(myJson){
+                        console.log(myJson);
+
+                        form.style.display = "block";
+
+
+
+                    });
+
+                    var wijzigButton = document.getElementById("putRange");
+
+                    wijzigButton.addEventListener("click",function(){
+                        console.log(rule.constraint_id)
+
+                        var formData = new FormData(document.querySelector("#PUTformRange"));
+                        var encData = new URLSearchParams(formData.entries());
+                        fetch("rest/define/range/" + rule.constraint_id, { method: 'PUT', body: encData })
+                        //		                       .then(response => response.json())
+                            .then(function (myJson) {
+                                if (myJson.ok)
+                                    console.log("Review edited!");
+                                else console.log("Cannot delete review!");
+                            })
+                    });
+
+
+                });
+
+            }
+
+        });
+
+    }
+
+    loadReviews1();
+
+    function loadReviews2(){
+        var fetchoptions = {
+            method: 'GET',
+
+        }
+
+        fetch('http://localhost:8088/V2TOSAD_Groep3_war_exploded/rest/define/getRulesOther/', fetchoptions)
+            .then(response => response.json())
+    .then(function(myJson) {
+            console.log(myJson);
+            let content = document.querySelector('#ruleListTuple table tbody');
+            for(let rule of myJson){
+                let tablerow = content.insertRow();
+                tablerow.code= rule.id;
+                tablerow.insertCell().innerHTML = rule.rule_id;
+                tablerow.insertCell().innerHTML = rule.naam;
+                tablerow.insertCell().innerHTML = rule.typeRule;
+                tablerow.insertCell().innerHTML = rule.constraintid;
+                tablerow.insertCell().innerHTML = rule.constraint_id;
+                tablerow.insertCell().innerHTML = rule.constraint_naam;
+                tablerow.insertCell().innerHTML = rule.tabel;
+                tablerow.insertCell().innerHTML = rule.atribuut2;
+                tablerow.insertCell().innerHTML = rule.atribuut1;
+                tablerow.insertCell().innerHTML = rule.operator;
+                let wijzigen = tablerow.insertCell();
+                wijzigen.innerHTML = 'Wijzigen';
+                let verwijder = tablerow.insertCell();
+                verwijder.innerHTML = 'verwijderen';
+
+                var fetchoptions = {
+                    method: 'DELETE',
+
+                }
+
+                verwijder.addEventListener("click",function(){
+                    fetch("http://localhost:8088/rest/define/"+rule.constraint_id,fetchoptions)
+                        .then(function (response) {
+                            if (response.ok) // response-status = 200 OK
+                                console.log("AttributeOther constraint deleted!");
+                            else if (response.status == 404)
+                                console.log("AttributeOther constraint not found!");
+                            else console.log("Cannot delete !");
+                        })
+                        .catch(error => console.log(error));
+
+
+
+                });
+
+                wijzigen.addEventListener("click",function(){
+
+                    var form = document.getElementById("PUTformTuple");
+                    fetch("http://localhost:8088/rest/define/" + rule.constraint_id)
+                        .then(response => response.json())
+                .then(function(myJson){
+                        console.log(myJson);
+
+                        form.style.display = "block";
+
+
+
+                    });
+
+                    var wijzigButton = document.getElementById("putTuple");
+
+                    wijzigButton.addEventListener("click",function(){
+                        console.log(rule.constraint_id)
+
+                        var formData = new FormData(document.querySelector("#PUTformTuple"));
+                        var encData = new URLSearchParams(formData.entries());
+                        fetch("rest/define/other/" + rule.constraint_id, { method: 'PUT', body: encData })
+                        //			                       .then(response => response.json())
+                            .then(function (myJson) {
+                                if (myJson.ok)
+                                    console.log("constraint Other edited!");
+                                else console.log("Cannot edit Other constraint!");
+                            })
+                    });
+
+
+                });
+
+            }
+
+        });
+
+    }
+
+    loadReviews2();
+
+    function loadReviews3(){
+        var fetchoptions = {
+            method: 'GET',
+
+        }
+
+        fetch('http://localhost:8088/rest/define/getRulesInter/', fetchoptions)
+            .then(response => response.json())
+    .then(function(myJson) {
+            console.log(myJson);
+            let content = document.querySelector('#ruleListInter table tbody');
+            for(let rule of myJson){
+                let tablerow = content.insertRow();
+                tablerow.code= rule.id;
+                tablerow.insertCell().innerHTML = rule.rule_id;
+                tablerow.insertCell().innerHTML = rule.naam;
+                tablerow.insertCell().innerHTML = rule.typeRule;
+                tablerow.insertCell().innerHTML = rule.constraintid;
+                tablerow.insertCell().innerHTML = rule.constraint_id;
+                tablerow.insertCell().innerHTML = rule.constraint_naam;
+                tablerow.insertCell().innerHTML = rule.ref_tabel;
+                tablerow.insertCell().innerHTML = rule.atribuut1;
+                tablerow.insertCell().innerHTML = rule.atribuut2;
+                tablerow.insertCell().innerHTML = rule.tabel;
+                tablerow.insertCell().innerHTML = rule.operator;
+                let wijzigen = tablerow.insertCell();
+                wijzigen.innerHTML = 'Wijzigen';
+                let verwijder = tablerow.insertCell();
+                verwijder.innerHTML = 'verwijderen';
+
+                var fetchoptions = {
+                    method: 'DELETE',
+
+                }
+
+                verwijder.addEventListener("click",function(){
+                    fetch("http://localhost:8088/rest/define/"+rule.constraint_id,fetchoptions)
+                        .then(function (response) {
+                            if (response.ok) // response-status = 200 OK
+                                console.log("interEntity  deleted!");
+                            else if (response.status == 404)
+                                console.log("interEntity not found!");
+                            else console.log("Cannot delete interEntity!");
+                        })
+                        .catch(error => console.log(error));
+
+
+
+                });
+
+                wijzigen.addEventListener("click",function(){
+
+                    var form = document.getElementById("PUTformInter");
+                    fetch("http://localhost:8088/rest/define/" + rule.constraint_id)
+                        .then(response => response.json())
+                .then(function(myJson){
+                        console.log(myJson);
+
+                        form.style.display = "block";
+
+
+
+                    });
+
+                    var wijzigButton = document.getElementById("putInter");
+
+                    wijzigButton.addEventListener("click",function(){
+                        console.log(rule.constraint_id)
+
+                        var formData = new FormData(document.querySelector("#PUTformInter"));
+                        var encData = new URLSearchParams(formData.entries());
+                        fetch("rest/define/inter/" + rule.constraint_id, { method: 'PUT', body: encData })
+                        //				                       .then(response => response.json())
+                            .then(function (myJson) {
+                                if (myJson.ok)
+                                    console.log("InterEntity edited!");
+                                else console.log("Cannot delete InterEntity!");
+                            })
+                    });
+
+
+                });
+
+            }
+
+        });
+
+    }
+
+    loadReviews3();
+
+
+
+
+
+
+
+
+
+
+</script>
 </html>

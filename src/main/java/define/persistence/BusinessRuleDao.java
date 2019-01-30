@@ -10,6 +10,7 @@ public interface BusinessRuleDao {
     BusinessRule getBusinessRuleById(int id);
     BusinessRule getBusinessRule(String naam, String table, int type);
     List<BusinessRule> getAllBusinessRules();
+    List<BusinessRule> findAllCompare();
     List<BusinessRule> findAllRange();
     List<BusinessRule> findAllOther();
     List<BusinessRule> findAllInter();
