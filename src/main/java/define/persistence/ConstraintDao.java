@@ -8,7 +8,7 @@ import java.util.List;
 //
 public interface ConstraintDao{
     Constraint getConstraintByID(int id);
-    boolean delete(Constraint constraint);
+    boolean delete(Constraint constraint) throws SQLException;
     Constraint findByidCompare(int id) throws SQLException;
     Constraint findByidRange(int id) throws SQLException;
     Constraint findByidOther(int id) throws SQLException;

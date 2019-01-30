@@ -46,6 +46,7 @@ public class ConstraintOracleDaoImpl extends OracleBaseDao implements Constraint
         }
     }
 
+    /*
     @Override
     public boolean delete(Constraint constraint) {
 
@@ -70,7 +71,23 @@ public class ConstraintOracleDaoImpl extends OracleBaseDao implements Constraint
             return false;
         }
     }
+    */
 //
+
+    public boolean delete(Constraint constraint) throws SQLException {
+        Connection c = super.getConnection();
+        PreparedStatement ps = c.prepareStatement("DELETE FROM businessrule WHERE constraintid=?");
+        PreparedStatement ps1 = c.prepareStatement("DELETE FROM constraint WHERE id=?");
+        ps.setInt(1, constraint.getId());
+        ps1.setInt(1, constraint.getId());
+        boolean result = ps.executeUpdate() > 0;
+        boolean result1 = ps1.executeUpdate() > 0;
+        ps.close();
+        c.close();
+        return result;
+
+
+    };
     @Override
     public Constraint findByidCompare(int id) throws SQLException {
 

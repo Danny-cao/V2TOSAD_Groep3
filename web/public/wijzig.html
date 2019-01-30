@@ -31,9 +31,9 @@
                 <th>constraint_id</th>
                 <th>constraintnaam</th>
                 <th>tabel</th>
-                <th>value</th>
+                <th>Operator</th>
                 <th>atribuut</th>
-                <th>operator</th>
+                <th>Value</th>
                 <th>Wijzigen</th>
                 <th>Verwijderen</th>
             </tr>
@@ -46,13 +46,13 @@
             <input type="text" id="compare_tabel" name="compare_tabel" >
 
             <label for="compare_atribuut">Atribuut:</label>
-            <textarea id="compare_atribuut" name="compare_atribuut" style="height:200px"></textarea>
+            <input type="text" id="compare_atribuut" name="compare_atribuut">
 
             <label for="compare_operator">Operator:</label>
             <input type="text" id="compare_operator" name="compare_operator" >
 
             <label for="compare_value">Value:</label>
-            <input type="number" id="compare_value" name="compare_value" >
+            <input type="text" id="compare_value" name="compare_value" >
 
             <button type="button" id="put" name="button">wijzig</button>
         </form>
@@ -114,8 +114,8 @@
                 <th>constraint_id</th>
                 <th>constraintnaam</th>
                 <th>tabel</th>
-                <th>Operator</th>
                 <th>atribuut</th>
+                <th>operator</th>
                 <th>ref_atribuut</th>
                 <th>Wijzigen</th>
                 <th>Verwijderen</th>
@@ -131,13 +131,13 @@
             <input type="text" id="tuple_tabel" name="tuple_tabel" >
 
             <label for="tuple_atribuut">Atribuut:</label>
-            <textarea id="tuple_atribuut" name="tuple_atribuut" style="height:200px"></textarea>
+            <input type="text" id="tuple_atribuut" name="tuple_atribuut">
 
             <label for="tuple_operator">Operator:</label>
             <input type="text" id="tuple_operator" name="tuple_operator" >
 
             <label for="tuple_refatribuut">ref_Atribuut:</label>
-            <textarea id="tuple_refatribuut" name="tuple_refatribuut" style="height:200px"></textarea>
+            <input type="text" id="tuple_refatribuut" name="tuple_refatribuut">
 
             <button type="button" id="putTuple" name="button">wijzig</button>
         </form>
@@ -160,7 +160,7 @@
                 <th>ref_atribuut</th>
                 <th>Operator</th>
                 <th>Wijzigen</th>
-                <th>VerwijderenN</th>
+                <th>Verwijderen</th>
             </tr>
         </table>
     </div>
@@ -214,7 +214,7 @@
                 tablerow.insertCell().innerHTML = rule.constraint.naam;
                 tablerow.insertCell().innerHTML = rule.constraint.table;
                 tablerow.insertCell().innerHTML = rule.compare.operator;
-                tablerow.insertCell().innerHTML = rule.compare.attribute;
+                tablerow.insertCell().innerHTML = rule.compare.ref_attribute;
                 tablerow.insertCell().innerHTML = rule.compare.value;
 
 
@@ -245,14 +245,14 @@
                 wijzigen.addEventListener("click",function(){
 
                     var form = document.getElementById("PUTformCompare");
-                    fetch("rest/define/" + rule.constraint.id)
+                    fetch("rest/define/"+rule.constraint.id)
                         .then(response => response.json())
                 .then(function(myJson){
                         console.log(myJson);
-                        var tabel = document.getElementById("compare_tabel").value = myJson.value;
-                        var atribuut = document.getElementById("compare_atribuut").value = myJson.atribuut;
-                        var operator = document.getElementById("compare_operator").value = myJson.operator;
-                        var value = document.getElementById("compare_value").value = myJson.value;
+                        var tabel = document.getElementById("compare_tabel").value = myJson.naam;
+                        var atribuut = document.getElementById("compare_atribuut").value = myJson.attribute;
+                        var operator = document.getElementById("compare_operator").value = myJson.value;
+                        var value = document.getElementById("compare_value").value = myJson.operator;
                         form.style.display = "block";
 
 
@@ -266,12 +266,12 @@
 
                         var formData = new FormData(document.querySelector("#PUTformCompare"));
                         var encData = new URLSearchParams(formData.entries());
-                        fetch("rest/define/compare/" + rule.constraint_id, { method: 'PUT', body: encData })
+                        fetch("rest/define/compare/" + rule.constraint.id, { method: 'PUT', body: encData })
                         //	                       .then(response => response.json())
                             .then(function (myJson) {
                                 if (myJson.ok)
                                     console.log("constraintCompare edited!");
-                                else console.log("Cannot delete constraint compare!");
+                                else console.log("Cannot edit constraint compare!");
                             })
                     });
 
@@ -289,11 +289,11 @@
 
     function loadReviews1(){
         var fetchoptions = {
-            method: 'GET',
+            method: 'GET'
 
         }
 
-        fetch('rest/define/getRulesRange/', fetchoptions)
+        fetch('rest/define/getRulesRange/',fetchoptions)
             .then(response => response.json())
     .then(function(myJson) {
             console.log(myJson);
@@ -301,7 +301,7 @@
             for(let rule of myJson){
                 let tablerow = content.insertRow();
                 tablerow.code= rule.id;
-                tablerow.insertCell().innerHTML = rule.rule_id;
+                tablerow.insertCell().innerHTML = rule.id;
                 tablerow.insertCell().innerHTML = rule.naam;
                 tablerow.insertCell().innerHTML = rule.typeRule;
                 tablerow.insertCell().innerHTML = rule.constraintid;
@@ -392,16 +392,18 @@
             for(let rule of myJson){
                 let tablerow = content.insertRow();
                 tablerow.code= rule.id;
-                tablerow.insertCell().innerHTML = rule.rule_id;
+                tablerow.insertCell().innerHTML = rule.id;
                 tablerow.insertCell().innerHTML = rule.naam;
-                tablerow.insertCell().innerHTML = rule.typeRule;
-                tablerow.insertCell().innerHTML = rule.constraintid;
-                tablerow.insertCell().innerHTML = rule.constraint_id;
-                tablerow.insertCell().innerHTML = rule.constraint_naam;
-                tablerow.insertCell().innerHTML = rule.tabel;
-                tablerow.insertCell().innerHTML = rule.atribuut2;
-                tablerow.insertCell().innerHTML = rule.atribuut1;
-                tablerow.insertCell().innerHTML = rule.operator;
+                tablerow.insertCell().innerHTML = rule.type.id;
+                tablerow.insertCell().innerHTML = rule.constraint.id;
+                tablerow.insertCell().innerHTML = rule.constraint.id;
+                tablerow.insertCell().innerHTML = rule.constraint.naam;
+                tablerow.insertCell().innerHTML = rule.constraint.table;
+                tablerow.insertCell().innerHTML = rule.other.attribute1;
+                tablerow.insertCell().innerHTML = rule.other.attribute2;
+                tablerow.insertCell().innerHTML = rule.other.operator;
+
+
                 let wijzigen = tablerow.insertCell();
                 wijzigen.innerHTML = 'Wijzigen';
                 let verwijder = tablerow.insertCell();
@@ -434,7 +436,10 @@
                         .then(response => response.json())
                 .then(function(myJson){
                         console.log(myJson);
-
+                        var tabel = document.getElementById("tuple_tabel").value = myJson.naam;
+                        var atribuut = document.getElementById("tuple_atribuut").value = myJson.attribute;
+                        var operator = document.getElementById("tuple_operator").value = myJson.value;
+                        var value = document.getElementById("tuple_refatribuut").value = myJson.operator;
                         form.style.display = "block";
 
 
@@ -482,7 +487,7 @@
             for(let rule of myJson){
                 let tablerow = content.insertRow();
                 tablerow.code= rule.id;
-                tablerow.insertCell().innerHTML = rule.rule_id;
+                tablerow.insertCell().innerHTML = rule.id;
                 tablerow.insertCell().innerHTML = rule.naam;
                 tablerow.insertCell().innerHTML = rule.typeRule;
                 tablerow.insertCell().innerHTML = rule.constraintid;

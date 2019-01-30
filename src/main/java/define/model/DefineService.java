@@ -111,7 +111,7 @@ public class DefineService {
 
     // constraint
 
-    public boolean delete(Constraint constraint) {
+    public boolean delete(Constraint constraint) throws SQLException {
         return cdao.delete(constraint);
     }
 

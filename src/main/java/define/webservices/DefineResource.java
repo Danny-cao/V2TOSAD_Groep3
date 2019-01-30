@@ -58,6 +58,8 @@ public class DefineResource {
                 return Response.ok().build();
         }
 
+
+        /*
         @DELETE
         @Path("delete")
         @Produces("application/json")
@@ -74,7 +76,28 @@ public class DefineResource {
 
                 return Response.ok(json).build();
         }
+*/
 
+        @DELETE
+        @Path("{code}")
+        @Produces("application/json")
+        public Response deleteRule(@PathParam("code") int code) throws SQLException {
+                System.out.println("Delete rule");
+                Constraint found = null;
+                for (Constraint c : defineService.findAllRules()) {
+                        if (c.getId() == code) {
+                                found = c;
+                                break;
+                        }
+                }
+                if (found == null) {
+                        return Response.status(404).build();
+                } else {
+                        defineService.delete(found);
+                        System.out.println("businessRule verwijderd");
+                        return Response.ok().build();
+                }
+        }
         @POST
         @Path("/postCompare")
         @Produces("application/json")
@@ -290,25 +313,6 @@ public class DefineResource {
         @Produces("application/json")
         public String getRulesCompare() throws SQLException {
 
-//                JsonArrayBuilder jab = Json.createArrayBuilder();
-//                for (BusinessRule r : defineService.findAllBusinessRulesCompare()) {
-//                        JsonObjectBuilder job = Json.createObjectBuilder();
-//                        job.add("rule_id", r.getId());
-//                        job.add("naam", r.getNaam());
-//                        job.add("typeRule", r.getbusinesstype());
-//                        job.add("constraintid", r.getConstraintid());
-//                        job.add("constraint_id", r.getCompare().getId());
-//                        job.add("constraint_naam", r.getCompare().getNaam());
-//                        job.add("tabel", r.getCompare().getTable());
-//                        job.add("operator", r.getCompare().getOperator());
-//                        job.add("value", r.getCompare().getValue());
-//                        job.add("atribuut", r.getCompare().getAttribute());
-//
-//
-//                        jab.add(job);
-//                }
-//                JsonArray array = jab.build();
-//                return array.toString();
 
                 Gson gson = new Gson();
                 String json = gson.toJson(defineService.findAllBusinessRulesCompare());
@@ -321,27 +325,6 @@ public class DefineResource {
         public String getRulesRange() throws SQLException {
 
 
-//                JsonArrayBuilder jab = Json.createArrayBuilder();
-//                for (BusinessRule r : defineService.findAllBusinessRulesRange()) {
-//                        JsonObjectBuilder job = Json.createObjectBuilder();
-//                        job.add("rule_id", r.getId());
-//                        job.add("naam", r.getNaam());
-//                        job.add("typeRule", r.getbusinesstype());
-//                        job.add("constraintid", r.getConstraintid());
-//                        job.add("constraint_id", r.getRange().getId());
-//                        job.add("constraint_naam", r.getRange().getNaam());
-//                        job.add("tabel", r.getRange().getTable());
-//                        job.add("operator", r.getRange().getOperator());
-//                        job.add("value1", r.getRange().getValue1());
-//                        job.add("value2", r.getRange().getValue2());
-//                        job.add("atribuut", r.getRange().getAttribute());
-//
-//
-//                        jab.add(job);
-//                }
-//                JsonArray array = jab.build();
-//                return array.toString();
-
                 Gson gson = new Gson();
                 String json = gson.toJson(defineService.findAllBusinessRulesRange());
                 return json;
@@ -352,26 +335,6 @@ public class DefineResource {
         @Produces("application/json")
         public String getRulesOther() throws SQLException {
 
-//
-//                JsonArrayBuilder jab = Json.createArrayBuilder();
-//                for (BusinessRule r : defineService.findAllBusinessRulesOther()) {
-//                        JsonObjectBuilder job = Json.createObjectBuilder();
-//                        job.add("rule_id", r.getId());
-//                        job.add("naam", r.getNaam());
-//                        job.add("typeRule", r.getbusinesstype());
-//                        job.add("constraintid", r.getConstraintid());
-//                        job.add("constraint_id", r.getOther().getId());
-//                        job.add("tabel", r.getOther().getTable());
-//                        job.add("constraint_naam", r.getOther().getNaam());
-//                        job.add("operator", r.getOther().getOperator());
-//                        job.add("atribuut1", r.getOther().getAttribute1());
-//                        job.add("atribuut2", r.getOther().getAttribute2());
-//
-//
-//                        jab.add(job);
-//                }
-//                JsonArray array = jab.build();
-//                return array.toString();
 
                 Gson gson = new Gson();
                 String json = gson.toJson(defineService.findAllBusinessRulesOther());
@@ -384,26 +347,6 @@ public class DefineResource {
         public String getRulesInter() throws SQLException {
 
 
-//                JsonArrayBuilder jab = Json.createArrayBuilder();
-//                for (BusinessRule r : defineService.findAllBusinessRulesInter()) {
-//                        JsonObjectBuilder job = Json.createObjectBuilder();
-//                        job.add("rule_id", r.getId());
-//                        job.add("naam", r.getNaam());
-//                        job.add("typeRule", r.getbusinesstype());
-//                        job.add("constraintid", r.getConstraintid());
-//                        job.add("constraint_id", r.getInter().getId());
-//                        job.add("tabel", r.getInter().getTable());
-//                        job.add("constraint_naam", r.getInter().getNaam());
-//                        job.add("operator", r.getInter().getOperator());
-//                        job.add("atribuut1", r.getInter().getAttribute1());
-//                        job.add("atribuut2", r.getInter().getAttribute2());
-//                        job.add("ref_tabel", r.getInter().getRef_table());
-//
-//
-//                        jab.add(job);
-//                }
-//                JsonArray array = jab.build();
-//                return array.toString();
 
                 Gson gson = new Gson();
                 String json = gson.toJson(defineService.findAllBusinessRulesInter());
