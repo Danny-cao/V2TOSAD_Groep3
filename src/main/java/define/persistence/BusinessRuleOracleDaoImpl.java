@@ -186,6 +186,8 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
 
         try{
 
+            System.out.println("reached 1");
+
             List<BusinessRule> allBusinessRules = new ArrayList<>();
 
             String queryText =  "select * from BusinessRule WHERE BUSINESSRULETYPEID = 1";
@@ -196,6 +198,8 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
 
             int id, businessruletypeid, constraintid;
             String naam;
+
+            System.out.println("reached 2");
 
             while(result.next()) {
 
@@ -208,9 +212,11 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
                 BusinessRuleType businessRuleType = tdao.getBusinessRuleTypeByID(businessruletypeid);
                 Attribute_Range constraintRange = (Attribute_Range) cdao.findByidRange(result.getInt("constraintid"));
 
+                System.out.println("reached 3");
                 BusinessRule businessRule = new BusinessRule(id, naam, businessRuleType, constraint);
                 businessRule.setRange(constraintRange);
                 allBusinessRules.add(businessRule);
+                System.out.println("reached 4");
             }
 
             return allBusinessRules;

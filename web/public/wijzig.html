@@ -198,7 +198,7 @@
 
         }
 
-        fetch('http://localhost:8088/V2TOSAD_Groep3_war_exploded/rest/define/getRulesCompare/', fetchoptions)
+        fetch('rest/define/getRulesCompare/', fetchoptions)
             .then(response => response.json())
     .then(function(myJson) {
             console.log(myJson);
@@ -206,16 +206,16 @@
             for(let rule of myJson){
                 let tablerow = content.insertRow();
                 tablerow.code= rule.id;
-                tablerow.insertCell().innerHTML = rule.rule_id;
+                tablerow.insertCell().innerHTML = rule.id;
                 tablerow.insertCell().innerHTML = rule.naam;
-                tablerow.insertCell().innerHTML = rule.typeRule;
-                tablerow.insertCell().innerHTML = rule.constraintid;
-                tablerow.insertCell().innerHTML = rule.constraint_id;
-                tablerow.insertCell().innerHTML = rule.constraint_naam;
-                tablerow.insertCell().innerHTML = rule.tabel;
-                tablerow.insertCell().innerHTML = rule.operator;
-                tablerow.insertCell().innerHTML = rule.atribuut;
-                tablerow.insertCell().innerHTML = rule.value;
+                tablerow.insertCell().innerHTML = rule.type.id;
+                tablerow.insertCell().innerHTML = rule.constraint.id;
+                tablerow.insertCell().innerHTML = rule.constraint.id;
+                tablerow.insertCell().innerHTML = rule.constraint.naam;
+                tablerow.insertCell().innerHTML = rule.constraint.table;
+                tablerow.insertCell().innerHTML = rule.compare.operator;
+                tablerow.insertCell().innerHTML = rule.compare.attribute;
+                tablerow.insertCell().innerHTML = rule.compare.value;
 
 
                 let wijzigen = tablerow.insertCell();
@@ -229,7 +229,7 @@
                 }
 
                 verwijder.addEventListener("click",function(){
-                    fetch("http://localhost:8088/V2TOSAD_Groep3_war_exploded/rest/define/"+rule.constraint_id,fetchoptions)
+                    fetch("rest/define/"+rule.constraint.id ,fetchoptions)
                         .then(function (response) {
                             if (response.ok) // response-status = 200 OK
                                 console.log("review deleted!");
@@ -240,13 +240,12 @@
                         .catch(error => console.log(error));
 
 
-
                 });
 
                 wijzigen.addEventListener("click",function(){
 
                     var form = document.getElementById("PUTformCompare");
-                    fetch("http://localhost:8088/V2TOSAD_Groep3_war_exploded/rest/define/" + rule.constraint_id)
+                    fetch("rest/define/" + rule.constraint.id)
                         .then(response => response.json())
                 .then(function(myJson){
                         console.log(myJson);
@@ -294,7 +293,7 @@
 
         }
 
-        fetch('http://localhost:8088/V2TOSAD_Groep3_war_exploded/rest/define/getRulesRange/', fetchoptions)
+        fetch('rest/define/getRulesRange/', fetchoptions)
             .then(response => response.json())
     .then(function(myJson) {
             console.log(myJson);
@@ -324,7 +323,7 @@
                 }
 
                 verwijder.addEventListener("click",function(){
-                    fetch("http://localhost:8088/rest/define/"+rule.constraint_id,fetchoptions)
+                    fetch("rest/define/"+rule.constraint_id,fetchoptions)
                         .then(function (response) {
                             if (response.ok) // response-status = 200 OK
                                 console.log("review deleted!");
@@ -341,7 +340,7 @@
                 wijzigen.addEventListener("click",function(){
 
                     var form = document.getElementById("PUTformRange");
-                    fetch("http://localhost:8088/rest/define/" + rule.constraint_id)
+                    fetch("rest/define/" + rule.constraint_id)
                         .then(response => response.json())
                 .then(function(myJson){
                         console.log(myJson);
@@ -385,7 +384,7 @@
 
         }
 
-        fetch('http://localhost:8088/V2TOSAD_Groep3_war_exploded/rest/define/getRulesOther/', fetchoptions)
+        fetch('rest/define/getRulesOther/', fetchoptions)
             .then(response => response.json())
     .then(function(myJson) {
             console.log(myJson);
@@ -414,7 +413,7 @@
                 }
 
                 verwijder.addEventListener("click",function(){
-                    fetch("http://localhost:8088/rest/define/"+rule.constraint_id,fetchoptions)
+                    fetch("rest/define/"+rule.constraint_id,fetchoptions)
                         .then(function (response) {
                             if (response.ok) // response-status = 200 OK
                                 console.log("AttributeOther constraint deleted!");
@@ -431,7 +430,7 @@
                 wijzigen.addEventListener("click",function(){
 
                     var form = document.getElementById("PUTformTuple");
-                    fetch("http://localhost:8088/rest/define/" + rule.constraint_id)
+                    fetch("rest/define/" + rule.constraint_id)
                         .then(response => response.json())
                 .then(function(myJson){
                         console.log(myJson);
@@ -475,7 +474,7 @@
 
         }
 
-        fetch('http://localhost:8088/rest/define/getRulesInter/', fetchoptions)
+        fetch('rest/define/getRulesInter/', fetchoptions)
             .then(response => response.json())
     .then(function(myJson) {
             console.log(myJson);
@@ -505,7 +504,7 @@
                 }
 
                 verwijder.addEventListener("click",function(){
-                    fetch("http://localhost:8088/rest/define/"+rule.constraint_id,fetchoptions)
+                    fetch("rest/define/"+rule.constraint_id,fetchoptions)
                         .then(function (response) {
                             if (response.ok) // response-status = 200 OK
                                 console.log("interEntity  deleted!");
@@ -522,7 +521,7 @@
                 wijzigen.addEventListener("click",function(){
 
                     var form = document.getElementById("PUTformInter");
-                    fetch("http://localhost:8088/rest/define/" + rule.constraint_id)
+                    fetch("rest/define/" + rule.constraint_id)
                         .then(response => response.json())
                 .then(function(myJson){
                         console.log(myJson);
@@ -559,15 +558,6 @@
     }
 
     loadReviews3();
-
-
-
-
-
-
-
-
-
 
 </script>
 </html>
