@@ -24,6 +24,30 @@ public class Entity_OtherOracleDaoImpl extends OracleBaseDao implements Entity_O
         }
     }
 
+    public Entity_Other findByID(int id) {
+
+        try {
+            String queryText =  "SELECT * " +
+                    "FROM CONSTRAINT " +
+                    "WHERE ID = ?";
+
+            PreparedStatement stmt = conn.prepareStatement(queryText);
+            stmt.setInt(1, id);
+            ResultSet result = stmt.executeQuery();
+
+            result.next();
+            String naam = result.getString("NAAM");
+            String table = result.getString("TABLE_NAME");
+            String value = result.getString("VALUE");
+
+            return new Entity_Other(naam, table, id, value);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 
     public Entity_Other getEntity_Other(BusinessRule rule) {
 

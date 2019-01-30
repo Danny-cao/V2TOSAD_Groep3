@@ -24,6 +24,32 @@ public class Attribute_CompareOracleDaoImpl extends OracleBaseDao implements Att
     }
 
     @Override
+    public Attribute_Compare findByID(int id) {
+        try {
+            String queryText =  "SELECT * " +
+                    "FROM CONSTRAINT " +
+                    "WHERE ID = ?";
+
+            PreparedStatement stmt = conn.prepareStatement(queryText);
+            stmt.setInt(1, id);
+            ResultSet result = stmt.executeQuery();
+
+            result.next();
+            String naam = result.getString("NAAM");
+            String table = result.getString("TABLE_NAME");
+            String attribute = result.getString("ATTRIBUTE_NAME");
+            String operator = result.getString("OPERATOR");
+            double value = result.getDouble("VALUE");
+
+            return new Attribute_Compare(naam, table, id, attribute, value, operator);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
     public Attribute_Compare getAttribute_Compare(BusinessRule rule) {
         try {
             String queryText =  "SELECT * " +
@@ -38,7 +64,7 @@ public class Attribute_CompareOracleDaoImpl extends OracleBaseDao implements Att
             String naam = result.getString("NAAM");
             String table = result.getString("TABLE_NAME");
             int id = rule.getConstraint().getId();
-            String attribute = result.getString("REF_ATTRIBUTE");
+            String attribute = result.getString("ATTRIBUTE_NAME");
             String operator = result.getString("OPERATOR");
             double value = result.getDouble("VALUE");
 

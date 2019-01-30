@@ -330,4 +330,27 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
             return false;
         }
     }
+
+    @Override
+    public int createUniqueID() {
+
+        try {
+            String queryText =  "SELECT MAX(ID) + 1 as newID " +
+                    "FROM BUSINESSRULE";
+
+            PreparedStatement stmt = conn.prepareStatement(queryText);
+
+            ResultSet result = stmt.executeQuery();
+
+            result.next();
+
+            int id = result.getInt("newID");
+            System.out.println(id);
+            return id;
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

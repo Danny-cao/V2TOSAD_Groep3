@@ -39,6 +39,8 @@
             <option value="Compare" id="test2">Compare</option>
             <option value="Tuple Compare" id="test3">Tuple Compare</option>
             <option value="Inter-Entity Compare" id="test4">Inter-Entity Compare</option>
+            <option value="List" id="test5">List</option>
+            <option value="Other" id="test6">Other</option>
 
         </select>
         <button type="button" class="btn btn-success" id="select">Select</button>
@@ -216,6 +218,64 @@
 
         </form>
 
+        <form id="list">
+            <div class="form-group">
+                <label for="tabel_list">Table:</label>
+                <select class="form-control" id="tabel_list" name="tabel_list">
+                    <option value="phonenumber">phonenumber</option>
+                    <option value="bestelling">Bestelling</option>
+                    <option value="orders">Orders</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="atribuut_list">Atribute:</label>
+                <select class="form-control" id="atribuut_list" name="atribuut_list">
+                    <option value="phonenumber">phonenumber</option>
+                    <option value="bestelling">Bestelling</option>
+                    <option value="orders">Orders</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="list_value1">waarde 1:</label>
+                <input class="form-control" id="list_value1" name="list_value1">
+            </div>
+            <div class="form-group">
+                <label for="list_value1">waarde 2:</label>
+                <input class="form-control" id="list_value2" name="list_value2">
+            </div>
+            <div class="form-group">
+                <label for="list_value1">waarde 3</label>
+                <input class="form-control" id="list_value3" name="list_value3">
+            </div>
+            <div class="form-group">
+                <label for="list_value1">waarde 4:</label>
+                <input class="form-control" id="list_value4" name="list_value4">
+            </div>
+            <div class="form-group">
+                <label for="list_value1">waarde 5:</label>
+                <input class="form-control" id="list_value5" name="list_value5">
+            </div>
+
+            <button type="button" class="btn btn-success" id="ok_list">Opslaan</button>
+        </form>
+
+        <form id="other">
+
+            <div class="form-group">
+                <label for="tabel_other">Table</label>
+                <select class="form-control" id="tabel_other" name="tabel_other">
+                    <option value="phonenumber">phonenumber</option>
+                    <option value="bestelling">Bestelling</option>
+                    <option value="orders">Orders</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="list_value1">Constraint:</label>
+                <input class="form-control" id="other_value" name="other_value">
+            </div>
+            <button type="button" class="btn btn-success" id="ok_other">Opslaan</button>
+        </form>
 
     </div>
 </section>
@@ -230,18 +290,16 @@
     var range = document.getElementById('range');
     var tuple = document.getElementById('tuple_compare');
     var inter = document.getElementById('inter_compare');
+    var list = document.getElementById('list');
+    var other = document.getElementById('other');
     var btn = document.getElementById('select');
 
     range.style.display="none";
     compare.style.display="none";
     tuple.style.display="none";
     inter.style.display="none";
-
-
-
-
-
-
+    list.style.display="none";
+    other.style.display="none";
 
     "use strict";
 
@@ -257,27 +315,66 @@
             compare.style.display="none";
             tuple.style.display="none";
             inter.style.display="none";
+            list.style.display="none";
+            other.style.display="none";
         }
         else if(value=="Compare") {
             compare.style.display="";
             range.style.display="none";
             tuple.style.display="none";
             inter.style.display="none";
+            list.style.display="none";
+            other.style.display="none";
         }
         else if(value=="Tuple Compare") {
             tuple.style.display="";
             compare.style.display="none";
             range.style.display="none";
             inter.style.display="none";
+            list.style.display="none";
+            other.style.display="none";
         }
         else if(value=="Inter-Entity Compare") {
             inter.style.display="";
             compare.style.display="none";
             tuple.style.display="none";
             range.style.display="none";
+            list.style.display="none";
+            other.style.display="none";
+        }
+        else if(value=="List") {
+            inter.style.display="none";
+            compare.style.display="none";
+            tuple.style.display="none";
+            range.style.display="none";
+            list.style.display="";
+            other.style.display="none";
+        }
+        else if(value=="Other") {
+            inter.style.display="none";
+            compare.style.display="none";
+            tuple.style.display="none";
+            range.style.display="none";
+            list.style.display="none";
+            other.style.display="";
         }
     }
     btn.addEventListener('click',test);
+
+
+    var addListBusinessRule = document.querySelector("#ok_list");
+    addListBusinessRule.addEventListener("click", function(){
+        var formData = new FormData(document.querySelector("#list"));
+        var encData = new URLSearchParams(formData.entries());
+        fetch("rest/define/postList",{method:'POST', body: encData})
+            .then(function(myJson) {
+                if (myJson.ok){
+                    console.log("Business rule added!");
+                    console.log(myJson);}
+                else if (myJson.status == 404)
+                    console.log("Business rule not added!");
+            })
+    });
 
 
     var voegToe = document.querySelector("#ok_compare");
@@ -318,15 +415,13 @@
     voegToeOther.addEventListener("click",function(){
         var formData = new FormData(document.querySelector("#tuple_compare"));
         var encData = new URLSearchParams(formData.entries());
-        fetch("rest/define/postOther",{method:'POST', body: encData})
-        //fetch("restservices/rule",{method:'POST', body: encData})
+        fetch("rest/define/postTupleCompare",{method:'POST', body: encData})
             .then(function(myJson) {
                 if (myJson.ok){
                     console.log("Business rule added/other!");
                     console.log(myJson);}
                 else if (myJson.status == 404)
                     console.log("Business rule not added/other!");
-
             })
 
     });

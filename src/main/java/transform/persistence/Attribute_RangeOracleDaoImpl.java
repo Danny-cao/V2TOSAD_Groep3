@@ -23,6 +23,34 @@ public class Attribute_RangeOracleDaoImpl extends OracleBaseDao implements Attri
         }
     }
 
+    public Attribute_Range findByID(int id) {
+
+        try {
+            String queryText =  "SELECT * " +
+                    "FROM CONSTRAINT " +
+                    "WHERE ID = ?";
+
+            PreparedStatement stmt = conn.prepareStatement(queryText);
+            stmt.setInt(1, id);
+            ResultSet result = stmt.executeQuery();
+
+            result.next();
+            String naam = result.getString("NAAM");
+            String table = result.getString("TABLE_NAME");
+            String attribute = result.getString("ATTRIBUTE_NAME");
+            String operator = result.getString("OPERATOR");
+            double value = result.getDouble("VALUE");
+            double value2 = result.getDouble("VALUE2");
+
+            return new Attribute_Range(naam, table, id, attribute, operator, value, value2);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
     @Override
     public Attribute_Range getAttribute_Range(BusinessRule rule) {
 
@@ -39,7 +67,7 @@ public class Attribute_RangeOracleDaoImpl extends OracleBaseDao implements Attri
             String naam = result.getString("NAAM");
             String table = result.getString("TABLE_NAME");
             int id = result.getInt("ID");
-            String attribute = result.getString("REF_ATTRIBUTE");
+            String attribute = result.getString("ATTRIBUTE_NAME");
             String operator = result.getString("OPERATOR");
             double value = result.getDouble("VALUE");
             double value2 = result.getDouble("VALUE2");

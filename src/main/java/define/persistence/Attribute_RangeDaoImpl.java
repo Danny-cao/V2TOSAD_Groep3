@@ -6,19 +6,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import define.model.BusinessRule;
 import persistence.OracleBaseDao;
 
 import define.model.Attribute_Range;
 
 public class Attribute_RangeDaoImpl extends OracleBaseDao implements Attribute_RangeDao {
+
+	private ConstraintDao cdao = new ConstraintOracleDaoImpl();
+	private BusinessRuleDao bdao = new BusinessRuleOracleDaoImpl();
 	
 	public Attribute_Range save(Attribute_Range range) {
         try (Connection con = getConnection()) {
             Statement stmt = con.createStatement();
-            int id = 53;
+            int id = bdao.createUniqueID();
             int type = 1;
             String constraintNaam = "BRG_VBMG_" + range.getTable().toUpperCase() + "_CNS_ARNG_"+range.getId();
-            String businessruleNaam = "BRG_VBMG_" + range.getTable().toUpperCase() + "_ARNG_"+range.getId();
+            String businessruleNaam = "BRG_VBMG_" + range.getTable().toUpperCase() + "_CNS_ARNG_"+range.getId();
             
             String query = "INSERT INTO constraint (id, naam, table_name ,attribute_name, operator, value,value2,type)VALUES('" + range.getId() + "', '"+
                     constraintNaam + "', '" + range.getTable()  + "', '" + range.getAttribute() + "', '" + range.getOperator() + "', '" + range.getValue1()+"', '" + range.getValue2()+ "', '" + "check"  + "')";

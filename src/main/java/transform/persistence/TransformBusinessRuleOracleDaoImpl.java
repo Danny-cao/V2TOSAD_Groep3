@@ -5,6 +5,7 @@ import transform.model.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -37,6 +38,51 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
         }
     }
 
+    public void deleteConstraintIfExist(BusinessRule rule){
+
+        System.out.println("reached delete function");
+        String name = rule.getNaam();
+        String table = rule.getConstraint().getTable();
+
+        try{
+            String queryText =  "SELECT COUNT(*) as counter " +
+                    "FROM all_constraints " +
+                    "WHERE constraint_name = ?";
+            System.out.println("reached delete function 2");
+
+            PreparedStatement stmt = conn.prepareStatement(queryText);
+            stmt.setString(1, name);
+
+            System.out.println("reached delete function 3");
+
+            ResultSet result = stmt.executeQuery();
+
+            result.next();
+
+            int count = result.getInt("counter");
+
+            System.out.println(result);
+
+            System.out.println("reached delete function 4");
+            System.out.println(table);
+            System.out.println(name);
+
+
+            if(count > 0 ){
+                String queryDelete =  "ALTER TABLE " + rule.getConstraint().getTable() + " DROP CONSTRAINT " + rule.getNaam();
+
+                System.out.println(queryDelete);
+
+                PreparedStatement delstmt = conn.prepareStatement(queryDelete);
+                delstmt.executeQuery();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     public boolean transformDatabase(String query){
 
         try {
@@ -51,19 +97,18 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
             } else {
 
                 return false;
-
             }
 
         } catch (SQLException e) {
 
             e.printStackTrace();
             return false;
-
         }
-
     }
 
     public boolean transform(BusinessRule rule) {
+
+        System.out.println("reached");
 
         if (rule.getType().getNaam().equals("Attribute Compare rule")) {
 
@@ -72,28 +117,28 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
             String generatedCode = GenerateAttributeCompare(compare);
             System.out.println(generatedCode);
 
-            return true;
-            //return transformDatabase(generatedCode);
+            //return true;
+            return transformDatabase(generatedCode);
 
-        } else if (rule.getType().equals("Attribute_List")) {
+        } else if (rule.getType().getNaam().equals("Attribute List rule")) {
 
             Attribute_List list = aldao.getAttribute_List(rule);
 
             String generatedCode = GenerateAttributeList(list);
             System.out.println(generatedCode);
 
-            return true;
-            //return transformDatabase(generatedCode);
+            //return true;
+            return transformDatabase(generatedCode);
 
-        } else if (rule.getType().equals("Attribute_Other")) {
+        } else if (rule.getType().getNaam().equals("Attribute Other rule")) {
 
             Attribute_Other other = aodao.getAttribute_Other(rule);
 
             String generatedCode = GenerateAttributeOther(other);
             System.out.println(generatedCode);
 
-            return true;
-            //return transformDatabase(generatedCode);
+            //return true;
+            return transformDatabase(generatedCode);
 
         } else if (rule.getType().getNaam().equals("Attribute Range rule")) {
 
@@ -101,9 +146,9 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
 
             String generatedCode = GenerateAttributeRange(range);
             System.out.println(generatedCode);
-
-            return true;
-            //return transformDatabase(generatedCode);
+            deleteConstraintIfExist(rule);
+            //return true;
+            return transformDatabase(generatedCode);
 
         } else if (rule.getType().getNaam().equals("Tuple Compare rule")){
 
@@ -112,8 +157,8 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
             String generatedCode = GenerateTupleCompare(compare);
             System.out.println(generatedCode);
 
-            return true;
-            //return transformDatabase(generatedCode);
+            //return true;
+            return transformDatabase(generatedCode);
 
         } else if (rule.getType().getNaam().equals("Tuple Other rule")) {
 
@@ -122,8 +167,8 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
             String generatedCode = GenerateTupleOther(other);
             System.out.println(generatedCode);
 
-            return true;
-            //return transformDatabase(generatedCode);
+            //return true;
+            return transformDatabase(generatedCode);
 
         } else if (rule.getType().getNaam().equals("Inter-Entity Compare rule")){
 
@@ -132,8 +177,8 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
             String generatedCode = GenerateInterEntityCompare(compare);
             System.out.println(generatedCode);
 
-            return true;
-            //return transformDatabase(generatedCode);
+            //return true;
+            return transformDatabase(generatedCode);
 
         } else if (rule.getType().getNaam().equals("Entity Other rule")) {
 
@@ -142,8 +187,8 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
             String generatedCode = GenerateEntityOther(other);
             System.out.println(generatedCode);
 
-            return true;
-            //return transformDatabase(generatedCode);
+            //return true;
+            return transformDatabase(generatedCode);
 
         } else {
 
@@ -157,12 +202,12 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
 
         if (range.getOperator().equals("between")) {
 
-            String query = "ALTER TABLE " + range.getTable() + " ADD CONSTRAINT " + range.getNaam() + " CHECK (" + range.getAttribute() + " > " + range.getValue1() + " AND " + range.getAttribute() + " < " + range.getValue2() + ");";
+            String query = "ALTER TABLE " + range.getTable() + " ADD CONSTRAINT " + range.getNaam() + " CHECK (" + range.getAttribute() + " > " + range.getValue1() + " AND " + range.getAttribute() + " < " + range.getValue2() + ")";
             return query;
 
         } else {
 
-            String query = "ALTER TABLE " + range.getTable() + " ADD CONSTRAINT " + range.getNaam() + " CHECK (" + range.getAttribute() + " < " + range.getValue1() + " AND " + range.getAttribute() + " > " + range.getValue2() + ");";
+            String query = "ALTER TABLE " + range.getTable() + " ADD CONSTRAINT " + range.getNaam() + " CHECK (" + range.getAttribute() + " < " + range.getValue1() + " AND " + range.getAttribute() + " > " + range.getValue2() + ")";
             return query;
         }
     }
@@ -187,8 +232,7 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
 
         for (String x : valuesList) {
 
-            String v = "'" + x + "'";
-            values += "'" + v + "'";
+            values += x;
             values += ",";
 
         }
@@ -196,7 +240,7 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
         values.substring(0,values.length()-1);
         values += ")";
 
-        if (list.getInList().equals("yes")) {
+        if (list.getInList().equals("in")) {
 
             String query = "ALTER TABLE " + table + " ADD CONSTRAINT " + name + " CHECK (" + value + " IN " + values + ")";
             return query;

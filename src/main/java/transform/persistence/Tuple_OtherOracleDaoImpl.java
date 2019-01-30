@@ -24,6 +24,30 @@ public class Tuple_OtherOracleDaoImpl extends OracleBaseDao implements Tuple_Oth
         }
     }
 
+    public Tuple_Other findByID(int id) {
+
+        try {
+            String queryText =  "SELECT * " +
+                    "FROM CONSTRAINT " +
+                    "WHERE ID = ?";
+
+            PreparedStatement stmt = conn.prepareStatement(queryText);
+            stmt.setInt(1, id);
+            ResultSet result = stmt.executeQuery();
+
+            result.next();
+            String naam = result.getString("NAAM");
+            String table = result.getString("TABLE_NAME");
+            String value = result.getString("VALUE");
+
+            return new Tuple_Other(naam, table, id, value);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 
     public Tuple_Other getTuple_Other(BusinessRule rule) {
 

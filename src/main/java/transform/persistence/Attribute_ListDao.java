@@ -5,6 +5,7 @@ import transform.model.Attribute_List;
 
 public interface Attribute_ListDao {
 
-    public Attribute_List getAttribute_List(BusinessRule rule);
+    Attribute_List findByID(int id);
+    Attribute_List getAttribute_List(BusinessRule rule);
 
 }

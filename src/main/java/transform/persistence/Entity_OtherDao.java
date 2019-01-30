@@ -5,6 +5,7 @@ import transform.model.Entity_Other;
 
 public interface Entity_OtherDao {
 
-    public Entity_Other getEntity_Other(BusinessRule rule);
+    Entity_Other findByID(int id);
+    Entity_Other getEntity_Other(BusinessRule rule);
 
 }

@@ -210,4 +210,26 @@ public class ConstraintOracleDaoImpl extends OracleBaseDao implements Constraint
     public Constraint findByConstraintnummer(int constraintnummer) {
         return selectConstraint("SELECT * from constraint where id = " + constraintnummer).get(0);
     }
+
+    @Override
+    public int createUniqueID() {
+        try {
+            String queryText =  "SELECT MAX(ID) + 1 as newID " +
+                    "FROM CONSTRAINT";
+
+            PreparedStatement stmt = conn.prepareStatement(queryText);
+
+            ResultSet result = stmt.executeQuery();
+
+            result.next();
+
+            int id = result.getInt("newID");
+            System.out.println(id);
+            return id;
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

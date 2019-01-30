@@ -6,6 +6,18 @@ public class Constraint {
     private String naam;
     private String table;
 
+
+    public Constraint(String table, int id) {
+
+        this.table = table;
+        this.id = id;
+    }
+
+    public Constraint(String table){
+        this.table = table;
+    }
+
+
     public Constraint(String naam, String table, int id) {
 
         this.id = id;
@@ -18,14 +30,6 @@ public class Constraint {
 
         this.naam = naam;
         this.table = table;
-
-    }
-
-    public Constraint(String table, int id) {
-
-
-        this.table = table;
-        this.id = id;
 
     }
 

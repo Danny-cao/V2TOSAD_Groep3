@@ -14,6 +14,14 @@ public class DefineService {
     private Attribute_OtherDaoImpl odao = new Attribute_OtherDaoImpl();
     private Attribute_RangeDaoImpl rdao = new Attribute_RangeDaoImpl();
     private ConstraintDao cdao = new ConstraintOracleDaoImpl();
+    private Tuple_CompareDao tcdao = new Tuple_CompareDaoImpl();
+    private InterEntity_CompareDao iedao = new InterEntity_CompareOracleDaoImpl();
+
+    // Inter Entity compare
+
+    public InterEntity_Compare Save(InterEntity_Compare compare) {
+        return iedao.save(compare);
+    }
 
     // attribute compare dao;
 
@@ -85,11 +93,16 @@ public class DefineService {
         return bdao.findAllRange();
     }
 
+    //tuple compare
+
+    public Tuple_Compare Save(Tuple_Compare compare){
+        return tcdao.save(compare);
+    }
+
     // other lijst
     public List<BusinessRule> findAllBusinessRulesOther(){
         return bdao.findAllOther();
     }
-
 
     // interEntity lijst
     public List<BusinessRule> findAllBusinessRulesInter(){
@@ -129,6 +142,10 @@ public class DefineService {
 
     public BusinessRule update(BusinessRule rule){
         return bdao.update(rule);
+    }
+
+    public int createUniqueIDConstraint(){
+        return cdao.createUniqueID();
     }
 
 }

@@ -16,4 +16,5 @@ public interface ConstraintDao{
     List<Constraint> selectConstraint(String query);
     List<Constraint> findAll();
     Constraint findByConstraintnummer(int constraintnummer);
+    int createUniqueID();
 }

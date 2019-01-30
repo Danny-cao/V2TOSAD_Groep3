@@ -5,6 +5,7 @@ import transform.model.Tuple_Other;
 
 public interface Tuple_OtherDao {
 
-    public Tuple_Other getTuple_Other(BusinessRule rule);
+    Tuple_Other findByID(int id);
+    Tuple_Other getTuple_Other(BusinessRule rule);
 
 }

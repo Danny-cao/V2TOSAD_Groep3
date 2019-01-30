@@ -1,6 +1,8 @@
 package define.persistence;
 
 import define.model.BusinessRule;
+import define.model.BusinessRuleType;
+import define.model.Constraint;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,5 +19,6 @@ public interface BusinessRuleDao {
 
     BusinessRule update(BusinessRule rule);
     boolean delete(BusinessRule rule);
+    int createUniqueID();
 }
 
