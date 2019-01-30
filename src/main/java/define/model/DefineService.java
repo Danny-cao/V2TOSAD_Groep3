@@ -74,7 +74,7 @@ public class DefineService {
     public ArrayList<Attribute_Range> findAllRulesRange() throws SQLException{
         return rdao.findAllRange();
     }
-
+//
     public boolean UpdateRange(Attribute_Range range) throws SQLException{
         return rdao.updateRange(range);
     }

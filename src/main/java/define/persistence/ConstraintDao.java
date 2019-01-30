@@ -5,7 +5,7 @@ import define.model.Constraint;
 
 import java.sql.SQLException;
 import java.util.List;
-
+//
 public interface ConstraintDao{
     Constraint getConstraintByID(int id);
     boolean delete(Constraint constraint);

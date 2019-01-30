@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import define.model.Attribute_InterEntity;
 
-
+//
 public interface Attribute_InterEntityDao {
 	public Attribute_InterEntity save(Attribute_InterEntity inter);
 	public ArrayList<Attribute_InterEntity> selectConstraintInter(String query);

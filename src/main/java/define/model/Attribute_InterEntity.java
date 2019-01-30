@@ -7,7 +7,7 @@ public class Attribute_InterEntity extends Constraint {
     private String attribute2;
     private String operator;
    
-
+//
     public Attribute_InterEntity(String naam, String table, int id, String attribute1,String attribute2,
     		String operator, String ref_table) {
 

@@ -180,7 +180,7 @@ public class BusinessRuleOracleDaoImpl extends OracleBaseDao implements Business
             return null;
         }
     }
-
+//
     @Override
     public List<BusinessRule> findAllRange() {
 

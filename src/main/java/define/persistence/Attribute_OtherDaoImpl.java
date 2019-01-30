@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import persistence.OracleBaseDao;
 
 import define.model.Attribute_Other;
-
+//
 public class Attribute_OtherDaoImpl extends OracleBaseDao implements Attribute_OtherDao {
 	
 	public Attribute_Other save(Attribute_Other other) {

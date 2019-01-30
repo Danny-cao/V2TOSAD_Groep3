@@ -1,6 +1,6 @@
 package define.model;
 import java.util.List;
-
+//
 public class Attribute_List extends Constraint {
 
     private String attribute;

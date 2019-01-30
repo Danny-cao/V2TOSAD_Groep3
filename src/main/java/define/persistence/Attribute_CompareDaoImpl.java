@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import define.model.Attribute_Compare;
 import persistence.OracleBaseDao;
 
-
+//
 public class Attribute_CompareDaoImpl extends OracleBaseDao implements Attribute_CompareDao {
 
 	private BusinessRuleDao bdao = new BusinessRuleOracleDaoImpl();

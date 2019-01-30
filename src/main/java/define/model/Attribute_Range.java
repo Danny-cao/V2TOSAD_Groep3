@@ -1,5 +1,5 @@
 package define.model;
-
+//
 public class Attribute_Range extends Constraint{
 
     private String attribute;

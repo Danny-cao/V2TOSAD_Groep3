@@ -70,7 +70,7 @@ public class ConstraintOracleDaoImpl extends OracleBaseDao implements Constraint
             return false;
         }
     }
-
+//
     @Override
     public Constraint findByidCompare(int id) throws SQLException {
 

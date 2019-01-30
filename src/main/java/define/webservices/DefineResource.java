@@ -284,7 +284,7 @@ public class DefineResource {
         @Path("/getRulesCompare")
         @Produces("application/json")
         public String getRulesCompare() throws SQLException {
-
+/
 
                 JsonArrayBuilder jab = Json.createArrayBuilder();
                 for (BusinessRule r : defineService.findAllBusinessRulesCompare()) {

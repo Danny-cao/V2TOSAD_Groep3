@@ -1,5 +1,5 @@
 package define.model;
-
+//
 public class Attribute_Other extends Constraint {
 
     private String attribute1;

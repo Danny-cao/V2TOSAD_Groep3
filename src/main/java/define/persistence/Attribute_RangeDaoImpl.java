@@ -11,7 +11,7 @@ import define.model.BusinessRule;
 import persistence.OracleBaseDao;
 
 import define.model.Attribute_Range;
-
+//
 public class Attribute_RangeDaoImpl extends OracleBaseDao implements Attribute_RangeDao {
 
 	private ConstraintDao cdao = new ConstraintOracleDaoImpl();

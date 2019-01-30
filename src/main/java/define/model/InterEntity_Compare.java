@@ -1,7 +1,7 @@
 package define.model;
 
 import define.model.Constraint;
-
+//
 public class InterEntity_Compare extends Constraint{
 
     private String attribute;

@@ -25,7 +25,7 @@ public class Constraint {
         this.table = table;
 
     }
-
+//
     public Constraint(String naam, String table) {
 
         this.naam = naam;

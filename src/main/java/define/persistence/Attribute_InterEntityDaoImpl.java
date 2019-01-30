@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import persistence.OracleBaseDao;
 
 import define.model.Attribute_InterEntity;
-
+//
 public class Attribute_InterEntityDaoImpl extends OracleBaseDao implements Attribute_InterEntityDao {
 	
 	public Attribute_InterEntity save(Attribute_InterEntity inter) {

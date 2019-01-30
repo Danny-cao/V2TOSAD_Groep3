@@ -1,5 +1,5 @@
 package define.model;
-
+//
 public class BusinessRule {
 
     private int id;

@@ -1,5 +1,5 @@
 package define.model;
-
+//
 import define.model.Constraint;
 
 public class Tuple_Compare extends Constraint{

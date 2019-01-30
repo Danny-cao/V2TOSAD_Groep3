@@ -47,7 +47,7 @@ public class Attribute_Compare extends Constraint {
     public String getValue() {
 
         return this.value;
-
+//
     }
 
     public String getOperator() {
