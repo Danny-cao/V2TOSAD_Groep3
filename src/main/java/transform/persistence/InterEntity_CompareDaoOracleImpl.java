@@ -28,7 +28,7 @@ public class InterEntity_CompareDaoOracleImpl extends OracleBaseDao implements I
         try {
             String queryText =  "SELECT * " +
                     "FROM CONSTRAINT " +
-                    "WHERE ID = ?";
+                   "WHERE ID = ?";
 
             PreparedStatement stmt = conn.prepareStatement(queryText);
             stmt.setInt(1, id);

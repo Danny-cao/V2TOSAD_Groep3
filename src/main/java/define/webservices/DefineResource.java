@@ -147,11 +147,16 @@ public class DefineResource {
 
 
                 System.out.println("constraint_inter opslaan");
-                Attribute_InterEntity inter = new Attribute_InterEntity(table,result,atribuut1,atribuut2,operator,ref_table);
-                defineService.Save(inter);
+                //Attribute_InterEntity inter = new Attribute_InterEntity(table,result,atribuut1,atribuut2,operator,ref_table);
+                InterEntity_Compare compare = new InterEntity_Compare(table, atribuut1, ref_table, atribuut2, operator);
+                //defineService.Save(inter);
+                defineService.Save(compare);
                 System.out.println("constraint_inter opgeslagen");
-                return Response.ok(inter).build();
+                Gson gson = new Gson();
 
+                String json = gson.toJson(compare);
+
+                return Response.ok(json).build();
         }
 
         /*

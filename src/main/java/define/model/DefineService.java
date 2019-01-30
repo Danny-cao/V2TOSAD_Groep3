@@ -15,6 +15,13 @@ public class DefineService {
     private Attribute_RangeDaoImpl rdao = new Attribute_RangeDaoImpl();
     private ConstraintDao cdao = new ConstraintOracleDaoImpl();
     private Tuple_CompareDao tcdao = new Tuple_CompareDaoImpl();
+    private InterEntity_CompareDao iedao = new InterEntity_CompareOracleDaoImpl();
+
+    // Inter Entity compare
+
+    public InterEntity_Compare Save(InterEntity_Compare compare) {
+        return iedao.save(compare);
+    }
 
     // attribute compare dao;
 
