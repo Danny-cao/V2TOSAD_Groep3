@@ -25,6 +25,18 @@ public class DefineResource {
         private DefineService defineService = ServiceProvider.getDefineService();
 
         @GET
+        @Path("/tabledef")
+        @Produces("application/json")
+        public Response getTabledef(){
+
+                List<String> tables = defineService.getTabledef();
+                Gson gson = new Gson();
+                String json = gson.toJson(tables);
+
+                return Response.ok(json).build();
+        }
+
+        @GET
         @Path("/businessrules")
         @Produces("application/json")
         public Response getAllBusinessRules(){

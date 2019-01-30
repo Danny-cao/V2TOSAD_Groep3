@@ -30,18 +30,46 @@
 </nav>
 
 <section id="rule_selecteren">
-        Check console of die het doet.
-    <form id="generateRule">
-        <input type="text" name="type" id="type" value="6">
-        <input type="text" name="name" id="name" value="BRG_VBMG_ORDER_RANGE_05">
-        <input type="text" name="table" id="table" value="Order">
+    <div class="container">
 
-        <select name="rules" id="rules">
-            <option value="1">1 name</option>
-        </select>
+    <form id="generateRule">
+
+        <div class="form-group">
+            Businessrule Types:
+            <select name="type" id="type">
+                <option value="1">Attribute Range</option>
+                <option value="2">Attribute Compare</option>
+                <option value="3">Attribute List</option>
+                <option value="4">Attribute Other</option>
+                <option value="5">Tuple compare</option>
+                <option value="6">Tuple Other</option>
+                <option value="7">Inter-Entity compare</option>
+                <option value="8">Entity Other</option>
+                <option value="9">Modify</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            Businessrule name:
+            <select name="name" id="name">
+
+            </select>
+        </div>
+
+        <div class="form-group">
+            Table:
+            <select name="table" id="table">
+
+            </select>
+        </div>
 
         <input type="button" id="generate" value="generate">
     </form>
+
+        <div class="info" name="info" id="info">
+
+        </div>
+    </div>
 </section>
 
 <script src="dist/js/jquery.min.js"></script>
@@ -58,10 +86,86 @@
             var encData = new URLSearchParams(formData.entries());
 
             fetch("rest/define/selecteren", { method: 'POST', body: encData })
-                .then(response => response.json()).then( posts => console.log(posts));
+                .then(response => response.json()).then( function(bRules){
+
+                    var select = document.querySelector("#info");
+
+                    var p1 = document.createElement("p");
+                    var p2 = document.createElement("p");
+                    var p3 = document.createElement("p");
+                    var p4 = document.createElement("p");
+                    var p5 = document.createElement("p");
+
+                    p1.innerHTML = "businessule naam: " +  bRules.naam;
+                    p2.innerHTML = "Type: " +  bRules.type.naam;
+                    p3.innerHTML = "Categorie: " +  bRules.type.categorie;
+                    p4.innerHTML = "Constraint naam: " +  bRules.constraint.naam;
+                    p5.innerHTML = "Table: " +  bRules.constraint.table;
+
+                    select.appendChild(p1);
+                    select.appendChild(p2);
+                    select.appendChild(p3);
+                    select.appendChild(p4);
+                    select.appendChild(p5);
+            });
 
         });
     } findBusinessRule();
+
+    function getBusinessRules(){
+        fetch('rest/define/businessrules')
+            .then((resp) => resp.json())
+            .then(function(bRules){
+
+            console.log(bRules);
+            var select = document.querySelector("#name");
+
+
+            for(let b of bRules){
+                console.log(b.naam);
+                console.log(b.id);
+
+                var option = document.createElement("option");
+
+                option.setAttribute('id', "rule");
+                option.value = b.naam;
+                option.innerHTML = b.naam;
+
+                select.appendChild(option);
+
+                //option.appendChild(b.id).innerHTML = b.naam;
+            }
+
+        });
+    }getBusinessRules();
+
+    function getTableDef(){
+        fetch('rest/define/tabledef')
+            .then((resp) => resp.json())
+            .then(function(bRules){
+
+            console.log(bRules);
+            var select = document.querySelector("#table");
+
+
+            for(let b of bRules){
+                console.log(b);
+
+                var option = document.createElement("option");
+
+                option.setAttribute('id', "t");
+                option.value = b;
+                option.innerHTML = b;
+
+                select.appendChild(option);
+
+                //option.appendChild(b.id).innerHTML = b.naam;
+            }
+
+        });
+    }getTableDef();
+
+
 </script>
 
 

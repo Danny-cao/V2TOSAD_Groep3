@@ -16,6 +16,12 @@ public class DefineService {
     private ConstraintDao cdao = new ConstraintOracleDaoImpl();
     private Tuple_CompareDao tcdao = new Tuple_CompareDaoImpl();
     private InterEntity_CompareDao iedao = new InterEntity_CompareOracleDaoImpl();
+    private TabledefDao tabledefdao = new TabledefOracleDaoImpl();
+
+
+    public List<String> getTabledef(){
+        return tabledefdao.getTabledef();
+    }
 
     // Inter Entity compare
 
