@@ -318,15 +318,13 @@
     voegToeOther.addEventListener("click",function(){
         var formData = new FormData(document.querySelector("#tuple_compare"));
         var encData = new URLSearchParams(formData.entries());
-        fetch("rest/define/postOther",{method:'POST', body: encData})
-        //fetch("restservices/rule",{method:'POST', body: encData})
+        fetch("rest/define/postTupleCompare",{method:'POST', body: encData})
             .then(function(myJson) {
                 if (myJson.ok){
                     console.log("Business rule added/other!");
                     console.log(myJson);}
                 else if (myJson.status == 404)
                     console.log("Business rule not added/other!");
-
             })
 
     });

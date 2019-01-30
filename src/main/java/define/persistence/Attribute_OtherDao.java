@@ -7,10 +7,10 @@ import define.model.Attribute_Other;
 
 public interface Attribute_OtherDao {
 	
-	public Attribute_Other save(Attribute_Other other);
-	public ArrayList<Attribute_Other> selectConstraintOther(String query);
-	public ArrayList<Attribute_Other> findAllOther();
-	public boolean updateOther(Attribute_Other other) throws SQLException;
+	Attribute_Other save(Attribute_Other other);
+	ArrayList<Attribute_Other> selectConstraintOther(String query);
+	ArrayList<Attribute_Other> findAllOther();
+	boolean updateOther(Attribute_Other other) throws SQLException;
 
 
 }

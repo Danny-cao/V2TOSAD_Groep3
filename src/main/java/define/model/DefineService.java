@@ -14,6 +14,7 @@ public class DefineService {
     private Attribute_OtherDaoImpl odao = new Attribute_OtherDaoImpl();
     private Attribute_RangeDaoImpl rdao = new Attribute_RangeDaoImpl();
     private ConstraintDao cdao = new ConstraintOracleDaoImpl();
+    private Tuple_CompareDao tcdao = new Tuple_CompareDaoImpl();
 
     // attribute compare dao;
 
@@ -79,11 +80,16 @@ public class DefineService {
         return bdao.findAllRange();
     }
 
+    //tuple compare
+
+    public Tuple_Compare Save(Tuple_Compare compare){
+        return tcdao.save(compare);
+    }
+
     // other lijst
     public List<BusinessRule> findAllBusinessRulesOther(){
         return bdao.findAllOther();
     }
-
 
     // interEntity lijst
     public List<BusinessRule> findAllBusinessRulesInter(){

@@ -117,18 +117,24 @@ public class DefineResource {
         }
 
         @POST
-        @Path("/postOther")
+        @Path("/postTupleCompare")
         @Produces("application/json")
         public Response createOther(@FormParam("tabel_tcompare") String table,
                                     @FormParam("atribuut_tcompare") String atribuut1,@FormParam("operator_tcompare") String operator,
                                     @FormParam("atribuut_acompare")String atribuut2) throws SQLException{
 
 ;
-                System.out.println("constraint_other opslaan");
-                Attribute_Other other = new Attribute_Other(table,result,atribuut1,atribuut2,operator);
-                defineService.Save(other);
-                System.out.println("constraint_other opgeslagen");
-                return Response.ok(other).build();
+                System.out.println("constraint tuple compare opslaan");
+                //Attribute_Other other = new Attribute_Other(table,result,atribuut1,atribuut2,operator);
+                Tuple_Compare compare = new Tuple_Compare(table, atribuut1, atribuut2, operator);
+
+                //defineService.Save(other);
+                defineService.Save(compare);
+                System.out.println("constraint tuple compare opgeslagen");
+                Gson gson = new Gson();
+                String json = gson.toJson(compare);
+
+                return Response.ok(json).build();
 
         }
 
