@@ -118,16 +118,13 @@ public class DefineResource {
                                          @FormParam("value_compare")String value) throws SQLException {
 
 
-
-
-
-
-
                 System.out.println("constraint opslaan");
-                Attribute_Compare compare = new Attribute_Compare(table,result,attribute,value,operator);
+                Attribute_Compare compare = new Attribute_Compare(table,defineService.createUniqueIDConstraint(),attribute,value,operator);
                 defineService.Save(compare);
+                Gson gson = new Gson();
+                String json = gson.toJson(compare);
                 System.out.println("gelukt");
-                return Response.ok(compare).build();
+                return Response.ok(json).build();
 
         }
 
@@ -141,10 +138,12 @@ public class DefineResource {
 
 
                 System.out.println("constraint_range opslaan");
-                Attribute_Range range = new Attribute_Range(table,result,attribute,value1,value2,operator);
+                Attribute_Range range = new Attribute_Range(table, defineService.createUniqueIDConstraint(),attribute,value1,value2,operator);
                 defineService.Save(range);
                 System.out.println("constraint_range opgeslagen");
-                return Response.ok(range).build();
+                Gson gson = new Gson();
+                String json = gson.toJson(range);
+                return Response.ok(json).build();
 
         }
 
@@ -160,9 +159,31 @@ public class DefineResource {
                 Attribute_Other other = new Attribute_Other(table,result,atribuut1,atribuut2,operator);
                 defineService.Save(other);
                 System.out.println("constraint_other opgeslagen");
+
                 return Response.ok(other).build();
 
         }
+
+        @POST
+        @Path("/postTupleCompare")
+        @Produces("application/json")
+        public Response createTupleCompare(@FormParam("tabel_tcompare") String table,
+                                    @FormParam("atribuut_tcompare") String atribuut1,@FormParam("operator_tcompare") String operator,
+                                    @FormParam("atribuut_acompare")String atribuut2) throws SQLException{
+
+                ;
+                System.out.println("constraint_other opslaan");
+                Tuple_Compare compare = new Tuple_Compare(table,atribuut1,atribuut2,operator);
+                defineService.Save(compare);
+                System.out.println("constraint_other opgeslagen");
+
+                Gson gson = new Gson();
+                String json = gson.toJson(compare);
+
+                return Response.ok(json).build();
+        }
+
+
 
         @POST
         @Path("/postInter")
@@ -173,10 +194,13 @@ public class DefineResource {
 
 
                 System.out.println("constraint_inter opslaan");
-                Attribute_InterEntity inter = new Attribute_InterEntity(table,result,atribuut1,atribuut2,operator,ref_table);
+
+                Attribute_InterEntity inter = new Attribute_InterEntity(table,defineService.createUniqueIDConstraint(),atribuut1,atribuut2,operator,ref_table);
                 defineService.Save(inter);
                 System.out.println("constraint_inter opgeslagen");
-                return Response.ok(inter).build();
+                Gson gson = new Gson();
+                String json = gson.toJson(inter);
+                return Response.ok(json).build();
 
         }
 

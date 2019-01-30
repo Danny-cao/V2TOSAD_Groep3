@@ -54,16 +54,16 @@
             <div class="form-group">
                 <label for="tabel_range">Table</label>
                 <select class="form-control" id="tabel_range" name="tabel_range">
-                    <option value="phonenumber">phonenumber</option>
+                    <option value="VBMG_PRODUCT">VBMG_PRODUCT</option>
                     <option value="bestelling">Bestelling</option>
-                    <option value="orders">Orders</option>
+                    <option value="VBMG_ORDERS">VBMG_ORDER</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="atribuut_range">Atribute:</label>
                 <select class="form-control" id="atribuut_range" name="atribuut_range">
-                    <option value="phonenumber">phonenumber</option>
+                    <option value="prijs">prijs</option>
                     <option value="bestelling">Bestelling</option>
                     <option value="orders">Orders</option>
                 </select>
@@ -72,7 +72,7 @@
             <div class="form-group">
                 <label for="operator_range">Operator:</label>
                 <select class="form-control" id="Operator_range" name="operator_range">
-                    <option value="Between">Between</option>
+                    <option value="between">between</option>
                     <option value="NotBetween">NotBetween</option>
                 </select>
             </div>
@@ -96,7 +96,7 @@
                     <select class="form-control" id="tabel_compare" name="tabel_compare">
                         <option value="Order">Order</option>
                         <option value="Product">Product</option>
-                        <option value="Orderregel">Orderregel</option>
+                        <option value="VBMG_PRODUCT">VBMG_PRODUCT</option>
                     </select>
                 </div>
 
@@ -106,18 +106,19 @@
                         <option value="phonenumber">phonenumber</option>
                         <option value="bestelling">Bestelling</option>
                         <option value="orders">Orders</option>
+                        <option value="prijs">prijs</option>
                     </select>
                 </div>
 
             <div class="form-group">
                     <label for="operator_compare">Operator:</label>
                     <select class="form-control" id="operator_compare" name="operator_compare">
-                        <option value="Equals">Equals</option>
-                        <option value="NotEquals">NotEquals</option>
-                        <option value="LessThan">LessThan</option>
-                        <option value="GreaterThan">GreaterThan</option>
-                        <option value="LessOrEqualTo">LessOrEqualTo</option>
-                        <option value="GreaterOrEqualTo">GreaterOrEqualTo</option>
+                        <option value="=">Equals</option>
+                        <option value="!=">NotEquals</option>
+                        <option value="<">LessThan</option>
+                        <option value=">">GreaterThan</option>
+                        <option value="<=">LessOrEqualTo</option>
+                        <option value=">=">GreaterOrEqualTo</option>
                     </select>
                 </div>
 
@@ -137,6 +138,8 @@
                         <option value="phonenumber">phonenumber</option>
                         <option value="bestelling">Bestelling</option>
                         <option value="orders">Orders</option>
+                        <option value="VBMG_PRODUCT">VBMG_PRODUCT</option>
+
                     </select>
                 </div>
             <div class="form-group">
@@ -145,17 +148,18 @@
                         <option value="phonenumber">phonenumber</option>
                         <option value="bestelling">Bestelling</option>
                         <option value="orders">Orders</option>
+                        <option value="prijs">prijs</option>
                     </select>
                 </div>
             <div class="form-group">
                     <label for="operator_tcompare">Operator:</label>
                     <select class="form-control" id="Operator_tcompare" name="operator_tcompare">
-                        <option value="Equals">Equals</option>
-                        <option value="NotEquals">NotEquals</option>
-                        <option value="LessThan">LessThan</option>
-                        <option value="GreaterThan">GreaterThan</option>
-                        <option value="LessOrEqualTo">LessOrEqualTo</option>
-                        <option value="GreaterOrEqualTo">GreaterOrEqualTo</option>
+                        <option value="=">Equals</option>
+                        <option value="!=">NotEquals</option>
+                        <option value="<">LessThan</option>
+                        <option value=">">GreaterThan</option>
+                        <option value="<=">LessOrEqualTo</option>
+                        <option value=">=">GreaterOrEqualTo</option>
                     </select>
                 </div>
             <div class="form-group">
@@ -163,7 +167,7 @@
                     <select class="form-control" id="atribuut_acompare" name="atribuut_acompare">
                         <option value="phonenumber">phonenumber</option>
                         <option value="bestelling">Bestelling</option>
-                        <option value="orders">Orders</option>
+                        <option value="inkoopprijs">inkoopprijs</option>
                     </select>
                 </div>
             <button type="button" class="btn btn-success" id="ok_tcompare">Opslaan</button>
@@ -177,6 +181,7 @@
                         <option value="phonenumber">phonenumber</option>
                         <option value="bestelling">Bestelling</option>
                         <option value="orders">Orders</option>
+                        <option value="VBMG_PRODUCT">VBMG_PRODUCT</option>
                     </select>
                 </div>
             <div class="form-group">
@@ -185,17 +190,18 @@
                         <option value="phonenumber">phonenumber</option>
                         <option value="bestelling">Bestelling</option>
                         <option value="orders">Orders</option>
+                        <option value="prijs">prijs</option>
                     </select>
                 </div>
             <div class="form-group">
                     <label for="operator_inter">Operator:</label>
                     <select class="form-control" id="operator_inter" name="operator_inter">
-                        <option value="Equals">Equals</option>
-                        <option value="NotEquals">NotEquals</option>
-                        <option value="LessThan">LessThan</option>
-                        <option value="GreaterThan">GreaterThan</option>
-                        <option value="LessOrEqualTo">LessOrEqualTo</option>
-                        <option value="GreaterOrEqualTo">GreaterOrEqualTo</option>
+                        <option value="=">Equals</option>
+                        <option value="!=">NotEquals</option>
+                        <option value="<">LessThan</option>
+                        <option value=">">GreaterThan</option>
+                        <option value="<=">LessOrEqualTo</option>
+                        <option value=">=">GreaterOrEqualTo</option>
                     </select>
                 </div>
             <div class="form-group">
@@ -204,6 +210,7 @@
                         <option value="phonenumber">Orders</option>
                         <option value="bestelling">Bestelregel</option>
                         <option value="orders">Orderregel</option>
+                        <option value="VBMG_VOORRAAD">VBMG_VOORRAAD</option>
                     </select>
                 </div>
             <div class="form-group">
@@ -212,6 +219,8 @@
                         <option value="phonenumber">phonenumber</option>
                         <option value="bestelling">regel</option>
                         <option value="orders">datum</option>
+                        <option value="aantal">aantal</option>
+
                     </select>
                 </div>
             <button type="button" class="btn btn-success" id="ok_etcompare">Opslaan</button>

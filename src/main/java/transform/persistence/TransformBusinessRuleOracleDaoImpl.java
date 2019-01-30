@@ -116,7 +116,7 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
 
             String generatedCode = GenerateAttributeCompare(compare);
             System.out.println(generatedCode);
-
+            deleteConstraintIfExist(rule);
             //return true;
             return transformDatabase(generatedCode);
 
@@ -156,7 +156,7 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
 
             String generatedCode = GenerateTupleCompare(compare);
             System.out.println(generatedCode);
-
+            deleteConstraintIfExist(rule);
             //return true;
             return transformDatabase(generatedCode);
 
@@ -176,7 +176,7 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
 
             String generatedCode = GenerateInterEntityCompare(compare);
             System.out.println(generatedCode);
-
+            deleteConstraintIfExist(rule);
             //return true;
             return transformDatabase(generatedCode);
 
@@ -217,7 +217,7 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
 
         String operator = compare.getOperator();
 
-        String query = "ALTER TABLE " + compare.getTable() + " ADD CONSTRAINT " + compare.getNaam() + " CHECK (" + compare.getAttribute() + " " + operator + " " + compare.getValue() + ");";
+        String query = "ALTER TABLE " + compare.getTable() + " ADD CONSTRAINT " + compare.getNaam() + " CHECK (" + compare.getAttribute() + " " + operator + " " + compare.getValue() + ")";
         return query;
     }
 
@@ -270,7 +270,7 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
 
         String operator = compare.getOperator();
 
-        String query = "ALTER TABLE " + compare.getTable() + " ADD CONSTRAINT " + compare.getNaam() + " CHECK (" + compare.getAttribute() + " " + operator + " " + compare.getRef_attribute() + ");";
+        String query = "ALTER TABLE " + compare.getTable() + " ADD CONSTRAINT " + compare.getNaam() + " CHECK (" + compare.getAttribute() + " " + operator + " " + compare.getRef_attribute() + ")";
         return query;
     }
 
@@ -290,7 +290,7 @@ public class TransformBusinessRuleOracleDaoImpl extends OracleBaseDao implements
 
         String operator = compare.getOperator();
 
-        String query = "ALTER TABLE " + compare.getTable() + " ADD CONSTRAINT " + compare.getNaam() + " CHECK (" + compare.getTable() + "." + compare.getAttribute() + " " + operator + " " + compare.getRef_table() + "." + compare.getRef_attribute() + ");";
+        String query = "ALTER TABLE " + compare.getTable() + " ADD CONSTRAINT " + compare.getNaam() + " CHECK (" + compare.getTable() + "." + compare.getAttribute() + " " + operator + " " + compare.getRef_table() + "." + compare.getRef_attribute() + ")";
         return query;
     }
 
