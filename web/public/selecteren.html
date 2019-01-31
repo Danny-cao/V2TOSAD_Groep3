@@ -9,10 +9,11 @@
 
     <!-- Bootstrap CSS -->
     <link href="dist/css/main.css" rel="stylesheet">
-    <title>Test</title>
+    <title>Business Rule Generator | Selecteren</title>
 </head>
 <body>
 
+<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="index.html">Business rule generator</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,23 +21,25 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link" href="index.html"><i class="fa fa-home" aria-hidden="true"></i> Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="index.html"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
             <a class="nav-item nav-link" href="toevoegen.html"><i class="fa fa-plus-circle" aria-hidden="true"></i> Toevoegen</a>
             <a class="nav-item nav-link" href="genereren.html"><i class="fa fa-cogs" aria-hidden="true"></i> Genereren</a>
-            <a class="nav-item nav-link active" href="selecteren.html"><i class="fa fa-hand-pointer-o" aria-hidden="true"></i> Selecteren</a>
+            <a class="nav-item nav-link active" href="selecteren.html"><i class="fa fa-hand-pointer-o" aria-hidden="true"></i><span class="sr-only">(current)</span> Selecteren</a>
             <a class="nav-item nav-link" href="verwijderen.html"><i class="fa fa-trash" aria-hidden="true"></i> Verwijderen</a>
+            <a class="nav-item nav-link" href="wijzig.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Wijzigen</a>
         </div>
     </div>
 </nav>
 
 <section id="rule_selecteren">
     <div class="container">
+        <h1>Selecteren</h1>
 
     <form id="generateRule">
 
         <div class="form-group">
-            Businessrule Types:
-            <select name="type" id="type">
+            <label for="type">Businessrule Types:</label>
+            <select class="form-control" name="type" id="type">
                 <option value="1">Attribute Range</option>
                 <option value="2">Attribute Compare</option>
                 <option value="3">Attribute List</option>
@@ -50,20 +53,20 @@
         </div>
 
         <div class="form-group">
-            Businessrule name:
-            <select name="name" id="name">
+            <label for="name">Businessrule name:</label>
+            <select class="form-control" name="name" id="name">
 
             </select>
         </div>
 
         <div class="form-group">
-            Table:
-            <select name="table" id="table">
+            <label for="table">Table:</label>
+            <select class="form-control" name="table" id="table">
 
             </select>
         </div>
 
-        <input type="button" id="generate" value="generate">
+        <input type="button" class="btn btn-primary mt-2" id="generate" value="Generate">
     </form>
 
         <div class="info" name="info" id="info">

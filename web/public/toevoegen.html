@@ -13,6 +13,7 @@
 </head>
 <body>
 
+<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="index.html">Business rule generator</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,11 +21,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link" href="index.html"><i class="fa fa-home" aria-hidden="true"></i> Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link active" href="toevoegen.html"><i class="fa fa-plus-circle" aria-hidden="true"></i> Toevoegen</a>
+            <a class="nav-item nav-link" href="index.html"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+            <a class="nav-item nav-link active" href="toevoegen.html"><i class="fa fa-plus-circle" aria-hidden="true"></i><span class="sr-only">(current)</span> Toevoegen</a>
             <a class="nav-item nav-link" href="genereren.html"><i class="fa fa-cogs" aria-hidden="true"></i> Genereren</a>
             <a class="nav-item nav-link" href="selecteren.html"><i class="fa fa-hand-pointer-o" aria-hidden="true"></i> Selecteren</a>
             <a class="nav-item nav-link" href="verwijderen.html"><i class="fa fa-trash" aria-hidden="true"></i> Verwijderen</a>
+            <a class="nav-item nav-link" href="wijzig.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Wijzigen</a>
         </div>
     </div>
 </nav>
@@ -32,6 +34,7 @@
 <section id="rule_toevoegen">
 
     <div class="container" id="selecteer_rule">
+        <h1>Toevoegen</h1>
 
 
         <select class="form-control" id="rule">
@@ -43,7 +46,7 @@
             <option value="Other" id="test6">Other</option>
 
         </select>
-        <button type="button" class="btn btn-success" id="select">Select</button>
+        <button type="button" class="btn btn-primary btn-floatr mt-2" id="select">Select</button>
 
     </div>
 
@@ -86,7 +89,7 @@
                 <label for="maxvalue_range">Maximum Value:</label>
                 <input class="form-control" id="maxvalue_range" name="maxvalue_range"  placeholder="max">
             </div>
-            <button type="button" class="btn btn-success" id="ok">Opslaan</button>
+            <button type="button" class="btn btn-primary btn-floatr" id="ok">Opslaan</button>
 
         </form>
 
@@ -128,7 +131,7 @@
                 </div>
 
 
-            <button type="button" class="btn btn-success" id="ok_compare">Opslaan</button>
+            <button type="button" class="btn btn-primary btn-floatr" id="ok_compare">Opslaan</button>
 
         </form>
         <form id="tuple_compare">
@@ -170,7 +173,7 @@
                         <option value="inkoopprijs">inkoopprijs</option>
                     </select>
                 </div>
-            <button type="button" class="btn btn-success" id="ok_tcompare">Opslaan</button>
+            <button type="button" class="btn btn-primary btn-floatr" id="ok_tcompare">Opslaan</button>
 
 
         </form>
@@ -223,7 +226,7 @@
 
                     </select>
                 </div>
-            <button type="button" class="btn btn-success" id="ok_etcompare">Opslaan</button>
+            <button type="button" class="btn btn-primary btn-floatr" id="ok_etcompare">Opslaan</button>
 
         </form>
 
@@ -265,7 +268,7 @@
                 <input class="form-control" id="list_value5" name="list_value5">
             </div>
 
-            <button type="button" class="btn btn-success" id="ok_list">Opslaan</button>
+            <button type="button" class="btn btn-primary btn-floatr" id="ok_list">Opslaan</button>
         </form>
 
         <form id="other">
@@ -283,7 +286,7 @@
                 <label for="list_value1">Constraint:</label>
                 <input class="form-control" id="other_value" name="other_value">
             </div>
-            <button type="button" class="btn btn-success" id="ok_other">Opslaan</button>
+            <button type="button" class="btn btn-primary btn-floatr" id="ok_other">Opslaan</button>
         </form>
 
     </div>

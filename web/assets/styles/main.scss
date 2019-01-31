@@ -58,7 +58,7 @@
 	margin-bottom: 1em;
 }
 
-.btn-success {
+.btn-floatr {
 	float: right;
 	margin: 1em;
 	margin-right: 0px;
@@ -66,6 +66,120 @@
 
 #types {
 	margin-top: 50px;
+}
+
+#rules {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#rules td, #rules th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#rules tr:nth-child(even){background-color: #f2f2f2;}
+
+#rules tr:hover {background-color: #ddd;}
+
+#rules th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #4CAF50;
+	color: white;
+}
+
+#rulesRange {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#rulesRange td, #rulesRange th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#rulesRange tr:nth-child(even){background-color: #f2f2f2;}
+
+#rulesRange tr:hover {background-color: #ddd;}
+
+#rulesRange th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #4CAF50;
+	color: white;
+}
+
+
+#rulesTuple {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#rulesTuple td, #rulesTuple th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#rulesTuple tr:nth-child(even){background-color: #f2f2f2;}
+
+#rulesTuple tr:hover {background-color: #ddd;}
+
+#rulesTuple th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #4CAF50;
+	color: white;
+}
+
+
+#rulesInter {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#rulesInter td, #rulesInter th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#rulesInter tr:nth-child(even){background-color: #f2f2f2;}
+
+#rulesInter tr:hover {background-color: #ddd;}
+
+#rulesInter th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #4CAF50;
+	color: white;
+}
+
+#PUTformCompare{
+	width: 400px;
+	height: auto;
+	display:none;
+}
+
+#PUTformRange{
+	width: 400px;
+	height: auto;
+	display:none;
+}
+
+#PUTformTuple{
+	width: 400px;;
+	height: auto;
+	display:none;
+}
+
+#PUTformInter{
+	width: 400px;
+	height: auto;
+	display:none;
 }
 
 // body{
